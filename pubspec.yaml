@@ -1,5 +1,5 @@
 name: taberu
-description: Taberu allows your local customers to order dishes through an easy-to-use digital menu with a modern design.
+description: Allows your local customers to order dishes through an easy-to-use digital menu with a modern design.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -23,13 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc: ^6.1.0
+  flutter_bloc: ^6.1.1
   get_it: ^5.0.1
   injectable: ^1.0.5
   firebase_core: ^0.5.2
   cloud_firestore: ^0.14.3
+  easy_localization: ^2.3.3
   google_fonts: ^1.1.1
-  stilo: ^1.0.1
+  stilo: ^1.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -54,8 +55,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images
-    - assets/svg
+    - assets/images/
+    - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
