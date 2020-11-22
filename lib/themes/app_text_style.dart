@@ -50,4 +50,12 @@ abstract class AppTextStyle {
       fontWeight: StiloFontWeight.regular,
     ),
   );
+
+  static final buttonText = GoogleFonts.sourceSansPro(
+    textStyle: TextStyle(
+      color: StiloColor.white,
+      fontSize: StiloFontSize.xl2,
+      fontWeight: StiloFontWeight.semiBold,
+    ),
+  );
 }
