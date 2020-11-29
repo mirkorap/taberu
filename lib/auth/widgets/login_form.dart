@@ -28,7 +28,7 @@ class LoginForm extends StatelessWidget {
           StiloSpacing.y20,
           TextButton(
             onPressed: onLogin,
-            child: Text('auth.login').tr(),
+            child: const Text('auth.login').tr(),
           ),
         ],
       ),

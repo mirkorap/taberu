@@ -5,10 +5,12 @@ import 'package:taberu/routes.dart';
 import 'package:taberu/themes/app_theme.dart';
 
 void main() {
-  runApp(AppLocale(child: TaberuApp()));
+  runApp(const AppLocale(child: TaberuApp()));
 }
 
 class TaberuApp extends StatelessWidget {
+  const TaberuApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

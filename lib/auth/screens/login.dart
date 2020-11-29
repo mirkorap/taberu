@@ -4,20 +4,22 @@ import 'package:taberu/auth/widgets/login_form.dart';
 import 'package:taberu/auth/widgets/login_header.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AspectRatio(
+            const AspectRatio(
               aspectRatio: 1.5,
               child: LoginHeader(),
             ),
             Padding(
               padding: StiloEdge.a16,
               child: LoginForm(
-                onLogin: () => print('Login success!'),
+                onLogin: () {},
               ),
             ),
           ],
