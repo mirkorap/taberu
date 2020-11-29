@@ -1,3 +1,7 @@
 {
-
+  "auth": {
+    "email": "Indirizzo email",
+    "password": "Password",
+    "login": "Login"
+  }
 }
