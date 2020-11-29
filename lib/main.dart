@@ -1,29 +1,21 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:taberu/locale.dart';
+import 'package:taberu/routes.dart';
+import 'package:taberu/themes/app_theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(AppLocale(child: TaberuApp()));
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class TaberuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('Hello World'),
+      title: tr('app.title'),
+      theme: AppTheme.build(),
+      initialRoute: '/',
+      routes: routes,
     );
   }
 }

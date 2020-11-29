@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "Taberu"
+  },
   "auth": {
     "email": "Indirizzo email",
     "password": "Password",
