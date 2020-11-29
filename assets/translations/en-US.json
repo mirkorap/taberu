@@ -5,6 +5,7 @@
   "auth": {
     "email": "E-mail address",
     "password": "Password",
+    "create_menu": "Create your menu",
     "login": "Login"
   }
 }
