@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:stilo/stilo.dart';
 import 'package:taberu/widgets/buttons/link_button.dart';
 
-class LoginForm extends StatelessWidget {
+class SelectRestaurantForm extends StatelessWidget {
   final VoidCallback onCreateMenu;
-  final VoidCallback onLogin;
+  final VoidCallback onShowMenu;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  LoginForm({
+  SelectRestaurantForm({
     Key key,
     @required this.onCreateMenu,
-    @required this.onLogin,
+    @required this.onShowMenu,
   }) : super(key: key);
 
   @override
@@ -24,23 +24,23 @@ class LoginForm extends StatelessWidget {
         children: [
           TextFormField(
             decoration: InputDecoration(
-              labelText: tr('auth.email'),
+              labelText: tr('restaurant_menu.email'),
             ),
           ),
           TextFormField(
             decoration: InputDecoration(
-              labelText: tr('auth.password'),
+              labelText: tr('restaurant_menu.password'),
             ),
           ),
           StiloSpacing.y8,
           LinkButton(
-            text: tr('auth.create_menu'),
+            text: tr('restaurant_menu.create_menu'),
             onTap: onCreateMenu,
           ),
           StiloSpacing.y16,
           TextButton(
-            onPressed: onLogin,
-            child: const Text('auth.login').tr(),
+            onPressed: onShowMenu,
+            child: const Text('restaurant_menu.show_menu').tr(),
           ),
         ],
       ),

@@ -5,7 +5,7 @@ abstract class AppBorderRadius {
     borderRadius: BorderRadiusDirectional.all(Radius.circular(30.0)),
   );
 
-  static const loginHeader = BorderRadiusDirectional.vertical(
+  static const logoBoxContainer = BorderRadiusDirectional.vertical(
     bottom: Radius.circular(30.0),
   );
 }

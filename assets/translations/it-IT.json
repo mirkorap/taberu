@@ -2,10 +2,10 @@
   "app": {
     "title": "Taberu"
   },
-  "auth": {
+  "restaurant_menu": {
     "email": "Indirizzo email",
     "password": "Password",
     "create_menu": "Crea il tuo menu",
-    "login": "Login"
+    "show_menu": "Visualizza menu"
   }
 }
