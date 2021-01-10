@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stilo/stilo.dart';
-import 'package:taberu/themes/app_color.dart';
 
 abstract class AppTextStyle {
   static final headline1 = GoogleFonts.sourceSansPro(
@@ -58,9 +57,5 @@ abstract class AppTextStyle {
       fontSize: StiloFontSize.xl2,
       fontWeight: StiloFontWeight.semiBold,
     ),
-  );
-
-  static final linkButtonText = headline4.copyWith(
-    color: AppColor.primary,
   );
 }

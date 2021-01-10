@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taberu/locale.dart';
-import 'package:taberu/routes.dart';
 import 'package:taberu/themes/app_theme.dart';
 
 void main() {
@@ -16,8 +15,7 @@ class TaberuApp extends StatelessWidget {
     return MaterialApp(
       title: tr('app.title'),
       theme: AppTheme.build(),
-      initialRoute: '/',
-      routes: routes,
+      home: Text(tr('app.title')),
     );
   }
 }
