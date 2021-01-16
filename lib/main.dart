@@ -1,9 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+import 'package:taberu/injection.dart';
 import 'package:taberu/locale.dart';
 import 'package:taberu/themes/app_theme.dart';
 
 void main() {
+  configureInjection(Environment.prod);
   runApp(const AppLocale(child: TaberuApp()));
 }
 
