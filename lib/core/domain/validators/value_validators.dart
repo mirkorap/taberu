@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:kt_dart/kt.dart';
-import 'package:taberu/core/domain/value_objects/value_failure.dart';
+import 'package:taberu/core/domain/failures/value_failure.dart';
 
 Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
   if (input.isNotEmpty) {

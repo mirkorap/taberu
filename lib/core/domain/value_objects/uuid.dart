@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:taberu/core/domain/value_objects/value_failure.dart';
+import 'package:taberu/core/domain/failures/value_failure.dart';
 import 'package:uuid/uuid.dart';
 
 class UniqueId {
