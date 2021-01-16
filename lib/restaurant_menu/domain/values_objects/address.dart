@@ -11,24 +11,24 @@ class Address {
   final Either<ValueFailure<String>, String> street;
 
   factory Address({
-    @required String cityInput,
-    @required String postalCodeInput,
-    @required String streetInput,
+    @required String city,
+    @required String postalCode,
+    @required String street,
   }) {
-    assert(cityInput != null);
-    assert(postalCodeInput != null);
-    assert(streetInput != null);
+    assert(city != null);
+    assert(postalCode != null);
+    assert(street != null);
 
-    final city = validateStringNotEmpty(cityInput);
-    final postalCode = validateStringNotEmpty(postalCodeInput).flatMap(
+    final validatedCity = validateStringNotEmpty(city);
+    final validatedPostalCode = validateStringNotEmpty(postalCode).flatMap(
       (value) => validateMaxStringLength(value, postalCodeMaxLength),
     );
-    final street = validateStringNotEmpty(streetInput);
+    final validatedStreet = validateStringNotEmpty(street);
 
     return Address._(
-      city: city,
-      postalCode: postalCode,
-      street: street,
+      city: validatedCity,
+      postalCode: validatedPostalCode,
+      street: validatedStreet,
     );
   }
 
