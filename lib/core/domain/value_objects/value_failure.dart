@@ -16,4 +16,6 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidChoice(T failedValue, KtSet<T> choices) = InvalidChoice<T>;
 
   const factory ValueFailure.listTooLong(T failedValue, int maxLength) = ListTooLong<T>;
+
+  const factory ValueFailure.invalidImageFormat(T failedValue) = InvalidImageFormat<T>;
 }
