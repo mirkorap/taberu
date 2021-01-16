@@ -13,7 +13,7 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
 
   const factory ValueFailure.invalidPhone(T failedValue) = InvalidPhone<T>;
 
-  const factory ValueFailure.invalidChoice(T failedValue, KtList<T> choices) = InvalidChoice<T>;
+  const factory ValueFailure.invalidChoice(T failedValue, KtSet<T> choices) = InvalidChoice<T>;
 
   const factory ValueFailure.listTooLong(T failedValue, int maxLength) = ListTooLong<T>;
 }

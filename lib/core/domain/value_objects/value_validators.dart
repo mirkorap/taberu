@@ -36,7 +36,7 @@ Either<ValueFailure<String>, String> validatePhone(String input) {
   return left(ValueFailure.invalidPhone(input));
 }
 
-Either<ValueFailure<T>, T> validateChoice<T>(T input, KtList<T> choices) {
+Either<ValueFailure<T>, T> validateChoice<T>(T input, KtSet<T> choices) {
   if (choices.contains(input)) {
     return right(input);
   }

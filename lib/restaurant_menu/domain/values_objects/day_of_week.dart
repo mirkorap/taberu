@@ -4,7 +4,7 @@ import 'package:taberu/core/domain/value_objects/value_failure.dart';
 import 'package:taberu/core/domain/value_objects/value_validators.dart';
 
 class DayOfWeek {
-  static const daysOfWeek = {
+  static final daysOfWeek = {
     DateTime.monday: 'monday',
     DateTime.tuesday: 'tuesday',
     DateTime.wednesday: 'wednesday',
@@ -12,7 +12,7 @@ class DayOfWeek {
     DateTime.friday: 'friday',
     DateTime.saturday: 'saturday',
     DateTime.sunday: 'sunday',
-  };
+  }.toImmutableMap();
 
   final Either<ValueFailure<int>, int> value;
 
@@ -20,14 +20,13 @@ class DayOfWeek {
     assert(dayOfWeek != null);
 
     return DayOfWeek._(
-      validateChoice(dayOfWeek, daysOfWeek.keys.toImmutableList()),
+      validateChoice(dayOfWeek, daysOfWeek.keys),
     );
   }
 
   factory DayOfWeek.fromString(String dayOfWeekStr) {
-    final dayOfWeek = daysOfWeek.keys.firstWhere(
-      (k) => daysOfWeek[k] == dayOfWeekStr,
-      orElse: () => null,
+    final dayOfWeek = daysOfWeek.keys.firstOrNull(
+      (k) => daysOfWeek[k] == dayOfWeekStr.toLowerCase(),
     );
 
     return DayOfWeek(dayOfWeek);
