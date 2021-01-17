@@ -5,6 +5,7 @@ import 'package:taberu/core/domain/failures/value_failure.dart';
 import 'package:taberu/core/domain/validators/value_validators.dart';
 
 class Money {
+  static const defaultCurrency = '€';
   static final currencies = ['€', r'$'].toImmutableSet();
 
   final Either<ValueFailure<int>, int> amount;
@@ -12,7 +13,7 @@ class Money {
 
   factory Money({
     @required int amount,
-    @required String currency,
+    String currency = defaultCurrency,
   }) {
     assert(amount != null);
     assert(currency != null);
