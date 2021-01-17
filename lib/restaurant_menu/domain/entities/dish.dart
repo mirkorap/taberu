@@ -4,6 +4,7 @@ import 'package:taberu/core/domain/value_objects/image.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
+import 'package:taberu/restaurant_menu/domain/entities/dish_image.dart';
 
 part 'dish.freezed.dart';
 
@@ -19,8 +20,8 @@ abstract class Dish with _$Dish {
     @required String allergens,
     @required Money price,
     @required bool visible,
-    @required Image mainImage,
-    @required LimitedList<Image> gallery,
+    @required DishImage mainImage,
+    @required LimitedList<DishImage> gallery,
     @required DateTime createdAt,
     @required DateTime updatedAt,
   }) = _Dish;
