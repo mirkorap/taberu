@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
+import 'package:taberu/core/domain/value_objects/email_address.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
+import 'package:taberu/core/domain/value_objects/phone.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
-import 'package:taberu/restaurant_menu/domain/value_objects/email_address.dart';
-import 'package:taberu/restaurant_menu/domain/value_objects/phone.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/address_dto.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/menu_dto.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/opening_time_dto.dart';
