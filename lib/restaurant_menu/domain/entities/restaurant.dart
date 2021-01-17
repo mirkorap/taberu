@@ -4,10 +4,10 @@ import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/restaurant_menu/domain/entities/menu.dart';
-import 'package:taberu/restaurant_menu/domain/values_objects/address.dart';
-import 'package:taberu/restaurant_menu/domain/values_objects/email_address.dart';
-import 'package:taberu/restaurant_menu/domain/values_objects/opening_time.dart';
-import 'package:taberu/restaurant_menu/domain/values_objects/phone.dart';
+import 'package:taberu/restaurant_menu/domain/value_objects/address.dart';
+import 'package:taberu/restaurant_menu/domain/value_objects/email_address.dart';
+import 'package:taberu/restaurant_menu/domain/value_objects/opening_time.dart';
+import 'package:taberu/restaurant_menu/domain/value_objects/phone.dart';
 
 part 'restaurant.freezed.dart';
 
