@@ -29,6 +29,9 @@ abstract class DishDto implements _$DishDto {
 
   factory DishDto.fromJson(Map<String, dynamic> json) => _$DishDtoFromJson(json);
 
+  // ignore: unused_element
+  const DishDto._();
+
   Dish toDomain() {
     final gallery = LimitedList(
       dishImages.map((item) => item.toDomain()).toImmutableList(),

@@ -38,6 +38,9 @@ abstract class RestaurantDto implements _$RestaurantDto {
     return RestaurantDto.fromJson(doc.data());
   }
 
+  // ignore: unused_element
+  const RestaurantDto._();
+
   Restaurant toDomain() {
     final weekOpeningTime = LimitedList(
       openingTimes.map((item) => item.toDomain()).toImmutableList(),

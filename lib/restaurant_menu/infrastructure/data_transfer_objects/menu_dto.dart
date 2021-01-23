@@ -19,6 +19,9 @@ abstract class MenuDto implements _$MenuDto {
 
   factory MenuDto.fromJson(Map<String, dynamic> json) => _$MenuDtoFromJson(json);
 
+  // ignore: unused_element
+  const MenuDto._();
+
   Menu toDomain() {
     return Menu(
       id: UniqueId.fromUniqueString(id),

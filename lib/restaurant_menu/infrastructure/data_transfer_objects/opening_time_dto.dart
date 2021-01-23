@@ -17,6 +17,9 @@ abstract class OpeningTimeDto implements _$OpeningTimeDto {
 
   factory OpeningTimeDto.fromJson(Map<String, dynamic> json) => _$OpeningTimeDtoFromJson(json);
 
+  // ignore: unused_element
+  const OpeningTimeDto._();
+
   OpeningTime toDomain() {
     return OpeningTime(
       dayOfWeek: DayOfWeek.fromString(dayOfWeek),

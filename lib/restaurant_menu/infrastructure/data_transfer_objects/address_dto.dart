@@ -16,6 +16,9 @@ abstract class AddressDto implements _$AddressDto {
 
   factory AddressDto.fromJson(Map<String, dynamic> json) => _$AddressDtoFromJson(json);
 
+  // ignore: unused_element
+  const AddressDto._();
+
   Address toDomain() {
     return Address(
       city: city,

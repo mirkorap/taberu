@@ -17,6 +17,9 @@ abstract class DishImageDto implements _$DishImageDto {
 
   factory DishImageDto.fromJson(Map<String, dynamic> json) => _$DishImageDtoFromJson(json);
 
+  // ignore: unused_element
+  const DishImageDto._();
+
   DishImage toDomain() {
     return DishImage(
       id: UniqueId.fromUniqueString(id),
