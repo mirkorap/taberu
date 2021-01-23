@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:taberu/core/domain/value_objects/email_address.dart';
@@ -32,6 +33,10 @@ abstract class RestaurantDto implements _$RestaurantDto {
   }) = _RestaurantDto;
 
   factory RestaurantDto.fromJson(Map<String, dynamic> json) => _$RestaurantDtoFromJson(json);
+
+  factory RestaurantDto.fromFirestore(DocumentSnapshot doc) {
+    return RestaurantDto.fromJson(doc.data());
+  }
 
   Restaurant toDomain() {
     final weekOpeningTime = LimitedList(
