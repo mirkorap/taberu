@@ -4,5 +4,7 @@ part 'restaurant_failure.freezed.dart';
 
 @freezed
 abstract class RestaurantFailure with _$RestaurantFailure {
+  const factory RestaurantFailure.insufficientPermissions() = _InsufficientPermissions;
+
   const factory RestaurantFailure.unexpected() = _Unexpected;
 }

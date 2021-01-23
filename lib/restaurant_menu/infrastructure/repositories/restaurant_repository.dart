@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:taberu/core/infrastructure/extension_methods/firebase_core.dart';
 import 'package:taberu/core/infrastructure/extension_methods/firebase_firestore.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/domain/failures/restaurant_failure.dart';
@@ -27,6 +28,12 @@ class RestaurantRepository implements IRestaurantRepository {
             snapshot.docs.map((doc) => RestaurantDto.fromFirestore(doc).toDomain()).toImmutableList(),
           ),
         )
-        .onErrorReturnWith((e) => left(const RestaurantFailure.unexpected()));
+        .onErrorReturnWith((e) {
+      if (e is FirebaseException && e.isPermissionDeniedException) {
+        return left(const RestaurantFailure.insufficientPermissions());
+      }
+
+      return left(const RestaurantFailure.unexpected());
+    });
   }
 }
