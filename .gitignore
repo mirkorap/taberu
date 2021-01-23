@@ -30,6 +30,7 @@
 .pub/
 /build/
 **/*.g.dart
+**/*.gr.dart
 **/*.freezed.dart
 **/*.config.dart
 
