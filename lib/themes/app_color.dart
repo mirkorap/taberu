@@ -7,4 +7,5 @@ abstract class AppColor {
   static const danger = Color(0xFFDF2C2C);
 
   static const background = Color(0xFFF2F2F2);
+  static const circularProgressIndicator = AlwaysStoppedAnimation(primary);
 }
