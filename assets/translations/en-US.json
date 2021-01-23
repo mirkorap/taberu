@@ -1,11 +1,5 @@
 {
   "app": {
     "title": "Taberu"
-  },
-  "restaurant_menu": {
-    "email": "E-mail address",
-    "password": "Password",
-    "create_menu": "Create your menu",
-    "show_menu": "Show menu"
   }
 }
