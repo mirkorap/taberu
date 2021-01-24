@@ -28,7 +28,7 @@ Either<ValueFailure<String>, String> validateEmailAddress(String input) {
 }
 
 Either<ValueFailure<String>, String> validatePhone(String input) {
-  const phoneRegex = r"""/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/""";
+  const phoneRegex = r"""^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$""";
   if (RegExp(phoneRegex).hasMatch(input)) {
     return right(input);
   }
