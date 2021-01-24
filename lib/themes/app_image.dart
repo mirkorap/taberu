@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
 abstract class AppImage {
-  static const splashScreen = AssetImage('assets/images/splash-screen.jpg');
+  static const logo = 'assets/images/logo.png';
+  static const splashScreen = 'assets/images/splash-screen.jpg';
 }

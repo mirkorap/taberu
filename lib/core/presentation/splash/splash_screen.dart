@@ -14,8 +14,8 @@ class SplashScreen extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          const Image(
-            image: AppImage.splashScreen,
+          Image.asset(
+            AppImage.splashScreen,
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
