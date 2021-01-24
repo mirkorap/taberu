@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
+import 'package:taberu/core/infrastructure/json_converter/date_time_converter.dart';
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/dish_image_dto.dart';
 
@@ -14,7 +16,7 @@ part 'dish_dto.g.dart';
 @freezed
 abstract class DishDto implements _$DishDto {
   const factory DishDto({
-    @required String id,
+    @JsonKey(ignore: true) String id,
     @required String name,
     @required String description,
     @required String ingredients,
@@ -22,22 +24,21 @@ abstract class DishDto implements _$DishDto {
     @required int price,
     @required bool visible,
     @required DishImageDto mainImage,
-    @required List<DishImageDto> dishImages,
-    @required String createdAt,
-    @required String updatedAt,
+    @JsonKey(defaultValue: []) List<DishImageDto> gallery,
+    @required @DateTimeConverter() DateTime createdAt,
+    @required @DateTimeConverter() DateTime updatedAt,
   }) = _DishDto;
 
   factory DishDto.fromJson(Map<String, dynamic> json) => _$DishDtoFromJson(json);
+
+  factory DishDto.fromFirestore(DocumentSnapshot doc) {
+    return DishDto.fromJson(doc.data()).copyWith(id: doc.id);
+  }
 
   // ignore: unused_element
   const DishDto._();
 
   Dish toDomain() {
-    final gallery = LimitedList(
-      dishImages.map((item) => item.toDomain()).toImmutableList(),
-      Dish.galleryMaxLength,
-    );
-
     return Dish(
       id: UniqueId.fromUniqueString(id),
       name: name,
@@ -47,9 +48,12 @@ abstract class DishDto implements _$DishDto {
       price: Money(amount: price),
       visible: visible,
       mainImage: mainImage.toDomain(),
-      gallery: gallery,
-      createdAt: DateTime.tryParse(createdAt),
-      updatedAt: DateTime.tryParse(updatedAt),
+      gallery: LimitedList(
+        gallery.map((item) => item.toDomain()).toImmutableList(),
+        Dish.galleryMaxLength,
+      ),
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 }

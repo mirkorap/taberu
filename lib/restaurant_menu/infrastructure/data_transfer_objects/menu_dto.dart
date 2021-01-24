@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:meta/meta.dart';
@@ -12,12 +13,16 @@ part 'menu_dto.g.dart';
 @freezed
 abstract class MenuDto implements _$MenuDto {
   const factory MenuDto({
-    @required String id,
+    @JsonKey(ignore: true) String id,
     @required String name,
-    @required List<DishDto> dishes,
+    @JsonKey(defaultValue: []) List<DishDto> dishes,
   }) = _MenuDto;
 
   factory MenuDto.fromJson(Map<String, dynamic> json) => _$MenuDtoFromJson(json);
+
+  factory MenuDto.fromFirestore(DocumentSnapshot doc) {
+    return MenuDto.fromJson(doc.data()).copyWith(id: doc.id);
+  }
 
   // ignore: unused_element
   const MenuDto._();

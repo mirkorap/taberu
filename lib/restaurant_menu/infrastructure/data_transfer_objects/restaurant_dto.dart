@@ -5,6 +5,7 @@ import 'package:taberu/core/domain/value_objects/email_address.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/phone.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
+import 'package:taberu/core/infrastructure/json_converter/date_time_converter.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/address_dto.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/menu_dto.dart';
@@ -17,41 +18,39 @@ part 'restaurant_dto.g.dart';
 @freezed
 abstract class RestaurantDto implements _$RestaurantDto {
   const factory RestaurantDto({
-    @required String id,
+    @JsonKey(ignore: true) String id,
     @required String name,
     @required AddressDto address,
-    @required List<OpeningTimeDto> openingTimes,
+    @required List<OpeningTimeDto> weekOpeningTime,
     @required String phone,
     @required String emailAddress,
     @required String websiteUrl,
     @required String facebookUrl,
     @required String instagramUrl,
     @required bool active,
-    @required List<MenuDto> menus,
-    @required String createdAt,
-    @required String updatedAt,
+    @JsonKey(defaultValue: []) List<MenuDto> menus,
+    @required @DateTimeConverter() DateTime createdAt,
+    @required @DateTimeConverter() DateTime updatedAt,
   }) = _RestaurantDto;
 
   factory RestaurantDto.fromJson(Map<String, dynamic> json) => _$RestaurantDtoFromJson(json);
 
   factory RestaurantDto.fromFirestore(DocumentSnapshot doc) {
-    return RestaurantDto.fromJson(doc.data());
+    return RestaurantDto.fromJson(doc.data()).copyWith(id: doc.id);
   }
 
   // ignore: unused_element
   const RestaurantDto._();
 
   Restaurant toDomain() {
-    final weekOpeningTime = LimitedList(
-      openingTimes.map((item) => item.toDomain()).toImmutableList(),
-      Restaurant.weekOpeningTimeMaxLength,
-    );
-
     return Restaurant(
       id: UniqueId.fromUniqueString(id),
       name: name,
       address: address.toDomain(),
-      weekOpeningTime: weekOpeningTime,
+      weekOpeningTime: LimitedList(
+        weekOpeningTime.map((item) => item.toDomain()).toImmutableList(),
+        Restaurant.weekOpeningTimeMaxLength,
+      ),
       phone: Phone(phone),
       emailAddress: EmailAddress(emailAddress),
       websiteUrl: websiteUrl,
@@ -59,8 +58,8 @@ abstract class RestaurantDto implements _$RestaurantDto {
       instagramUrl: instagramUrl,
       active: active,
       menus: menus.map((item) => item.toDomain()).toImmutableList(),
-      createdAt: DateTime.tryParse(createdAt),
-      updatedAt: DateTime.tryParse(updatedAt),
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 }
