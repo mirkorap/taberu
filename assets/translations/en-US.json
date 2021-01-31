@@ -1,5 +1,20 @@
 {
   "app": {
-    "title": "Taberu"
+    "title": "Taberu",
+    "type_to_search": "Type something to start the search",
+    "no_results_found": "No results found",
+    "actions": {
+      "search": "Search"
+    },
+    "failures": {
+      "insufficient_permissions": "Insufficient permissions to perform the operation"
+    }
+  },
+  "restaurant_selection": {
+    "select_restaurant": "Select restaurant",
+    "show_menu": "Show menu",
+    "failures": {
+      "unexpected": "An unexpected error occurred while getting the restaurant list"
+    }
   }
 }

@@ -1,5 +1,20 @@
 {
   "app": {
-    "title": "Taberu"
+    "title": "Taberu",
+    "type_to_search": "Digita qualcosa per avviare la ricerca",
+    "no_results_found": "Nessun risultato trovato",
+    "actions": {
+      "search": "Cerca"
+    },
+    "failures": {
+      "insufficient_permissions": "Permessi insufficienti per eseguire l'operazione"
+    }
+  },
+  "restaurant_selection": {
+    "select_restaurant": "Seleziona ristorante",
+    "show_menu": "Visualizza menu",
+    "failures": {
+      "unexpected": "Si è verificato un errore imprevisto durante il recupero dell'elenco ristoranti"
+    }
   }
 }
