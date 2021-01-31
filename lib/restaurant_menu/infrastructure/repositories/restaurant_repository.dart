@@ -20,7 +20,7 @@ class RestaurantRepository implements IRestaurantRepository {
   Stream<Either<RestaurantFailure, KtList<Restaurant>>> searchByName(String name) async* {
     yield* _firestore.restaurants
         .where('name', isGreaterThanOrEqualTo: name)
-        .where('name', isLessThanOrEqualTo: name)
+        .where('name', isLessThanOrEqualTo: '$name\uf8ff')
         .orderBy('name')
         .snapshots()
         .map(
