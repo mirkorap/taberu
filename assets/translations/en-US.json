@@ -12,6 +12,7 @@
   },
   "restaurant_selection": {
     "select_restaurant": "Select restaurant",
+    "register_restaurant": "Is your restaurant not listed?",
     "show_menu": "Show menu",
     "failures": {
       "unexpected": "An unexpected error occurred while getting the restaurant list"

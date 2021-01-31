@@ -12,6 +12,7 @@
   },
   "restaurant_selection": {
     "select_restaurant": "Seleziona ristorante",
+    "register_restaurant": "Il tuo ristorante non è in elenco?",
     "show_menu": "Visualizza menu",
     "failures": {
       "unexpected": "Si è verificato un errore imprevisto durante il recupero dell'elenco ristoranti"
