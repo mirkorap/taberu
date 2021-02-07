@@ -20,7 +20,7 @@ class RestaurantSelectionBody extends StatelessWidget {
         state.maybeWhen(
           searchFailure: (failure) {
             FlushbarHelper.createError(
-              duration: const Duration(seconds: 5),
+              duration: StiloDuration.d5000,
               message: failure.map(
                 insufficientPermissions: (_) => tr('app.failures.insufficient_permissions'),
                 unexpected: (_) => tr('restaurant_selection.failures.unexpected'),
