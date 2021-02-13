@@ -1,9 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:kt_dart/kt.dart';
+import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/failures/value_failure.dart';
 import 'package:taberu/core/domain/validators/value_validators.dart';
+import 'package:taberu/core/domain/value_objects/value_object.dart';
 
-class DayOfWeek {
+@immutable
+class DayOfWeek extends SimpleValueObject<int> {
   static final daysOfWeek = {
     DateTime.monday: 'monday',
     DateTime.tuesday: 'tuesday',
@@ -14,6 +17,7 @@ class DayOfWeek {
     DateTime.sunday: 'sunday',
   }.toImmutableMap();
 
+  @override
   final Either<ValueFailure<int>, int> value;
 
   factory DayOfWeek(int dayOfWeek) {
