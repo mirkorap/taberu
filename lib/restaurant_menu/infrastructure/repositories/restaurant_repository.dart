@@ -21,6 +21,7 @@ class RestaurantRepository implements IRestaurantRepository {
     yield* _firestore.restaurants
         .where('name', isGreaterThanOrEqualTo: name)
         .where('name', isLessThanOrEqualTo: '$name\uf8ff')
+        .where('active', isEqualTo: true)
         .orderBy('name')
         .snapshots()
         .map(
