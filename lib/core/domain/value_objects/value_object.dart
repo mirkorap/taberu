@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
-import 'package:taberu/core/domain/errors/unexpected_value_error.dart';
 import 'package:taberu/core/domain/failures/value_failure.dart';
+import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 
 @immutable
 abstract class ValueObject {
@@ -19,9 +19,7 @@ abstract class ValueObject {
 abstract class SimpleValueObject<T> extends ValueObject {
   Either<ValueFailure<T>, T> get value;
 
-  T getOrCrash() {
-    return value.fold((l) => throw UnexpectedValueError(l), (r) => r);
-  }
+  T getOrCrash() => value.getOrCrash();
 
   @override
   bool operator ==(Object o) {
