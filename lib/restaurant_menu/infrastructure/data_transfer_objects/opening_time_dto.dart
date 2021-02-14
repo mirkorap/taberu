@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/value_objects/day_of_week.dart';
+import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 import 'package:taberu/core/infrastructure/json_converter/date_time_converter.dart';
 import 'package:taberu/restaurant_menu/domain/value_objects/opening_time.dart';
 
@@ -17,6 +18,14 @@ abstract class OpeningTimeDto implements _$OpeningTimeDto {
   }) = _OpeningTimeDto;
 
   factory OpeningTimeDto.fromJson(Map<String, dynamic> json) => _$OpeningTimeDtoFromJson(json);
+
+  factory OpeningTimeDto.fromDomain(OpeningTime openingTime) {
+    return OpeningTimeDto(
+      dayOfWeek: openingTime.dayOfWeek.getOrCrash().asString(),
+      startTime: openingTime.startTime.getOrCrash(),
+      endTime: openingTime.endTime.getOrCrash(),
+    );
+  }
 
   // ignore: unused_element
   const OpeningTimeDto._();

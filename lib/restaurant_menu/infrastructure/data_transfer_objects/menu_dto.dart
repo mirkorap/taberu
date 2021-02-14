@@ -20,6 +20,14 @@ abstract class MenuDto implements _$MenuDto {
 
   factory MenuDto.fromJson(Map<String, dynamic> json) => _$MenuDtoFromJson(json);
 
+  factory MenuDto.fromDomain(Menu menu) {
+    return MenuDto(
+      id: menu.id.getOrCrash(),
+      name: menu.name,
+      dishes: menu.dishes.map((dish) => DishDto.fromDomain(dish)).asList(),
+    );
+  }
+
   factory MenuDto.fromFirestore(DocumentSnapshot doc) {
     return MenuDto.fromJson(doc.data()).copyWith(id: doc.id);
   }

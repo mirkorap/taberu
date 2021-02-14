@@ -35,6 +35,28 @@ abstract class RestaurantDto implements _$RestaurantDto {
 
   factory RestaurantDto.fromJson(Map<String, dynamic> json) => _$RestaurantDtoFromJson(json);
 
+  factory RestaurantDto.fromDomain(Restaurant restaurant) {
+    return RestaurantDto(
+      id: restaurant.id.getOrCrash(),
+      name: restaurant.name,
+      address: AddressDto.fromDomain(restaurant.address),
+      weekOpeningTime: restaurant.weekOpeningTime
+          .getOrCrash()
+          .map(
+            (openingTime) => OpeningTimeDto.fromDomain(openingTime),
+          )
+          .asList(),
+      phone: restaurant.phone.getOrCrash(),
+      emailAddress: restaurant.emailAddress.getOrCrash(),
+      websiteUrl: restaurant.websiteUrl,
+      facebookUrl: restaurant.facebookUrl,
+      instagramUrl: restaurant.instagramUrl,
+      active: restaurant.active,
+      createdAt: restaurant.createdAt,
+      updatedAt: restaurant.updatedAt,
+    );
+  }
+
   factory RestaurantDto.fromFirestore(DocumentSnapshot doc) {
     return RestaurantDto.fromJson(doc.data()).copyWith(id: doc.id);
   }

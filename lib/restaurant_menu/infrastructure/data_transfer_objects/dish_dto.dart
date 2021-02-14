@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
+import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 import 'package:taberu/core/infrastructure/json_converter/date_time_converter.dart';
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/dish_image_dto.dart';
@@ -30,6 +31,22 @@ abstract class DishDto implements _$DishDto {
   }) = _DishDto;
 
   factory DishDto.fromJson(Map<String, dynamic> json) => _$DishDtoFromJson(json);
+
+  factory DishDto.fromDomain(Dish dish) {
+    return DishDto(
+      id: dish.id.getOrCrash(),
+      name: dish.name,
+      description: dish.description,
+      ingredients: dish.ingredients,
+      allergens: dish.allergens,
+      price: dish.price.amount.getOrCrash(),
+      visible: dish.visible,
+      mainImage: DishImageDto.fromDomain(dish.mainImage),
+      gallery: dish.gallery.getOrCrash().map((dishImage) => DishImageDto.fromDomain(dishImage)).asList(),
+      createdAt: dish.createdAt,
+      updatedAt: dish.updatedAt,
+    );
+  }
 
   factory DishDto.fromFirestore(DocumentSnapshot doc) {
     return DishDto.fromJson(doc.data()).copyWith(id: doc.id);

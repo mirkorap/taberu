@@ -18,6 +18,13 @@ abstract class DishImageDto implements _$DishImageDto {
 
   factory DishImageDto.fromJson(Map<String, dynamic> json) => _$DishImageDtoFromJson(json);
 
+  factory DishImageDto.fromDomain(DishImage dishImage) {
+    return DishImageDto(
+      id: dishImage.id.getOrCrash(),
+      path: dishImage.path.getOrCrash(),
+    );
+  }
+
   factory DishImageDto.fromFirestore(DocumentSnapshot doc) {
     return DishImageDto.fromJson(doc.data()).copyWith(id: doc.id);
   }
