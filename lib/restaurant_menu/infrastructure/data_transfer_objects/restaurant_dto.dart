@@ -5,7 +5,6 @@ import 'package:taberu/core/domain/value_objects/email_address.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/phone.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
-import 'package:taberu/core/infrastructure/json_converter/date_time_converter.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/address_dto.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/menu_dto.dart';
@@ -29,8 +28,8 @@ abstract class RestaurantDto implements _$RestaurantDto {
     @required String instagramUrl,
     @required bool active,
     @JsonKey(defaultValue: []) List<MenuDto> menus,
-    @required @DateTimeConverter() DateTime createdAt,
-    @required @DateTimeConverter() DateTime updatedAt,
+    @required int createdAt,
+    @required int updatedAt,
   }) = _RestaurantDto;
 
   factory RestaurantDto.fromJson(Map<String, dynamic> json) => _$RestaurantDtoFromJson(json);
@@ -52,8 +51,8 @@ abstract class RestaurantDto implements _$RestaurantDto {
       facebookUrl: restaurant.facebookUrl,
       instagramUrl: restaurant.instagramUrl,
       active: restaurant.active,
-      createdAt: restaurant.createdAt,
-      updatedAt: restaurant.updatedAt,
+      createdAt: restaurant.createdAt.millisecondsSinceEpoch,
+      updatedAt: restaurant.updatedAt.millisecondsSinceEpoch,
     );
   }
 
@@ -80,8 +79,8 @@ abstract class RestaurantDto implements _$RestaurantDto {
       instagramUrl: instagramUrl,
       active: active,
       menus: menus.map((item) => item.toDomain()).toImmutableList(),
-      createdAt: createdAt,
-      updatedAt: updatedAt,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),
     );
   }
 }

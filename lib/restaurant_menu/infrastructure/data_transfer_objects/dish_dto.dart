@@ -6,7 +6,6 @@ import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
-import 'package:taberu/core/infrastructure/json_converter/date_time_converter.dart';
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/dish_image_dto.dart';
 
@@ -26,8 +25,8 @@ abstract class DishDto implements _$DishDto {
     @required bool visible,
     @required DishImageDto mainImage,
     @JsonKey(defaultValue: []) List<DishImageDto> gallery,
-    @required @DateTimeConverter() DateTime createdAt,
-    @required @DateTimeConverter() DateTime updatedAt,
+    @required int createdAt,
+    @required int updatedAt,
   }) = _DishDto;
 
   factory DishDto.fromJson(Map<String, dynamic> json) => _$DishDtoFromJson(json);
@@ -43,8 +42,8 @@ abstract class DishDto implements _$DishDto {
       visible: dish.visible,
       mainImage: DishImageDto.fromDomain(dish.mainImage),
       gallery: dish.gallery.getOrCrash().map((dishImage) => DishImageDto.fromDomain(dishImage)).asList(),
-      createdAt: dish.createdAt,
-      updatedAt: dish.updatedAt,
+      createdAt: dish.createdAt.millisecondsSinceEpoch,
+      updatedAt: dish.updatedAt.millisecondsSinceEpoch,
     );
   }
 
@@ -69,8 +68,8 @@ abstract class DishDto implements _$DishDto {
         gallery.map((item) => item.toDomain()).toImmutableList(),
         Dish.galleryMaxLength,
       ),
-      createdAt: createdAt,
-      updatedAt: updatedAt,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),
     );
   }
 }
