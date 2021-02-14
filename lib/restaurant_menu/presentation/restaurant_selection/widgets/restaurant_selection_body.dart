@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stilo/stilo.dart';
 import 'package:taberu/core/presentation/widgets/buttons/link_button.dart';
+import 'package:taberu/injection.dart';
 import 'package:taberu/restaurant_menu/application/restaurant_selection/restaurant_selection_cubit.dart';
+import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/themes/app_input_decoration.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,6 +17,8 @@ class RestaurantSelectionBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Restaurant selectedRestaurant;
+
     return BlocConsumer<RestaurantSelectionCubit, RestaurantSelectionState>(
       listener: (context, state) {
         state.maybeWhen(
@@ -62,10 +66,14 @@ class RestaurantSelectionBody extends StatelessWidget {
                   orElse: () => [],
                 );
               },
+              onChanged: (restaurant) => selectedRestaurant = restaurant,
             ),
             StiloSpacing.y10,
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                final storage = getIt<ISelectedRestaurantStorage>();
+                storage.setRestaurant(selectedRestaurant);
+              },
               child: const Text('restaurant_selection.show_menu').tr(),
             ),
             StiloSpacing.y5,
