@@ -36,5 +36,7 @@ class DayOfWeek extends SimpleValueObject<int> {
     return DayOfWeek(dayOfWeek);
   }
 
+  String asString() => daysOfWeek[getOrCrash()];
+
   DayOfWeek._(this.value);
 }
