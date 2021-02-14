@@ -3,8 +3,10 @@ import 'package:kt_dart/kt.dart';
 import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/failures/value_failure.dart';
 import 'package:taberu/core/domain/validators/value_validators.dart';
+import 'package:taberu/core/domain/value_objects/value_object.dart';
 
-class Money {
+@immutable
+class Money extends ValueObject {
   static const defaultCurrency = '€';
   static final currencies = ['€', r'$'].toImmutableSet();
 
@@ -30,4 +32,19 @@ class Money {
     @required this.amount,
     @required this.currency,
   });
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) {
+      return true;
+    }
+
+    return o is Money && o.amount == amount && o.currency == currency;
+  }
+
+  @override
+  int get hashCode => amount.hashCode + currency.hashCode;
+
+  @override
+  String toString() => 'Money($amount, $currency)';
 }
