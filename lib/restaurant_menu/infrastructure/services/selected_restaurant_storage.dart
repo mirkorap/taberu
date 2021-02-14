@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:taberu/core/application/services/i_device_storage.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/restaurant_dto.dart';
 
+@LazySingleton()
 class SelectedRestaurantStorage {
   static const storageKey = 'selected_restaurant';
 
