@@ -12,7 +12,7 @@ part 'dish_image_dto.g.dart';
 @freezed
 abstract class DishImageDto implements _$DishImageDto {
   const factory DishImageDto({
-    @JsonKey(ignore: true) String id,
+    @required String id,
     @required String path,
   }) = _DishImageDto;
 
@@ -26,7 +26,9 @@ abstract class DishImageDto implements _$DishImageDto {
   }
 
   factory DishImageDto.fromFirestore(DocumentSnapshot doc) {
-    return DishImageDto.fromJson(doc.data()).copyWith(id: doc.id);
+    final data = Map.fromEntries([...doc.data().entries, MapEntry('id', doc.id)]);
+
+    return DishImageDto.fromJson(data);
   }
 
   // ignore: unused_element

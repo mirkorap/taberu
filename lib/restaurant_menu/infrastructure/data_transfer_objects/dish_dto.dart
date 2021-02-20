@@ -16,7 +16,7 @@ part 'dish_dto.g.dart';
 @freezed
 abstract class DishDto implements _$DishDto {
   const factory DishDto({
-    @JsonKey(ignore: true) String id,
+    @required String id,
     @required String name,
     @required String description,
     @required String ingredients,
@@ -48,7 +48,9 @@ abstract class DishDto implements _$DishDto {
   }
 
   factory DishDto.fromFirestore(DocumentSnapshot doc) {
-    return DishDto.fromJson(doc.data()).copyWith(id: doc.id);
+    final data = Map.fromEntries([...doc.data().entries, MapEntry('id', doc.id)]);
+
+    return DishDto.fromJson(data);
   }
 
   // ignore: unused_element

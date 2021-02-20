@@ -17,7 +17,7 @@ part 'restaurant_dto.g.dart';
 @freezed
 abstract class RestaurantDto implements _$RestaurantDto {
   const factory RestaurantDto({
-    @JsonKey(ignore: true) String id,
+    @required String id,
     @required String name,
     @required AddressDto address,
     @required List<OpeningTimeDto> weekOpeningTime,
@@ -57,7 +57,9 @@ abstract class RestaurantDto implements _$RestaurantDto {
   }
 
   factory RestaurantDto.fromFirestore(DocumentSnapshot doc) {
-    return RestaurantDto.fromJson(doc.data()).copyWith(id: doc.id);
+    final data = Map.fromEntries([...doc.data().entries, MapEntry('id', doc.id)]);
+
+    return RestaurantDto.fromJson(data);
   }
 
   // ignore: unused_element

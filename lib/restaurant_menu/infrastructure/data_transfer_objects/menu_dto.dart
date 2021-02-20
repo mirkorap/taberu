@@ -13,7 +13,7 @@ part 'menu_dto.g.dart';
 @freezed
 abstract class MenuDto implements _$MenuDto {
   const factory MenuDto({
-    @JsonKey(ignore: true) String id,
+    @required String id,
     @required String name,
     @JsonKey(defaultValue: []) List<DishDto> dishes,
   }) = _MenuDto;
@@ -29,7 +29,9 @@ abstract class MenuDto implements _$MenuDto {
   }
 
   factory MenuDto.fromFirestore(DocumentSnapshot doc) {
-    return MenuDto.fromJson(doc.data()).copyWith(id: doc.id);
+    final data = Map.fromEntries([...doc.data().entries, MapEntry('id', doc.id)]);
+
+    return MenuDto.fromJson(data);
   }
 
   // ignore: unused_element
