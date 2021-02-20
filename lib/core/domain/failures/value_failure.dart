@@ -9,7 +9,7 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
 
   const factory ValueFailure.exceedingLength(T failedValue, int maxLength) = ExceedingLength<T>;
 
-  const factory ValueFailure.invalidEmail(T failedValue) = InvalidEmail<T>;
+  const factory ValueFailure.invalidEmailAddress(T failedValue) = InvalidEmailAddress<T>;
 
   const factory ValueFailure.invalidPhone(T failedValue) = InvalidPhone<T>;
 

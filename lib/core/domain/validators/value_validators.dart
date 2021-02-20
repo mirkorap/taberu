@@ -19,12 +19,12 @@ Either<ValueFailure<String>, String> validateMaxStringLength(String input, int m
 }
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
-  const emailRegex = r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
-  if (RegExp(emailRegex).hasMatch(input)) {
+  const emailAddressRegex = r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
+  if (RegExp(emailAddressRegex).hasMatch(input)) {
     return right(input);
   }
 
-  return left(ValueFailure.invalidEmail(input));
+  return left(ValueFailure.invalidEmailAddress(input));
 }
 
 Either<ValueFailure<String>, String> validatePhone(String input) {
