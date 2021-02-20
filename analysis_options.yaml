@@ -1,0 +1,17 @@
+include: package:lint/analysis_options_package.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.gr.dart"
+    - "**/*.freezed.dart"
+    - "**/*.config.dart"
+  errors:
+    missing_return: error
+    missing_required_param: error
+    must_be_immutable: error
+    prefer_const_literals_to_create_immutables: ignore
+
+linter:
+  rules:
+    avoid_classes_with_only_static_members: false

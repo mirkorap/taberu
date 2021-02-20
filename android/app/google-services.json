@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "984138366353",
+    "firebase_url": "https://taberu-8ee03.firebaseio.com",
+    "project_id": "taberu-8ee03",
+    "storage_bucket": "taberu-8ee03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984138366353:android:c4d63b5b20a4c9ae49ee30",
+        "android_client_info": {
+          "package_name": "taberu.taberu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984138366353-m0qiudpeisfikhkkrdkcnefjrve6iok3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "taberu.taberu",
+            "certificate_hash": "96a971d42fe089b6034958c778cce801e9be07f3"
+          }
+        },
+        {
+          "client_id": "984138366353-qe1hquscfirgigf9bpnr0fstkmr2dvhk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcO6xlmrx8FDjGmzMF2PIquWzmN2YqS3E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984138366353-qe1hquscfirgigf9bpnr0fstkmr2dvhk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "984138366353-c5td0igl2lsc6it56019n4pk8umkjauj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "taberu"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
