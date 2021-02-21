@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:taberu/core/infrastructure/extension_methods/firebase_core.dart';
-import 'package:taberu/core/infrastructure/extension_methods/firebase_firestore.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/domain/failures/restaurant_failure.dart';
 import 'package:taberu/restaurant_menu/domain/repositories/i_restaurant_repository.dart';
@@ -18,7 +17,8 @@ class RestaurantRepository implements IRestaurantRepository {
 
   @override
   Stream<Either<RestaurantFailure, KtList<Restaurant>>> searchByName(String name) async* {
-    yield* _firestore.restaurants
+    yield* _firestore
+        .collection('restaurants')
         .where('name', isGreaterThanOrEqualTo: name)
         .where('name', isLessThanOrEqualTo: '$name\uf8ff')
         .where('active', isEqualTo: true)
