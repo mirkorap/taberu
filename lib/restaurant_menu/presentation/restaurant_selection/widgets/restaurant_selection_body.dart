@@ -7,8 +7,8 @@ import 'package:stilo/stilo.dart';
 import 'package:taberu/core/presentation/widgets/buttons/link_button.dart';
 import 'package:taberu/injection.dart';
 import 'package:taberu/restaurant_menu/application/restaurant_selection/restaurant_selection_cubit.dart';
+import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
-import 'package:taberu/restaurant_menu/infrastructure/services/selected_restaurant_storage.dart';
 import 'package:taberu/themes/app_input_decoration.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -71,7 +71,7 @@ class RestaurantSelectionBody extends StatelessWidget {
             StiloSpacing.y10,
             TextButton(
               onPressed: () {
-                final storage = getIt<SelectedRestaurantStorage>();
+                final storage = getIt<ISelectedRestaurantStorage>();
                 storage.setRestaurant(selectedRestaurant);
               },
               child: const Text('restaurant_selection.show_menu').tr(),
