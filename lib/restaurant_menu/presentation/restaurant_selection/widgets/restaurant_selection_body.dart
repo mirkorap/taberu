@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flushbar/flushbar_helper.dart';
@@ -9,6 +10,7 @@ import 'package:taberu/injection.dart';
 import 'package:taberu/restaurant_menu/application/restaurant_selection/restaurant_selection_cubit.dart';
 import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
+import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_input_decoration.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -73,6 +75,7 @@ class RestaurantSelectionBody extends StatelessWidget {
               onPressed: () {
                 final storage = getIt<ISelectedRestaurantStorage>();
                 storage.setRestaurant(selectedRestaurant);
+                ExtendedNavigator.of(context).replace(Routes.dishesSelectionScreen);
               },
               child: const Text('restaurant_selection.show_menu').tr(),
             ),
