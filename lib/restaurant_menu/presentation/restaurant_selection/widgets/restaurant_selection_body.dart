@@ -11,7 +11,7 @@ import 'package:taberu/restaurant_menu/application/restaurant_selection/restaura
 import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/router.gr.dart';
-import 'package:taberu/themes/app_input_decoration.dart';
+import 'package:taberu/themes/app_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantSelectionBody extends StatelessWidget {
@@ -44,10 +44,10 @@ class RestaurantSelectionBody extends StatelessWidget {
               isFilteredOnline: true,
               showSearchBox: true,
               itemAsString: (restaurant) => restaurant.name,
-              dropdownSearchDecoration: AppInputDecoration.searchTextField.copyWith(
+              dropdownSearchDecoration: AppInput.searchTextField.copyWith(
                 labelText: tr('restaurant_selection.select_restaurant'),
               ),
-              searchBoxDecoration: AppInputDecoration.searchTextField,
+              searchBoxDecoration: AppInput.searchTextField,
               popupShape: const RoundedRectangleBorder(
                 borderRadius: StiloBorderRadius.t7,
               ),
