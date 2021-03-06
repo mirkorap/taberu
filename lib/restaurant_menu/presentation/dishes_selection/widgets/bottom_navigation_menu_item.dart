@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:stilo/stilo.dart';
 import 'package:taberu/themes/app_color.dart';
 
 class BottomNavigationMenuItem extends StatelessWidget {
@@ -25,7 +24,7 @@ class BottomNavigationMenuItem extends StatelessWidget {
           ExtendedNavigator.of(context).replace(routeName);
         }
       },
-      color: isCurrentRoute ? AppColor.primary : StiloColor.black50,
+      color: isCurrentRoute ? AppColor.primary : AppColor.disabled,
       icon: Icon(isCurrentRoute ? activeIcon : inactiveIcon),
       iconSize: 30.0,
     );
