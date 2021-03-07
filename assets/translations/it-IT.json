@@ -17,5 +17,8 @@
     "failures": {
       "unexpected": "Si è verificato un errore imprevisto durante il recupero dell'elenco ristoranti"
     }
+  },
+  "dishes_selection": {
+    "title": "Scegli i piatti\ndal nostro menù"
   }
 }

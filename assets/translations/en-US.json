@@ -17,5 +17,8 @@
     "failures": {
       "unexpected": "An unexpected error occurred while getting the restaurant list"
     }
+  },
+  "dishes_selection": {
+    "title": "Choose the dishes\nfrom our menu"
   }
 }
