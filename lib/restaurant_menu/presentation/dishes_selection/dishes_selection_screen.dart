@@ -19,6 +19,7 @@ class DishesSelectionScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Padding(
             padding: const EdgeInsets.all(StiloEdge.edge10),
             child: Column(
