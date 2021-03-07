@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stilo/stilo.dart';
-import 'package:taberu/restaurant_menu/presentation/dishes_selection/widgets/bottom_navigation_menu_item.dart';
+import 'package:taberu/restaurant_menu/presentation/widgets/bottom_navigation_menu_item.dart';
 import 'package:taberu/router.gr.dart';
 
 class BottomNavigationMenu extends StatelessWidget {
