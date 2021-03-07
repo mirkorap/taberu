@@ -9,4 +9,8 @@ abstract class AppBorder {
     borderSide: BorderSide.none,
     borderRadius: BorderRadius.all(Radius.circular(100.0)),
   );
+
+  static const dishCard = BorderRadiusDirectional.all(
+    Radius.circular(30.0),
+  );
 }
