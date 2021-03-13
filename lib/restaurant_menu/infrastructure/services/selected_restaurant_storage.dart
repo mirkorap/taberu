@@ -30,4 +30,9 @@ class SelectedRestaurantStorage implements ISelectedRestaurantStorage {
       jsonEncode(RestaurantDto.fromDomain(restaurant).toJson()),
     );
   }
+
+  @override
+  bool containsRestaurant() {
+    return _deviceStorage.containsKey(storageKey);
+  }
 }
