@@ -15,7 +15,7 @@ class DishesSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<MenuNavigationCubit>()..loadFromSelectedRestaurant(),
+      create: (context) => getIt<MenuNavigationCubit>()..load(),
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(

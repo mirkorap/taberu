@@ -25,7 +25,7 @@ class MenuNavigationCubit extends Cubit<MenuNavigationState> {
     this._menuRepository,
   ) : super(const MenuNavigationState.initial());
 
-  void loadFromSelectedRestaurant() {
+  void load() {
     emit(const MenuNavigationState.loadInProgress());
 
     final selectedRestaurant = _storage.getRestaurant();
