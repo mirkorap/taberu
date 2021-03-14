@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stilo/stilo.dart';
 import 'package:taberu/core/presentation/widgets/buttons/link_button.dart';
 import 'package:taberu/injection.dart';
-import 'package:taberu/restaurant_menu/application/restaurant_selection/restaurant_selection_cubit.dart';
+import 'package:taberu/restaurant_menu/application/restaurant_search/restaurant_search_cubit.dart';
 import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/router.gr.dart';
@@ -21,7 +21,7 @@ class RestaurantSelectionBody extends StatelessWidget {
   Widget build(BuildContext context) {
     Restaurant selectedRestaurant;
 
-    return BlocConsumer<RestaurantSelectionCubit, RestaurantSelectionState>(
+    return BlocConsumer<RestaurantSearchCubit, RestaurantSearchState>(
       listener: (context, state) {
         state.maybeWhen(
           searchFailure: (failure) {
@@ -60,7 +60,7 @@ class RestaurantSelectionBody extends StatelessWidget {
                 );
               },
               onFind: (String restaurantName) async {
-                final cubit = context.read<RestaurantSelectionCubit>();
+                final cubit = context.read<RestaurantSearchCubit>();
                 cubit.searchByName(restaurantName);
 
                 return state.maybeWhen(

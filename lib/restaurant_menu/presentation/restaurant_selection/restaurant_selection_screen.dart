@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stilo/stilo.dart';
 import 'package:taberu/injection.dart';
-import 'package:taberu/restaurant_menu/application/restaurant_selection/restaurant_selection_cubit.dart';
+import 'package:taberu/restaurant_menu/application/restaurant_search/restaurant_search_cubit.dart';
 import 'package:taberu/restaurant_menu/presentation/restaurant_selection/widgets/restaurant_selection_body.dart';
 import 'package:taberu/restaurant_menu/presentation/restaurant_selection/widgets/restaurant_selection_header.dart';
 
@@ -12,7 +12,7 @@ class RestaurantSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<RestaurantSelectionCubit>(),
+      create: (context) => getIt<RestaurantSearchCubit>(),
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
