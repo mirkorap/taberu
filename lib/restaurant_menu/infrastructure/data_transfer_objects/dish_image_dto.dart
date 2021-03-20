@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/value_objects/image.dart';
@@ -23,12 +22,6 @@ abstract class DishImageDto implements _$DishImageDto {
       id: dishImage.id.getOrCrash(),
       path: dishImage.path.getOrCrash(),
     );
-  }
-
-  factory DishImageDto.fromFirestore(DocumentSnapshot doc) {
-    final data = Map.fromEntries([...doc.data().entries, MapEntry('id', doc.id)]);
-
-    return DishImageDto.fromJson(data);
   }
 
   // ignore: unused_element

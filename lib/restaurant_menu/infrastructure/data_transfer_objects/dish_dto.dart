@@ -23,7 +23,6 @@ abstract class DishDto implements _$DishDto {
     @required String allergens,
     @required int price,
     @required bool visible,
-    @required DishImageDto mainImage,
     @JsonKey(defaultValue: []) List<DishImageDto> gallery,
     @required int createdAt,
     @required int updatedAt,
@@ -40,7 +39,6 @@ abstract class DishDto implements _$DishDto {
       allergens: dish.allergens,
       price: dish.price.amount.getOrCrash(),
       visible: dish.visible,
-      mainImage: DishImageDto.fromDomain(dish.mainImage),
       gallery: dish.gallery.getOrCrash().map((dishImage) => DishImageDto.fromDomain(dishImage)).asList(),
       createdAt: dish.createdAt.millisecondsSinceEpoch,
       updatedAt: dish.updatedAt.millisecondsSinceEpoch,
@@ -65,7 +63,6 @@ abstract class DishDto implements _$DishDto {
       allergens: allergens,
       price: Money(amount: price),
       visible: visible,
-      mainImage: mainImage.toDomain(),
       gallery: LimitedList(
         gallery.map((item) => item.toDomain()).toImmutableList(),
         Dish.galleryMaxLength,
