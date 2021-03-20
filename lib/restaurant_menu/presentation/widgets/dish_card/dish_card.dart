@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:kt_dart/kt.dart';
+import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_menu/presentation/widgets/dish_card/dish_card_body.dart';
 import 'package:taberu/restaurant_menu/presentation/widgets/dish_card/dish_card_image.dart';
 import 'package:taberu/themes/app_card.dart';
 
 class DishCard extends StatelessWidget {
-  const DishCard({Key key}) : super(key: key);
+  final Dish dish;
+
+  const DishCard({
+    Key key,
+    @required this.dish,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +21,17 @@ class DishCard extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 80.0),
+          Padding(
+            padding: const EdgeInsets.only(top: 120.0),
             child: DishCardBody(
-              dishName: 'Veggie tomato mix',
-              dishPrice: '20,00€',
+              name: dish.name,
+              price: dish.price,
             ),
           ),
-          const Align(
-            alignment: Alignment(0.0, -1.5),
+          Align(
+            alignment: const Alignment(0.0, -1.5),
             child: DishCardImage(
-              dishImageUrl: 'https://featfood.it/wp-content/uploads/2020/11/7_pokesalmone-min.png',
+              image: dish.gallery.getOrCrash().firstOrNull(),
             ),
           ),
         ],

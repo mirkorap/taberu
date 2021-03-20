@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:stilo/stilo.dart';
+import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/themes/app_text_style.dart';
 
 class DishCardBody extends StatelessWidget {
-  final String dishName;
-  final String dishPrice;
+  final String name;
+  final Money price;
 
   const DishCardBody({
     Key key,
-    @required this.dishName,
-    @required this.dishPrice,
+    @required this.name,
+    @required this.price,
   }) : super(key: key);
 
   @override
@@ -20,14 +21,14 @@ class DishCardBody extends StatelessWidget {
         SizedBox(
           width: 150.0,
           child: Text(
-            dishName,
+            name,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline2,
+            style: Theme.of(context).textTheme.headline3,
           ),
         ),
         StiloSpacing.y2,
         Text(
-          dishPrice,
+          price.toString(),
           style: AppTextStyle.priceText,
         ),
       ],

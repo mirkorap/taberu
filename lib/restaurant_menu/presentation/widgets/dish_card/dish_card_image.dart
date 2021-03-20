@@ -1,25 +1,31 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stilo/stilo.dart';
+import 'package:taberu/restaurant_menu/domain/entities/dish_image.dart';
+import 'package:taberu/themes/app_image.dart';
 
 class DishCardImage extends StatelessWidget {
-  final String dishImageUrl;
+  final DishImage image;
 
   const DishCardImage({
     Key key,
-    @required this.dishImageUrl,
+    @required this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 130.0,
-      height: 130.0,
-      decoration: BoxDecoration(
+    return DecoratedBox(
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
         boxShadow: StiloBoxShadow.md,
-        image: DecorationImage(
+      ),
+      child: ClipOval(
+        child: CachedNetworkImage(
+          width: 150.0,
+          height: 150.0,
           fit: BoxFit.cover,
-          image: NetworkImage(dishImageUrl),
+          placeholder: (context, url) => Image.asset(AppImage.dishPlaceholder),
+          imageUrl: image.path.getOrCrash(),
         ),
       ),
     );
