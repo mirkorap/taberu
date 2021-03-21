@@ -12,7 +12,7 @@ class BottomNavigationMenu extends StatelessWidget {
       color: StiloColor.transparent,
       elevation: StiloElevation.z0,
       child: Container(
-        height: 60.0,
+        height: StiloHeight.h16,
         decoration: const BoxDecoration(
           color: StiloColor.white,
           boxShadow: StiloBoxShadow.lg,

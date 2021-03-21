@@ -19,7 +19,7 @@ class DishCardBody extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: 150.0,
+          width: StiloWidth.w40,
           child: Text(
             name,
             textAlign: TextAlign.center,

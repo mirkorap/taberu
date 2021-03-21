@@ -19,7 +19,7 @@ class FailureDisplay extends StatelessWidget {
           const Icon(
             Icons.error,
             color: AppColor.danger,
-            size: 50.0,
+            size: StiloFontSize.xl6,
           ),
           StiloSpacing.y3,
           Text(

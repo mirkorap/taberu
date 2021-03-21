@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kt_dart/kt.dart';
+import 'package:stilo/stilo.dart';
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_menu/presentation/widgets/dish_card/dish_card_body.dart';
 import 'package:taberu/restaurant_menu/presentation/widgets/dish_card/dish_card_image.dart';
@@ -16,13 +17,13 @@ class DishCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 220.0,
+      width: StiloWidth.w48,
       decoration: AppCard.dishCard,
       child: Stack(
         alignment: Alignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 120.0),
+            padding: const EdgeInsets.only(top: 100.0),
             child: DishCardBody(
               name: dish.name,
               price: dish.price,

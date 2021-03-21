@@ -21,8 +21,8 @@ class DishCardImage extends StatelessWidget {
       ),
       child: ClipOval(
         child: CachedNetworkImage(
-          width: 150.0,
-          height: 150.0,
+          width: StiloWidth.w32,
+          height: StiloHeight.h32,
           fit: BoxFit.cover,
           placeholder: (context, url) => Image.asset(AppImage.dishPlaceholder),
           imageUrl: image.path.getOrCrash(),
