@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:stilo/stilo.dart';
+import 'package:taberu/restaurant_menu/application/dish_search/dish_search_cubit.dart';
 import 'package:taberu/restaurant_menu/application/menu_navigation/menu_navigation_cubit.dart';
 import 'package:taberu/themes/app_tab_navigation.dart';
 
@@ -28,25 +29,26 @@ class RestaurantMenuTabs extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return Theme(
-          data: ThemeData(
-            tabBarTheme: AppTabNavigation.restaurantMenuTabBar,
-          ),
-          child: DefaultTabController(
-            length: state.maybeWhen(
-              loadSuccess: (menus) => menus.size,
-              orElse: () => 0,
-            ),
-            child: TabBar(
-              isScrollable: true,
-              tabs: state.maybeWhen(
-                loadSuccess: (menus) {
-                  return menus.map((menu) => Tab(text: menu.name)).asList();
-                },
-                orElse: () => [],
+        return state.maybeWhen(
+          loadSuccess: (menus) {
+            return Theme(
+              data: ThemeData(
+                tabBarTheme: AppTabNavigation.restaurantMenuTabBar,
               ),
-            ),
-          ),
+              child: DefaultTabController(
+                length: menus.size,
+                child: TabBar(
+                  onTap: (index) {
+                    final cubit = context.read<DishSearchCubit>();
+                    cubit.searchByMenu(menus[index].id.getOrCrash());
+                  },
+                  isScrollable: true,
+                  tabs: menus.map((menu) => Tab(text: menu.name)).asList(),
+                ),
+              ),
+            );
+          },
+          orElse: () => Container(),
         );
       },
     );
