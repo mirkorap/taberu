@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:stilo/stilo.dart';
 import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_color.dart';
 
@@ -18,7 +19,7 @@ class BottomNavigationMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       backgroundColor: AppColor.primary,
-      height: 55.0,
+      height: StiloHeight.h16,
       items: [
         const Icon(Icons.home_outlined, size: 30.0),
         const Icon(Icons.shopping_cart_outlined, size: 30.0),
