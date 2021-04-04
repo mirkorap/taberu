@@ -50,19 +50,21 @@ class DishRepository implements IDishRepository {
     assert(criteria.name != null);
 
     yield* _firestore
-        .collectionGroup('menus')
-        .where(FieldPath.documentId, isEqualTo: criteria.restaurantId)
+        .collectionGroup('dishes')
         .where('name', isGreaterThanOrEqualTo: criteria.name)
         .where('name', isLessThanOrEqualTo: '${criteria.name}\uf8ff')
         .where('visible', isEqualTo: true)
-        .orderBy('name')
         .snapshots()
         .map(
-          (snapshot) => right<DishFailure, KtList<Dish>>(
-            snapshot.docs.map((doc) => DishDto.fromFirestore(doc).toDomain()).toImmutableList(),
-          ),
-        )
-        .onErrorReturnWith((e) {
+      (snapshot) {
+        bool isRestaurantDish(doc) => doc.reference.parent.parent.parent.parent.id == criteria.restaurantId;
+        final restaurantDishes = snapshot.docs.where((doc) => isRestaurantDish(doc));
+
+        return right<DishFailure, KtList<Dish>>(
+          restaurantDishes.map((doc) => DishDto.fromFirestore(doc).toDomain()).toImmutableList(),
+        );
+      },
+    ).onErrorReturnWith((e) {
       if (e is FirebaseException && e.isPermissionDeniedException) {
         return left(const DishFailure.insufficientPermissions());
       }
