@@ -51,9 +51,9 @@ class DishRepository implements IDishRepository {
   }
 
   List<QueryDocumentSnapshot> _whereDocsHaveRestaurantId(List<QueryDocumentSnapshot> docs, String restaurantId) {
-    bool isRestaurantDish(doc) => doc.reference.parent.parent.parent.parent.id == restaurantId;
+    bool belongsToRestaurant(doc) => doc.reference.parent.parent.parent.parent.id == restaurantId;
 
-    return docs.where(isRestaurantDish).toList();
+    return docs.where(belongsToRestaurant).toList();
   }
 
   Either<DishFailure, KtList<Dish>> _fromDocsToDishes(List<QueryDocumentSnapshot> docs) {
