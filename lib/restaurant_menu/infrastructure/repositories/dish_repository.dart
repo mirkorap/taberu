@@ -30,18 +30,8 @@ class DishRepository implements IDishRepository {
         .where('visible', isEqualTo: true)
         .orderBy('name')
         .snapshots()
-        .map(
-          (snapshot) => right<DishFailure, KtList<Dish>>(
-            snapshot.docs.map((doc) => DishDto.fromFirestore(doc).toDomain()).toImmutableList(),
-          ),
-        )
-        .onErrorReturnWith((e) {
-      if (e is FirebaseException && e.isPermissionDeniedException) {
-        return left(const DishFailure.insufficientPermissions());
-      }
-
-      return left(const DishFailure.unexpected());
-    });
+        .map((snapshot) => _fromDocsToDishes(snapshot.docs))
+        .onErrorReturnWith(_fromExceptionToFailure);
   }
 
   @override
@@ -55,21 +45,28 @@ class DishRepository implements IDishRepository {
         .where('name', isLessThanOrEqualTo: '${criteria.name}\uf8ff')
         .where('visible', isEqualTo: true)
         .snapshots()
-        .map(
-      (snapshot) {
-        bool isRestaurantDish(doc) => doc.reference.parent.parent.parent.parent.id == criteria.restaurantId;
-        final restaurantDishes = snapshot.docs.where((doc) => isRestaurantDish(doc));
+        .map((snapshot) => _whereDocsHaveRestaurantId(snapshot.docs, criteria.restaurantId))
+        .map(_fromDocsToDishes)
+        .onErrorReturnWith(_fromExceptionToFailure);
+  }
 
-        return right<DishFailure, KtList<Dish>>(
-          restaurantDishes.map((doc) => DishDto.fromFirestore(doc).toDomain()).toImmutableList(),
-        );
-      },
-    ).onErrorReturnWith((e) {
-      if (e is FirebaseException && e.isPermissionDeniedException) {
-        return left(const DishFailure.insufficientPermissions());
-      }
+  List<QueryDocumentSnapshot> _whereDocsHaveRestaurantId(List<QueryDocumentSnapshot> docs, String restaurantId) {
+    bool isRestaurantDish(doc) => doc.reference.parent.parent.parent.parent.id == restaurantId;
 
-      return left(const DishFailure.unexpected());
-    });
+    return docs.where(isRestaurantDish).toList();
+  }
+
+  Either<DishFailure, KtList<Dish>> _fromDocsToDishes(List<QueryDocumentSnapshot> docs) {
+    final dishes = docs.map((doc) => DishDto.fromFirestore(doc).toDomain()).toImmutableList();
+
+    return right(dishes);
+  }
+
+  Either<DishFailure, KtList<Dish>> _fromExceptionToFailure(dynamic e) {
+    if (e is FirebaseException && e.isPermissionDeniedException) {
+      return left(const DishFailure.insufficientPermissions());
+    }
+
+    return left(const DishFailure.unexpected());
   }
 }
