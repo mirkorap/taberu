@@ -23,17 +23,21 @@ class MenuRepository implements IMenuRepository {
         .collection('menus')
         .orderBy('name')
         .snapshots()
-        .map(
-          (snapshot) => right<MenuFailure, KtList<Menu>>(
-            snapshot.docs.map((doc) => MenuDto.fromFirestore(doc).toDomain()).toImmutableList(),
-          ),
-        )
-        .onErrorReturnWith((e) {
-      if (e is FirebaseException && e.isPermissionDeniedException) {
-        return left(const MenuFailure.insufficientPermissions());
-      }
+        .map((snapshot) => _fromDocsToMenus(snapshot.docs))
+        .onErrorReturnWith(_fromExceptionToFailure);
+  }
 
-      return left(const MenuFailure.unexpected());
-    });
+  Either<MenuFailure, KtList<Menu>> _fromDocsToMenus(List<QueryDocumentSnapshot> docs) {
+    final menus = docs.map((doc) => MenuDto.fromFirestore(doc).toDomain()).toImmutableList();
+
+    return right(menus);
+  }
+
+  Either<MenuFailure, KtList<Menu>> _fromExceptionToFailure(dynamic e) {
+    if (e is FirebaseException && e.isPermissionDeniedException) {
+      return left(const MenuFailure.insufficientPermissions());
+    }
+
+    return left(const MenuFailure.unexpected());
   }
 }
