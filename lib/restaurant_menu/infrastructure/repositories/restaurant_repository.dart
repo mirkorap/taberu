@@ -24,17 +24,21 @@ class RestaurantRepository implements IRestaurantRepository {
         .where('active', isEqualTo: true)
         .orderBy('name')
         .snapshots()
-        .map(
-          (snapshot) => right<RestaurantFailure, KtList<Restaurant>>(
-            snapshot.docs.map((doc) => RestaurantDto.fromFirestore(doc).toDomain()).toImmutableList(),
-          ),
-        )
-        .onErrorReturnWith((e) {
-      if (e is FirebaseException && e.isPermissionDeniedException) {
-        return left(const RestaurantFailure.insufficientPermissions());
-      }
+        .map((snapshot) => _fromDocsToRestaurants(snapshot.docs))
+        .onErrorReturnWith(_fromExceptionToFailure);
+  }
 
-      return left(const RestaurantFailure.unexpected());
-    });
+  Either<RestaurantFailure, KtList<Restaurant>> _fromDocsToRestaurants(List<QueryDocumentSnapshot> docs) {
+    final restaurants = docs.map((doc) => RestaurantDto.fromFirestore(doc).toDomain()).toImmutableList();
+
+    return right(restaurants);
+  }
+
+  Either<RestaurantFailure, KtList<Restaurant>> _fromExceptionToFailure(dynamic e) {
+    if (e is FirebaseException && e.isPermissionDeniedException) {
+      return left(const RestaurantFailure.insufficientPermissions());
+    }
+
+    return left(const RestaurantFailure.unexpected());
   }
 }
