@@ -8,7 +8,7 @@ import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_menu/domain/failures/dish_failure.dart';
 import 'package:taberu/restaurant_menu/domain/repositories/i_dish_repository.dart';
 import 'package:taberu/restaurant_menu/domain/search_criteria/dish_search_criteria.dart';
-import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/dish_dto.dart';
+import 'package:taberu/restaurant_menu/infrastructure/extension_methods/firestore_dish.dart';
 
 @LazySingleton(as: IDishRepository)
 class DishRepository implements IDishRepository {
@@ -30,7 +30,7 @@ class DishRepository implements IDishRepository {
         .where('visible', isEqualTo: true)
         .orderBy('name')
         .snapshots()
-        .map((snapshot) => _fromDocsToDishes(snapshot.docs))
+        .map((snapshot) => right<DishFailure, KtList<Dish>>(snapshot.docs.toDishList()))
         .onErrorReturnWith(_fromExceptionToFailure);
   }
 
@@ -41,25 +41,13 @@ class DishRepository implements IDishRepository {
 
     yield* _firestore
         .collectionGroup('dishes')
-        .where('name', isGreaterThanOrEqualTo: criteria.name)
-        .where('name', isLessThanOrEqualTo: '${criteria.name}\uf8ff')
         .where('visible', isEqualTo: true)
         .snapshots()
-        .map((snapshot) => _whereDocsHaveRestaurantId(snapshot.docs, criteria.restaurantId))
-        .map(_fromDocsToDishes)
+        .switchMap((snapshot) => Stream.value(snapshot.docs))
+        .map((docs) => docs.whereHaveRestaurantId(criteria.restaurantId))
+        .map((docs) => docs.whereHaveName(criteria.name))
+        .map((docs) => right<DishFailure, KtList<Dish>>(docs.toDishList()))
         .onErrorReturnWith(_fromExceptionToFailure);
-  }
-
-  List<QueryDocumentSnapshot> _whereDocsHaveRestaurantId(List<QueryDocumentSnapshot> docs, String restaurantId) {
-    bool belongsToRestaurant(doc) => doc.reference.parent.parent.parent.parent.id == restaurantId;
-
-    return docs.where(belongsToRestaurant).toList();
-  }
-
-  Either<DishFailure, KtList<Dish>> _fromDocsToDishes(List<QueryDocumentSnapshot> docs) {
-    final dishes = docs.map((doc) => DishDto.fromFirestore(doc).toDomain()).toImmutableList();
-
-    return right(dishes);
   }
 
   Either<DishFailure, KtList<Dish>> _fromExceptionToFailure(dynamic e) {

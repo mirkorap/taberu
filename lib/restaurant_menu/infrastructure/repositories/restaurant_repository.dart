@@ -7,7 +7,7 @@ import 'package:taberu/core/infrastructure/extension_methods/firebase_core.dart'
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/domain/failures/restaurant_failure.dart';
 import 'package:taberu/restaurant_menu/domain/repositories/i_restaurant_repository.dart';
-import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/restaurant_dto.dart';
+import 'package:taberu/restaurant_menu/infrastructure/extension_methods/firestore_restaurant.dart';
 
 @LazySingleton(as: IRestaurantRepository)
 class RestaurantRepository implements IRestaurantRepository {
@@ -24,14 +24,8 @@ class RestaurantRepository implements IRestaurantRepository {
         .where('active', isEqualTo: true)
         .orderBy('name')
         .snapshots()
-        .map((snapshot) => _fromDocsToRestaurants(snapshot.docs))
+        .map((snapshot) => right<RestaurantFailure, KtList<Restaurant>>(snapshot.docs.toRestaurantList()))
         .onErrorReturnWith(_fromExceptionToFailure);
-  }
-
-  Either<RestaurantFailure, KtList<Restaurant>> _fromDocsToRestaurants(List<QueryDocumentSnapshot> docs) {
-    final restaurants = docs.map((doc) => RestaurantDto.fromFirestore(doc).toDomain()).toImmutableList();
-
-    return right(restaurants);
   }
 
   Either<RestaurantFailure, KtList<Restaurant>> _fromExceptionToFailure(dynamic e) {
