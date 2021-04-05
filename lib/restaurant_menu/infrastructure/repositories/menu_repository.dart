@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:taberu/core/infrastructure/extension_methods/firebase_core.dart';
 import 'package:taberu/restaurant_menu/domain/entities/menu.dart';
 import 'package:taberu/restaurant_menu/domain/failures/menu_failure.dart';
 import 'package:taberu/restaurant_menu/domain/repositories/i_menu_repository.dart';
-import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/menu_dto.dart';
+import 'package:taberu/restaurant_menu/infrastructure/extension_methods/firestore_menu.dart';
 
 @LazySingleton(as: IMenuRepository)
 class MenuRepository implements IMenuRepository {
@@ -23,21 +21,7 @@ class MenuRepository implements IMenuRepository {
         .collection('menus')
         .orderBy('name')
         .snapshots()
-        .map((snapshot) => _fromDocsToMenus(snapshot.docs))
-        .onErrorReturnWith(_fromExceptionToFailure);
-  }
-
-  Either<MenuFailure, KtList<Menu>> _fromDocsToMenus(List<QueryDocumentSnapshot> docs) {
-    final menus = docs.map((doc) => MenuDto.fromFirestore(doc).toDomain()).toImmutableList();
-
-    return right(menus);
-  }
-
-  Either<MenuFailure, KtList<Menu>> _fromExceptionToFailure(dynamic e) {
-    if (e is FirebaseException && e.isPermissionDeniedException) {
-      return left(const MenuFailure.insufficientPermissions());
-    }
-
-    return left(const MenuFailure.unexpected());
+        .map((snapshot) => right<MenuFailure, KtList<Menu>>(snapshot.docs.toMenuList()))
+        .onErrorReturnWithFailure();
   }
 }
