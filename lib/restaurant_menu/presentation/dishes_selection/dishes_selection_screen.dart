@@ -45,11 +45,19 @@ class DishesSelectionScreen extends HookWidget {
                   ).tr(),
                 ),
                 StiloSpacing.y8,
-                Form(
-                  child: TextFormField(
-                    onChanged: (value) => dishSearchBarState.value = value,
-                    decoration: AppInput.searchTextField,
-                  ),
+                BlocBuilder<DishSearchCubit, DishSearchState>(
+                  builder: (context, state) {
+                    return Form(
+                      child: TextFormField(
+                        onChanged: (value) {
+                          final cubit = context.read<DishSearchCubit>();
+                          cubit.searchByName(value);
+                          dishSearchBarState.value = value;
+                        },
+                        decoration: AppInput.searchTextField,
+                      ),
+                    );
+                  },
                 ),
                 StiloSpacing.y8,
                 if (dishSearchBarState.value.isEmpty) ...[
