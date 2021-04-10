@@ -14,6 +14,9 @@ class RestaurantMenuTabs extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           loadSuccess: (menus) {
+            final cubit = context.read<DishSearchCubit>();
+            if (menus.isNotEmpty()) cubit.searchByMenu(menus[0].id.getOrCrash());
+
             return Theme(
               data: ThemeData(
                 tabBarTheme: AppTabNavigation.restaurantMenuTabBar,
@@ -21,10 +24,7 @@ class RestaurantMenuTabs extends StatelessWidget {
               child: DefaultTabController(
                 length: menus.size,
                 child: TabBar(
-                  onTap: (index) {
-                    final cubit = context.read<DishSearchCubit>();
-                    cubit.searchByMenu(menus[index].id.getOrCrash());
-                  },
+                  onTap: (index) => cubit.searchByMenu(menus[index].id.getOrCrash()),
                   isScrollable: true,
                   tabs: menus.map((menu) => Tab(text: menu.name)).asList(),
                 ),
