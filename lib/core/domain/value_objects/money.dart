@@ -47,9 +47,9 @@ class Money extends ValueObject {
 
   @override
   String toString() {
-    final amountToDisplay = amount.getOrElse(() => 0) / 100;
-    final currencyToDisplay = currency.getOrElse(() => defaultCurrency);
+    final displayedAmount = amount.getOrElse(() => 0) / 100;
+    final displayedCurrency = currency.getOrElse(() => defaultCurrency);
 
-    return '$amountToDisplay $currencyToDisplay';
+    return '$displayedAmount $displayedCurrency';
   }
 }
