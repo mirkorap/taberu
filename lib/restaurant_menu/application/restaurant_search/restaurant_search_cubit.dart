@@ -9,25 +9,25 @@ import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/domain/failures/restaurant_failure.dart';
 import 'package:taberu/restaurant_menu/domain/repositories/i_restaurant_repository.dart';
 
-part 'restaurant_selection_cubit.freezed.dart';
+part 'restaurant_search_cubit.freezed.dart';
 
-part 'restaurant_selection_state.dart';
+part 'restaurant_search_state.dart';
 
 @injectable
-class RestaurantSelectionCubit extends Cubit<RestaurantSelectionState> {
+class RestaurantSearchCubit extends Cubit<RestaurantSearchState> {
   final IRestaurantRepository _restaurantRepository;
   StreamSubscription<Either<RestaurantFailure, KtList<Restaurant>>> _restaurantStreamSubscription;
 
-  RestaurantSelectionCubit(this._restaurantRepository) : super(const RestaurantSelectionState.initial());
+  RestaurantSearchCubit(this._restaurantRepository) : super(const RestaurantSearchState.initial());
 
   void searchByName(String name) {
-    emit(const RestaurantSelectionState.searchInProgress());
+    emit(const RestaurantSearchState.searchInProgress());
 
     _restaurantStreamSubscription?.cancel();
     _restaurantStreamSubscription = _restaurantRepository.searchByName(name).listen((failureOrRestaurants) {
       failureOrRestaurants.fold(
-        (l) => emit(RestaurantSelectionState.searchFailure(l)),
-        (r) => emit(RestaurantSelectionState.searchSuccess(r)),
+        (l) => emit(RestaurantSearchState.searchFailure(l)),
+        (r) => emit(RestaurantSearchState.searchSuccess(r)),
       );
     });
   }

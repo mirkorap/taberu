@@ -19,7 +19,6 @@ abstract class Dish with _$Dish {
     @required String allergens,
     @required Money price,
     @required bool visible,
-    @required DishImage mainImage,
     @required LimitedList<DishImage> gallery,
     @required DateTime createdAt,
     @required DateTime updatedAt,

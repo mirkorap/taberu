@@ -15,7 +15,13 @@
     "register_restaurant": "Is your restaurant not listed?",
     "show_menu": "Show menu",
     "failures": {
-      "unexpected": "An unexpected error occurred while getting the restaurant list"
+      "unexpected": "An unexpected error occurred while searching for restaurants"
+    }
+  },
+  "dishes_selection": {
+    "title": "Choose the dishes\nfrom our menu",
+    "failures": {
+      "unexpected": "An unexpected error occurred while loading the dishes"
     }
   }
 }

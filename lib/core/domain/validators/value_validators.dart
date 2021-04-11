@@ -53,7 +53,7 @@ Either<ValueFailure<KtList<T>>, KtList<T>> validateMaxListLength<T>(KtList<T> in
 }
 
 Either<ValueFailure<String>, String> validateImageFormat(String input) {
-  const imageFormatRegex = r"""/\.(gif|jpe?g|tiff?|png|webp|bmp)$/""";
+  const imageFormatRegex = r"""(?:([^:\/?#]+):)?(?:\/\/([^\/?#]*))?([^?#]*\.(?:jpe?g|gif|png))(?:\?([^#]*))?(?:#(.*))?""";
   if (RegExp(imageFormatRegex).hasMatch(input)) {
     return right(input);
   }

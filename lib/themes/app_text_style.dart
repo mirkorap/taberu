@@ -64,4 +64,12 @@ abstract class AppTextStyle {
     color: AppColor.primary,
     decoration: TextDecoration.underline,
   );
+
+  static final priceText = GoogleFonts.sourceSansPro(
+    textStyle: const TextStyle(
+      color: AppColor.primary,
+      fontSize: StiloFontSize.xl3,
+      fontWeight: StiloFontWeight.bold,
+    ),
+  );
 }

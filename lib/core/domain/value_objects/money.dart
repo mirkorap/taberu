@@ -46,5 +46,10 @@ class Money extends ValueObject {
   int get hashCode => amount.hashCode + currency.hashCode;
 
   @override
-  String toString() => 'Money($amount, $currency)';
+  String toString() {
+    final displayedAmount = amount.getOrElse(() => 0) / 100;
+    final displayedCurrency = currency.getOrElse(() => defaultCurrency);
+
+    return '$displayedAmount $displayedCurrency';
+  }
 }

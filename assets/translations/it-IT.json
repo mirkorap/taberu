@@ -15,7 +15,13 @@
     "register_restaurant": "Il tuo ristorante non è in elenco?",
     "show_menu": "Visualizza menu",
     "failures": {
-      "unexpected": "Si è verificato un errore imprevisto durante il recupero dell'elenco ristoranti"
+      "unexpected": "Si è verificato un errore imprevisto durante la ricerca dei ristoranti"
+    }
+  },
+  "dishes_selection": {
+    "title": "Scegli i piatti\ndal nostro menù",
+    "failures": {
+      "unexpected": "Si è verificato un errore imprevisto durante il caricamento dei piatti"
     }
   }
 }

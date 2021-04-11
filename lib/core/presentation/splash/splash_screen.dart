@@ -1,7 +1,4 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:stilo/stilo.dart';
-import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_color.dart';
 import 'package:taberu/themes/app_image.dart';
 
@@ -10,8 +7,6 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _navigateToRestaurantSelection(context);
-
     return SafeArea(
       child: Stack(
         children: [
@@ -31,10 +26,5 @@ class SplashScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Future<void> _navigateToRestaurantSelection(BuildContext context) async {
-    await Future.delayed(StiloDuration.d3000);
-    ExtendedNavigator.of(context).replace(Routes.restaurantSelectionScreen);
   }
 }

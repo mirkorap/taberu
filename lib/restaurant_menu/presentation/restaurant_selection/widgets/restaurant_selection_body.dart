@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flushbar/flushbar_helper.dart';
@@ -6,10 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stilo/stilo.dart';
 import 'package:taberu/core/presentation/widgets/buttons/link_button.dart';
 import 'package:taberu/injection.dart';
-import 'package:taberu/restaurant_menu/application/restaurant_selection/restaurant_selection_cubit.dart';
+import 'package:taberu/restaurant_menu/application/restaurant_search/restaurant_search_cubit.dart';
+import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
-import 'package:taberu/restaurant_menu/infrastructure/services/selected_restaurant_storage.dart';
-import 'package:taberu/themes/app_input_decoration.dart';
+import 'package:taberu/router.gr.dart';
+import 'package:taberu/themes/app_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantSelectionBody extends StatelessWidget {
@@ -19,7 +21,7 @@ class RestaurantSelectionBody extends StatelessWidget {
   Widget build(BuildContext context) {
     Restaurant selectedRestaurant;
 
-    return BlocConsumer<RestaurantSelectionCubit, RestaurantSelectionState>(
+    return BlocConsumer<RestaurantSearchCubit, RestaurantSearchState>(
       listener: (context, state) {
         state.maybeWhen(
           searchFailure: (failure) {
@@ -42,10 +44,10 @@ class RestaurantSelectionBody extends StatelessWidget {
               isFilteredOnline: true,
               showSearchBox: true,
               itemAsString: (restaurant) => restaurant.name,
-              dropdownSearchDecoration: AppInputDecoration.searchTextField.copyWith(
+              dropdownSearchDecoration: AppInput.searchTextField.copyWith(
                 labelText: tr('restaurant_selection.select_restaurant'),
               ),
-              searchBoxDecoration: AppInputDecoration.searchTextField,
+              searchBoxDecoration: AppInput.searchTextField,
               popupShape: const RoundedRectangleBorder(
                 borderRadius: StiloBorderRadius.t7,
               ),
@@ -58,7 +60,7 @@ class RestaurantSelectionBody extends StatelessWidget {
                 );
               },
               onFind: (String restaurantName) async {
-                final cubit = context.read<RestaurantSelectionCubit>();
+                final cubit = context.read<RestaurantSearchCubit>();
                 cubit.searchByName(restaurantName);
 
                 return state.maybeWhen(
@@ -71,8 +73,9 @@ class RestaurantSelectionBody extends StatelessWidget {
             StiloSpacing.y10,
             TextButton(
               onPressed: () {
-                final storage = getIt<SelectedRestaurantStorage>();
+                final storage = getIt<ISelectedRestaurantStorage>();
                 storage.setRestaurant(selectedRestaurant);
+                ExtendedNavigator.of(context).replace(Routes.dishesSelectionScreen);
               },
               child: const Text('restaurant_selection.show_menu').tr(),
             ),
