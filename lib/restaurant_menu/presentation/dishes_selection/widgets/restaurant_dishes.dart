@@ -64,6 +64,7 @@ class RestaurantDishes extends StatelessWidget {
   Widget _buildVerticalDishesGrid(KtList<Dish> dishes) {
     return Expanded(
       child: StaggeredGridView.countBuilder(
+        physics: const BouncingScrollPhysics(),
         crossAxisCount: 2,
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
@@ -92,6 +93,7 @@ class RestaurantDishes extends StatelessWidget {
   Widget _buildHorizontalDishesGrid(KtList<Dish> dishes) {
     return Expanded(
       child: StaggeredGridView.countBuilder(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         crossAxisCount: 1,
         staggeredTileBuilder: (index) => const StaggeredTile.count(1, 1),
