@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide BottomNavigationBar;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stilo/stilo.dart';
+import 'package:taberu/core/presentation/widgets/navigation_bars/bottom_navigation_bar.dart';
 import 'package:taberu/injection.dart';
 import 'package:taberu/restaurant_menu/application/dish_search/dish_search_cubit.dart';
 import 'package:taberu/restaurant_menu/application/menu_navigation/menu_navigation_cubit.dart';
 import 'package:taberu/restaurant_menu/presentation/dishes_selection/widgets/restaurant_dishes.dart';
 import 'package:taberu/restaurant_menu/presentation/dishes_selection/widgets/restaurant_menu_tabs.dart';
-import 'package:taberu/restaurant_menu/presentation/widgets/bottom_navigation_menu/bottom_navigation_menu.dart';
 import 'package:taberu/themes/app_input.dart';
 
 class DishesSelectionScreen extends HookWidget {
@@ -73,7 +73,7 @@ class DishesSelectionScreen extends HookWidget {
           ),
           bottomNavigationBar: Visibility(
             visible: dishSearchBarState.value.isEmpty,
-            child: const BottomNavigationMenu(),
+            child: const BottomNavigationBar(),
           ),
         ),
       ),
