@@ -5,12 +5,12 @@ import 'package:taberu/core/domain/value_objects/value_object.dart';
 
 @immutable
 class Position extends ValueObject {
-  final Either<ValueFailure<int>, int> longitude;
-  final Either<ValueFailure<int>, int> latitude;
+  final Either<ValueFailure<double>, double> longitude;
+  final Either<ValueFailure<double>, double> latitude;
 
   factory Position({
-    @required int longitude,
-    @required int latitude,
+    @required double longitude,
+    @required double latitude,
   }) {
     assert(longitude != null);
     assert(latitude != null);

@@ -10,8 +10,8 @@ part 'position_dto.g.dart';
 @freezed
 abstract class PositionDto implements _$PositionDto {
   const factory PositionDto({
-    @required int longitude,
-    @required int latitude,
+    @required double longitude,
+    @required double latitude,
   }) = _PositionDto;
 
   factory PositionDto.fromJson(Map<String, dynamic> json) => _$PositionDtoFromJson(json);
