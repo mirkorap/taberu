@@ -4,7 +4,8 @@
     "type_to_search": "Type something to start the search",
     "no_results_found": "No results found",
     "actions": {
-      "search": "Search"
+      "search": "Search",
+      "add_to_order": "Add to order"
     },
     "failures": {
       "insufficient_permissions": "Insufficient permissions to perform the operation"
