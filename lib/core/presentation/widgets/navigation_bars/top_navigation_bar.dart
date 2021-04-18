@@ -22,5 +22,5 @@ class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(StiloHeight.h24);
+  Size get preferredSize => const Size.fromHeight(StiloHeight.h16);
 }
