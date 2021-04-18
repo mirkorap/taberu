@@ -20,6 +20,7 @@ class DishDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: const TopNavigationBar(),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             Center(
