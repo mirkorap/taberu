@@ -5,7 +5,7 @@ import 'package:stilo/stilo.dart';
 import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_color.dart';
 
-class BottomNavigationMenu extends StatelessWidget {
+class BottomNavigationBar extends StatelessWidget {
   static const routes = [
     Routes.dishesSelectionScreen,
     Routes.dishesSelectionScreen,
@@ -13,7 +13,7 @@ class BottomNavigationMenu extends StatelessWidget {
     Routes.dishesSelectionScreen,
   ];
 
-  const BottomNavigationMenu({Key key}) : super(key: key);
+  const BottomNavigationBar({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -13,8 +13,8 @@ class SplashScreen extends StatelessWidget {
           Image.asset(
             AppImage.splashScreen,
             fit: BoxFit.cover,
-            height: double.infinity,
             width: double.infinity,
+            height: double.infinity,
           ),
           Container(
             alignment: Alignment.center,

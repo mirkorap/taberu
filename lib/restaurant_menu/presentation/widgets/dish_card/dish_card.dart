@@ -7,35 +7,40 @@ import 'package:taberu/restaurant_menu/presentation/widgets/dish_card/dish_card_
 import 'package:taberu/themes/app_card.dart';
 
 class DishCard extends StatelessWidget {
+  final VoidCallback onTap;
   final Dish dish;
 
   const DishCard({
     Key key,
+    @required this.onTap,
     @required this.dish,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: StiloWidth.w48,
-      decoration: AppCard.dishCard,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 100.0),
-            child: DishCardBody(
-              name: dish.name,
-              price: dish.price,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: StiloWidth.w48,
+        decoration: AppCard.dishCard,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 100.0),
+              child: DishCardBody(
+                name: dish.name,
+                price: dish.price,
+              ),
             ),
-          ),
-          Align(
-            alignment: const Alignment(0.0, -1.5),
-            child: DishCardImage(
-              image: dish.gallery.getOrCrash().firstOrNull(),
+            Align(
+              alignment: const Alignment(0.0, -1.5),
+              child: DishCardImage(
+                image: dish.gallery.getOrCrash().firstOrNull(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:taberu/core/presentation/widgets/failures/failure_display.dart';
 import 'package:taberu/restaurant_menu/application/dish_search/dish_search_cubit.dart';
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_menu/presentation/widgets/dish_card/dish_card.dart';
+import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_color.dart';
 
 class RestaurantDishes extends StatelessWidget {
@@ -62,6 +64,7 @@ class RestaurantDishes extends StatelessWidget {
   Widget _buildVerticalDishesGrid(KtList<Dish> dishes) {
     return Expanded(
       child: StaggeredGridView.countBuilder(
+        physics: const BouncingScrollPhysics(),
         crossAxisCount: 2,
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
@@ -75,7 +78,12 @@ class RestaurantDishes extends StatelessWidget {
               left: StiloEdge.edge2,
               bottom: index.isEven ? StiloEdge.edge20 : StiloEdge.edge4,
             ),
-            child: DishCard(dish: dishes[index]),
+            child: DishCard(
+              onTap: () {
+                ExtendedNavigator.of(context).pushDishDetailsScreen(dish: dishes[index]);
+              },
+              dish: dishes[index],
+            ),
           );
         },
       ),
@@ -85,6 +93,7 @@ class RestaurantDishes extends StatelessWidget {
   Widget _buildHorizontalDishesGrid(KtList<Dish> dishes) {
     return Expanded(
       child: StaggeredGridView.countBuilder(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         crossAxisCount: 1,
         staggeredTileBuilder: (index) => const StaggeredTile.count(1, 1),
@@ -97,7 +106,12 @@ class RestaurantDishes extends StatelessWidget {
               left: StiloEdge.edge12,
               bottom: StiloEdge.edge2,
             ),
-            child: DishCard(dish: dishes[index]),
+            child: DishCard(
+              onTap: () {
+                ExtendedNavigator.of(context).pushDishDetailsScreen(dish: dishes[index]);
+              },
+              dish: dishes[index],
+            ),
           );
         },
       ),
