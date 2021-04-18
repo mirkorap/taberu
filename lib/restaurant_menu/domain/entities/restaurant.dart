@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/value_objects/email_address.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/phone.dart';
+import 'package:taberu/core/domain/value_objects/position.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/restaurant_menu/domain/entities/menu.dart';
 import 'package:taberu/restaurant_menu/domain/value_objects/address.dart';
@@ -19,6 +20,7 @@ abstract class Restaurant with _$Restaurant {
     @required UniqueId id,
     @required String name,
     @required Address address,
+    @required Position position,
     @required LimitedList<OpeningTime> weekOpeningTime,
     @required Phone phone,
     @required EmailAddress emailAddress,

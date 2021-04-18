@@ -9,6 +9,7 @@ import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/address_dto.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/menu_dto.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/opening_time_dto.dart';
+import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/position_dto.dart';
 
 part 'restaurant_dto.freezed.dart';
 
@@ -20,6 +21,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
     @required String id,
     @required String name,
     @required AddressDto address,
+    @required PositionDto position,
     @required List<OpeningTimeDto> weekOpeningTime,
     @required String phone,
     @required String emailAddress,
@@ -39,6 +41,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
       id: restaurant.id.getOrCrash(),
       name: restaurant.name,
       address: AddressDto.fromDomain(restaurant.address),
+      position: PositionDto.fromDomain(restaurant.position),
       weekOpeningTime: restaurant.weekOpeningTime
           .getOrCrash()
           .map(
@@ -70,6 +73,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
       id: UniqueId.fromUniqueString(id),
       name: name,
       address: address.toDomain(),
+      position: position.toDomain(),
       weekOpeningTime: LimitedList(
         weekOpeningTime.map((item) => item.toDomain()).toImmutableList(),
         Restaurant.weekOpeningTimeMaxLength,
