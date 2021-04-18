@@ -22,6 +22,7 @@ class RestaurantDishes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: improve responsive for horizontal cards
     return BlocBuilder<DishSearchCubit, DishSearchState>(
       builder: (context, state) {
         return state.when(
