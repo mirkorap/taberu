@@ -34,15 +34,15 @@ class DishDetailsScreen extends StatelessWidget {
               ),
             ),
             StiloSpacing.y10,
-            DishInformation(dish: dish),
+            Padding(
+              padding: StiloEdge.x5,
+              child: DishInformation(dish: dish),
+            ),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: StiloEdge.edge5,
-          horizontal: StiloEdge.edge10,
-        ),
+        padding: StiloEdge.a8,
         child: TextButton(
           onPressed: () {},
           child: const Text('app.actions.add_to_order').tr(),
