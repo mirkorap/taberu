@@ -23,5 +23,10 @@
     "failures": {
       "unexpected": "An unexpected error occurred while loading the dishes"
     }
+  },
+  "dish_details": {
+    "description": "Description",
+    "ingredients": "Ingredients",
+    "allergens": "Allergens"
   }
 }

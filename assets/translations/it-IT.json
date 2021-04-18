@@ -23,5 +23,10 @@
     "failures": {
       "unexpected": "Si è verificato un errore imprevisto durante il caricamento dei piatti"
     }
+  },
+  "dish_details": {
+    "description": "Descrizione",
+    "ingredients": "Ingredienti",
+    "allergens": "Allergeni"
   }
 }
