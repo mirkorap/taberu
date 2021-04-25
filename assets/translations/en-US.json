@@ -25,6 +25,22 @@
       "unexpected": "An unexpected error occurred while loading the dishes"
     }
   },
+  "restaurant_contacts": {
+    "title": "Come and try\nour menu",
+    "opening_time": "Opening time",
+    "days_of_week": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "address": "Address",
+    "email_address": "E-mail address",
+    "phone": "Phone"
+  },
   "dish_details": {
     "description": "Description",
     "ingredients": "Ingredients",

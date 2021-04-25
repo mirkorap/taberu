@@ -25,6 +25,22 @@
       "unexpected": "Si è verificato un errore imprevisto durante il caricamento dei piatti"
     }
   },
+  "restaurant_contacts": {
+    "title": "Vieni a provare\nil nostro menù",
+    "opening_time": "Orario di apertura",
+    "days_of_week": {
+      "monday": "Lunedì",
+      "tuesday": "Martedì",
+      "wednesday": "Mercoledì",
+      "thursday": "Giovedì",
+      "friday": "Venerdì",
+      "saturday": "Sabato",
+      "sunday": "Domenica"
+    },
+    "address": "Indirizzo",
+    "email_address": "Indirizzo e-mail",
+    "phone": "Telefono"
+  },
   "dish_details": {
     "description": "Descrizione",
     "ingredients": "Ingredienti",
