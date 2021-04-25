@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/failures/value_failure.dart';
 import 'package:taberu/core/domain/validators/value_validators.dart';
 import 'package:taberu/core/domain/value_objects/value_object.dart';
+import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 
 @immutable
 class Address extends ValueObject {
@@ -53,5 +54,11 @@ class Address extends ValueObject {
   int get hashCode => city.hashCode + postalCode.hashCode + street.hashCode;
 
   @override
-  String toString() => 'Address($city, $postalCode, $street)';
+  String toString() {
+    if (city.andThen(postalCode).andThen(street).isLeft()) {
+      return '-';
+    }
+
+    return '${street.getOrCrash()}, ${postalCode.getOrCrash()} ${city.getOrCrash()}';
+  }
 }
