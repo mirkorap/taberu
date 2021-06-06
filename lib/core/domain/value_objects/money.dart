@@ -14,12 +14,9 @@ class Money extends ValueObject {
   final Either<ValueFailure<String>, String> currency;
 
   factory Money({
-    @required int amount,
+    required int amount,
     String currency = defaultCurrency,
   }) {
-    assert(amount != null);
-    assert(currency != null);
-
     final validatedCurrency = validateChoice(currency, currencies);
 
     return Money._(
@@ -29,8 +26,8 @@ class Money extends ValueObject {
   }
 
   Money._({
-    @required this.amount,
-    @required this.currency,
+    required this.amount,
+    required this.currency,
   });
 
   @override

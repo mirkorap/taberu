@@ -11,8 +11,6 @@ class LimitedList<T> extends SimpleValueObject<KtList<T>> {
   final Either<ValueFailure<KtList<T>>, KtList<T>> value;
 
   factory LimitedList(KtList<T> values, int maxLength) {
-    assert(values != null);
-
     return LimitedList._(
       validateMaxListLength(values, maxLength),
     );

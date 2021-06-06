@@ -10,8 +10,6 @@ class Phone extends SimpleValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory Phone(String phone) {
-    assert(phone != null);
-
     return Phone._(validatePhone(phone));
   }
 

@@ -9,12 +9,9 @@ class Position extends ValueObject {
   final Either<ValueFailure<double>, double> latitude;
 
   factory Position({
-    @required double longitude,
-    @required double latitude,
+    required double longitude,
+    required double latitude,
   }) {
-    assert(longitude != null);
-    assert(latitude != null);
-
     return Position._(
       longitude: right(longitude),
       latitude: right(latitude),
@@ -22,8 +19,8 @@ class Position extends ValueObject {
   }
 
   Position._({
-    @required this.longitude,
-    @required this.latitude,
+    required this.longitude,
+    required this.latitude,
   });
 
   @override
