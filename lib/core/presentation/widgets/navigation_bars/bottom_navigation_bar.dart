@@ -7,33 +7,30 @@ import 'package:taberu/themes/app_color.dart';
 
 class BottomNavigationBar extends StatelessWidget {
   // TODO: remove transition duration between routes
-  static const routes = [
-    Routes.dishesSelectionScreen,
-    Routes.dishesSelectionScreen,
-    Routes.dishesSelectionScreen,
-    Routes.restaurantContactsScreen,
-  ];
+  static const routes = {
+    DishesSelectionScreen.name: DishesSelectionScreen(),
+    RestaurantContactsScreen.name: RestaurantContactsScreen(),
+  };
 
-  const BottomNavigationBar({Key key}) : super(key: key);
+  const BottomNavigationBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final currentRouteName = ModalRoute.of(context).settings.name;
+    final currentRouteName = ModalRoute.of(context)!.settings.name.toString();
 
     return CurvedNavigationBar(
       onTap: (index) async {
         await Future.delayed(StiloDuration.d500);
-        ExtendedNavigator.of(context).replace(routes[index]);
+        context.router.replace(routes.values.elementAt(index));
       },
       backgroundColor: AppColor.primary,
       height: StiloHeight.h16,
-      index: routes.indexOf(currentRouteName),
-      letIndexChange: (value) => routes[value] != currentRouteName,
+      index: routes.keys.toList().indexOf(currentRouteName),
       items: [
         const Icon(Icons.home_outlined, size: 30.0),
         const Icon(Icons.shopping_cart_outlined, size: 30.0),
-        const Icon(Icons.add_shopping_cart_outlined, size: 30.0),
-        const Icon(Icons.restaurant_menu_outlined, size: 30.0),
+        //const Icon(Icons.add_shopping_cart_outlined, size: 30.0),
+        //const Icon(Icons.restaurant_menu_outlined, size: 30.0),
       ],
     );
   }

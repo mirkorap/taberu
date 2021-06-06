@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:stilo/stilo.dart';
 
 class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
-  const TopNavigationBar({Key key}) : super(key: key);
+  const TopNavigationBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: StiloElevation.z0,
       toolbarHeight: StiloHeight.h24,
       leading: IconButton(
-        onPressed: () => Navigator.of(context).pop(),
+        onPressed: () => context.router.pop(),
         icon: const Icon(
           Icons.chevron_left,
           color: StiloColor.black,
