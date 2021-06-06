@@ -9,7 +9,7 @@ class DeviceStorage implements IDeviceStorage {
   DeviceStorage(this._sharedPreferences);
 
   @override
-  bool getBool(String key) {
+  bool? getBool(String key) {
     return _sharedPreferences.getBool(key);
   }
 
@@ -19,7 +19,7 @@ class DeviceStorage implements IDeviceStorage {
   }
 
   @override
-  int getInt(String key) {
+  int? getInt(String key) {
     return _sharedPreferences.getInt(key);
   }
 
@@ -29,7 +29,7 @@ class DeviceStorage implements IDeviceStorage {
   }
 
   @override
-  double getDouble(String key) {
+  double? getDouble(String key) {
     return _sharedPreferences.getDouble(key);
   }
 
@@ -39,7 +39,7 @@ class DeviceStorage implements IDeviceStorage {
   }
 
   @override
-  String getString(String key) {
+  String? getString(String key) {
     return _sharedPreferences.getString(key);
   }
 
@@ -49,7 +49,7 @@ class DeviceStorage implements IDeviceStorage {
   }
 
   @override
-  List<String> getStringList(String key) {
+  List<String>? getStringList(String key) {
     return _sharedPreferences.getStringList(key);
   }
 
