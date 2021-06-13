@@ -7,7 +7,7 @@ import 'package:taberu/restaurant_menu/presentation/restaurant_selection/widgets
 import 'package:taberu/restaurant_menu/presentation/restaurant_selection/widgets/restaurant_selection_header.dart';
 
 class RestaurantSelectionScreen extends StatelessWidget {
-  const RestaurantSelectionScreen({Key key}) : super(key: key);
+  const RestaurantSelectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class RestaurantSelectionScreen extends StatelessWidget {
                 child: RestaurantSelectionHeader(),
               ),
               Padding(
-                padding: StiloEdge.a16,
+                padding: StiloEdge.all12,
                 child: RestaurantSelectionBody(),
               ),
             ],
