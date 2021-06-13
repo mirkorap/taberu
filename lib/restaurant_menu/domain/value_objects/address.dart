@@ -14,14 +14,10 @@ class Address extends ValueObject {
   final Either<ValueFailure<String>, String> street;
 
   factory Address({
-    @required String city,
-    @required String postalCode,
-    @required String street,
+    required String city,
+    required String postalCode,
+    required String street,
   }) {
-    assert(city != null);
-    assert(postalCode != null);
-    assert(street != null);
-
     final validatedCity = validateStringNotEmpty(city);
     final validatedPostalCode = validateStringNotEmpty(postalCode).flatMap(
       (value) => validateMaxStringLength(value, postalCodeMaxLength),
@@ -36,9 +32,9 @@ class Address extends ValueObject {
   }
 
   Address._({
-    @required this.city,
-    @required this.postalCode,
-    @required this.street,
+    required this.city,
+    required this.postalCode,
+    required this.street,
   });
 
   @override

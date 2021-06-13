@@ -12,14 +12,10 @@ class OpeningTime extends ValueObject {
   final Either<ValueFailure<DateTime>, DateTime> endTime;
 
   factory OpeningTime({
-    @required DayOfWeek dayOfWeek,
-    @required DateTime startTime,
-    @required DateTime endTime,
+    required DayOfWeek dayOfWeek,
+    required DateTime startTime,
+    required DateTime endTime,
   }) {
-    assert(dayOfWeek != null);
-    assert(startTime != null);
-    assert(endTime != null);
-
     return OpeningTime._(
       dayOfWeek: right(dayOfWeek),
       startTime: right(startTime),
@@ -28,9 +24,9 @@ class OpeningTime extends ValueObject {
   }
 
   OpeningTime._({
-    @required this.dayOfWeek,
-    @required this.startTime,
-    @required this.endTime,
+    required this.dayOfWeek,
+    required this.startTime,
+    required this.endTime,
   });
 
   String get timeRange {
