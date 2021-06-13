@@ -23,7 +23,7 @@ typedef DishRepositorySearchByAction = Stream<Either<DishFailure, KtList<Dish>>>
 class DishSearchCubit extends Cubit<DishSearchState> {
   final ISelectedRestaurantStorage _storage;
   final IDishRepository _dishRepository;
-  StreamSubscription<Either<DishFailure, KtList<Dish>>> _dishStreamSubscription;
+  StreamSubscription<Either<DishFailure, KtList<Dish>>>? _dishStreamSubscription;
 
   DishSearchCubit(
     this._storage,

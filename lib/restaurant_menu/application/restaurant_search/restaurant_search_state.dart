@@ -1,7 +1,7 @@
 part of 'restaurant_search_cubit.dart';
 
 @freezed
-abstract class RestaurantSearchState with _$RestaurantSearchState {
+class RestaurantSearchState with _$RestaurantSearchState {
   const factory RestaurantSearchState.initial() = _Initial;
 
   const factory RestaurantSearchState.searchInProgress() = _SearchInProgress;
