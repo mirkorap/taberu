@@ -8,9 +8,9 @@ class DishCardBody extends StatelessWidget {
   final Money price;
 
   const DishCardBody({
-    Key key,
-    @required this.name,
-    @required this.price,
+    Key? key,
+    required this.name,
+    required this.price,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class DishCardBody extends StatelessWidget {
             style: Theme.of(context).textTheme.headline3,
           ),
         ),
-        StiloSpacing.y2,
+        StiloSpacing.vert2,
         Text(
           price.toString(),
           style: AppTextStyle.priceText,
