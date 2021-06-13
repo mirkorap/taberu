@@ -11,8 +11,8 @@ class DishDetailsScreen extends StatelessWidget {
   final Dish dish;
 
   const DishDetailsScreen({
-    Key key,
-    @required this.dish,
+    Key? key,
+    required this.dish,
   }) : super(key: key);
 
   @override
@@ -27,23 +27,23 @@ class DishDetailsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   DishImageGallery(gallery: dish.gallery.getOrCrash()),
-                  StiloSpacing.y10,
+                  StiloSpacing.vert8,
                   Text(dish.name, style: Theme.of(context).textTheme.headline2),
-                  StiloSpacing.y4,
+                  StiloSpacing.vert3,
                   Text(dish.price.toString(), style: AppTextStyle.priceText),
                 ],
               ),
             ),
-            StiloSpacing.y10,
+            StiloSpacing.vert8,
             Padding(
-              padding: StiloEdge.x5,
+              padding: StiloEdge.horiz4,
               child: DishInformation(dish: dish),
             ),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: StiloEdge.a8,
+        padding: StiloEdge.all6,
         child: TextButton(
           onPressed: () {},
           child: const Text('app.actions.add_to_order').tr(),

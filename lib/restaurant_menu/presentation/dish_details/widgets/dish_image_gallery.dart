@@ -11,8 +11,8 @@ class DishImageGallery extends StatelessWidget {
   final KtList<DishImage> gallery;
 
   DishImageGallery({
-    Key key,
-    @required this.gallery,
+    Key? key,
+    required this.gallery,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,7 @@ class DishImageGallery extends StatelessWidget {
             },
           ),
         ),
-        StiloSpacing.y10,
+        StiloSpacing.vert8,
         SmoothPageIndicator(
           controller: controller,
           count: gallery.size,
