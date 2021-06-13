@@ -24,7 +24,7 @@ class BottomNavigationBar extends StatelessWidget {
         context.router.replace(routes.values.elementAt(index));
       },
       backgroundColor: AppColor.primary,
-      height: StiloHeight.h16,
+      height: StiloHeight.h14,
       index: routes.keys.toList().indexOf(currentRouteName),
       items: [
         const Icon(Icons.home_outlined, size: 30.0),
