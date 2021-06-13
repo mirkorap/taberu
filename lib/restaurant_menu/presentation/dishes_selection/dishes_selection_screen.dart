@@ -12,7 +12,7 @@ import 'package:taberu/restaurant_menu/presentation/dishes_selection/widgets/res
 import 'package:taberu/themes/app_input.dart';
 
 class DishesSelectionScreen extends HookWidget {
-  const DishesSelectionScreen({Key key}) : super(key: key);
+  const DishesSelectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class DishesSelectionScreen extends HookWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: Padding(
-            padding: const EdgeInsets.all(StiloEdge.edge10),
+            padding: StiloEdge.all8,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +44,7 @@ class DishesSelectionScreen extends HookWidget {
                     style: Theme.of(context).textTheme.headline1,
                   ).tr(),
                 ),
-                StiloSpacing.y8,
+                StiloSpacing.vert6,
                 BlocBuilder<DishSearchCubit, DishSearchState>(
                   builder: (context, state) {
                     return Form(
@@ -59,10 +59,10 @@ class DishesSelectionScreen extends HookWidget {
                     );
                   },
                 ),
-                StiloSpacing.y8,
+                StiloSpacing.vert6,
                 if (dishSearchBarState.value.isEmpty) ...[
                   const RestaurantMenuTabs(),
-                  StiloSpacing.y10,
+                  StiloSpacing.vert8,
                   const RestaurantDishes(scrollDirection: Axis.horizontal),
                 ],
                 if (dishSearchBarState.value.isNotEmpty) ...[

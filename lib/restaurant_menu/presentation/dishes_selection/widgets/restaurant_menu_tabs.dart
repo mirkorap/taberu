@@ -6,7 +6,7 @@ import 'package:taberu/restaurant_menu/application/menu_navigation/menu_navigati
 import 'package:taberu/themes/app_tab_navigation.dart';
 
 class RestaurantMenuTabs extends StatelessWidget {
-  const RestaurantMenuTabs({Key key}) : super(key: key);
+  const RestaurantMenuTabs({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
