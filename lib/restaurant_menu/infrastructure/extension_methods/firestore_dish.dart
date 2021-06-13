@@ -10,7 +10,7 @@ import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/dish
 extension DishQueryDocumentSnapshotList on List<QueryDocumentSnapshot> {
   List<QueryDocumentSnapshot> whereHaveRestaurantId(String restaurantId) {
     bool belongsToRestaurant(QueryDocumentSnapshot doc) {
-      return doc.reference.parent.parent.parent.parent.id == restaurantId;
+      return doc.reference.parent.parent!.parent.parent!.id == restaurantId;
     }
 
     return where(belongsToRestaurant).toList();
@@ -18,7 +18,8 @@ extension DishQueryDocumentSnapshotList on List<QueryDocumentSnapshot> {
 
   List<QueryDocumentSnapshot> whereHaveName(String name) {
     bool containsName(QueryDocumentSnapshot doc) {
-      return (doc.data()['name'] as String).toLowerCase().contains(name.toLowerCase());
+      final data = doc.data()! as Map<String, dynamic>;
+      return (data['name'] as String).toLowerCase().contains(name.toLowerCase());
     }
 
     return where(containsName).toList();
@@ -37,8 +38,8 @@ extension DishQueryDocumentSnapshot on QueryDocumentSnapshot {
 
 extension DishOnErrorExtensions on Stream<Either<DishFailure, KtList<Dish>>> {
   Stream<Either<DishFailure, KtList<Dish>>> onErrorReturnWithFailure() {
-    return onErrorReturnWith((e) {
-      if (e is FirebaseException && e.isPermissionDeniedException) {
+    return onErrorReturnWith((error, stackTrace) {
+      if (error is FirebaseException && error.isPermissionDeniedException) {
         return left(const DishFailure.insufficientPermissions());
       }
 

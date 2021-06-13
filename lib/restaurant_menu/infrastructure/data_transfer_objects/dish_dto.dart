@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
-import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
@@ -14,18 +13,18 @@ part 'dish_dto.freezed.dart';
 part 'dish_dto.g.dart';
 
 @freezed
-abstract class DishDto implements _$DishDto {
+class DishDto with _$DishDto {
   const factory DishDto({
-    @required String id,
-    @required String name,
-    @required String description,
-    @required String ingredients,
-    @required String allergens,
-    @required int price,
-    @required bool visible,
-    @JsonKey(defaultValue: []) List<DishImageDto> gallery,
-    @required int createdAt,
-    @required int updatedAt,
+    required String id,
+    required String name,
+    required String description,
+    required String ingredients,
+    required String allergens,
+    required int price,
+    required bool visible,
+    @JsonKey(defaultValue: []) @Default([]) List<DishImageDto> gallery,
+    required int createdAt,
+    required int updatedAt,
   }) = _DishDto;
 
   factory DishDto.fromJson(Map<String, dynamic> json) => _$DishDtoFromJson(json);
@@ -46,9 +45,10 @@ abstract class DishDto implements _$DishDto {
   }
 
   factory DishDto.fromFirestore(DocumentSnapshot doc) {
-    final data = Map.fromEntries([...doc.data().entries, MapEntry('id', doc.id)]);
+    final data = doc.data()! as Map<String, dynamic>;
+    final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);
 
-    return DishDto.fromJson(data);
+    return DishDto.fromJson(json);
   }
 
   // ignore: unused_element

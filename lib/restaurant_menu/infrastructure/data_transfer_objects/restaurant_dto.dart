@@ -16,22 +16,22 @@ part 'restaurant_dto.freezed.dart';
 part 'restaurant_dto.g.dart';
 
 @freezed
-abstract class RestaurantDto implements _$RestaurantDto {
+class RestaurantDto with _$RestaurantDto {
   const factory RestaurantDto({
-    @required String id,
-    @required String name,
-    @required AddressDto address,
-    @required PositionDto position,
-    @required List<OpeningTimeDto> weekOpeningTime,
-    @required String phone,
-    @required String emailAddress,
-    @required String websiteUrl,
-    @required String facebookUrl,
-    @required String instagramUrl,
-    @required bool active,
-    @JsonKey(defaultValue: []) List<MenuDto> menus,
-    @required int createdAt,
-    @required int updatedAt,
+    required String id,
+    required String name,
+    required AddressDto address,
+    required PositionDto position,
+    required List<OpeningTimeDto> weekOpeningTime,
+    required String phone,
+    required String emailAddress,
+    required String websiteUrl,
+    required String facebookUrl,
+    required String instagramUrl,
+    required bool active,
+    @JsonKey(defaultValue: []) @Default([]) List<MenuDto> menus,
+    required int createdAt,
+    required int updatedAt,
   }) = _RestaurantDto;
 
   factory RestaurantDto.fromJson(Map<String, dynamic> json) => _$RestaurantDtoFromJson(json);
@@ -42,12 +42,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
       name: restaurant.name,
       address: AddressDto.fromDomain(restaurant.address),
       position: PositionDto.fromDomain(restaurant.position),
-      weekOpeningTime: restaurant.weekOpeningTime
-          .getOrCrash()
-          .map(
-            (openingTime) => OpeningTimeDto.fromDomain(openingTime),
-          )
-          .asList(),
+      weekOpeningTime: restaurant.weekOpeningTime.map((openingTime) => OpeningTimeDto.fromDomain(openingTime)).asList(),
       phone: restaurant.phone.getOrCrash(),
       emailAddress: restaurant.emailAddress.getOrCrash(),
       websiteUrl: restaurant.websiteUrl,
@@ -60,9 +55,10 @@ abstract class RestaurantDto implements _$RestaurantDto {
   }
 
   factory RestaurantDto.fromFirestore(DocumentSnapshot doc) {
-    final data = Map.fromEntries([...doc.data().entries, MapEntry('id', doc.id)]);
+    final data = doc.data()! as Map<String, dynamic>;
+    final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);
 
-    return RestaurantDto.fromJson(data);
+    return RestaurantDto.fromJson(json);
   }
 
   // ignore: unused_element
