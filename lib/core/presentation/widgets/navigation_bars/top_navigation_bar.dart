@@ -12,7 +12,7 @@ class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: StiloElevation.z0,
       toolbarHeight: StiloHeight.h24,
       leading: IconButton(
-        onPressed: () => context.router.pop(),
+        onPressed: () => context.popRoute(),
         icon: const Icon(
           Icons.chevron_left,
           color: StiloColor.black,

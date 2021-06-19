@@ -75,7 +75,7 @@ class RestaurantSelectionBody extends StatelessWidget {
               onPressed: () {
                 final storage = getIt<ISelectedRestaurantStorage>();
                 storage.setRestaurant(selectedRestaurant!);
-                context.router.replace(const DishesSelectionScreen());
+                context.replaceRoute(const DishesSelectionScreen());
               },
               child: const Text('restaurant_selection.show_menu').tr(),
             ),

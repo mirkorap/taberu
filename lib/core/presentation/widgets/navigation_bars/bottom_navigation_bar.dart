@@ -21,7 +21,7 @@ class BottomNavigationBar extends StatelessWidget {
     return CurvedNavigationBar(
       onTap: (index) async {
         await Future.delayed(StiloDuration.d500);
-        context.router.replace(routes.values.elementAt(index));
+        context.replaceRoute(routes.values.elementAt(index));
       },
       backgroundColor: AppColor.primary,
       height: StiloHeight.h14,
