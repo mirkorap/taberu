@@ -6,9 +6,9 @@ class LinkButton extends StatelessWidget {
   final String text;
 
   const LinkButton({
-    Key key,
-    @required this.onTap,
-    @required this.text,
+    Key? key,
+    required this.onTap,
+    required this.text,
   }) : super(key: key);
 
   @override

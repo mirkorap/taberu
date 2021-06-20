@@ -10,8 +10,6 @@ class Image extends SimpleValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory Image(String path) {
-    assert(path != null);
-
     return Image._(validateImageFormat(path));
   }
 

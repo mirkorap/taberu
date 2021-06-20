@@ -10,8 +10,6 @@ class EmailAddress extends SimpleValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory EmailAddress(String emailAddress) {
-    assert(emailAddress != null);
-
     return EmailAddress._(validateEmailAddress(emailAddress));
   }
 

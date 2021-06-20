@@ -7,8 +7,8 @@ class DishInformation extends StatelessWidget {
   final Dish dish;
 
   const DishInformation({
-    Key key,
-    @required this.dish,
+    Key? key,
+    required this.dish,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class DishInformation extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
-          StiloSpacing.y6,
+          StiloSpacing.vert5,
         ],
         if (dish.ingredients.isNotEmpty) ...[
           ListTile(
@@ -39,7 +39,7 @@ class DishInformation extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
-          StiloSpacing.y6,
+          StiloSpacing.vert5,
         ],
         if (dish.allergens.isNotEmpty) ...[
           ListTile(
@@ -52,7 +52,7 @@ class DishInformation extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
-          StiloSpacing.y6,
+          StiloSpacing.vert5,
         ],
       ],
     );

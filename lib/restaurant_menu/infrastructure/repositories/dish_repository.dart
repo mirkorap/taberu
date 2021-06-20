@@ -43,8 +43,8 @@ class DishRepository implements IDishRepository {
         .where('visible', isEqualTo: true)
         .snapshots()
         .switchMap((snapshot) => Stream.value(snapshot.docs))
-        .map((docs) => docs.whereHaveRestaurantId(criteria.restaurantId))
-        .map((docs) => docs.whereHaveName(criteria.name))
+        .map((docs) => docs.whereHaveRestaurantId(criteria.restaurantId!))
+        .map((docs) => docs.whereHaveName(criteria.name!))
         .map((docs) => right<DishFailure, KtList<Dish>>(docs.toDishList()))
         .onErrorReturnWithFailure();
   }

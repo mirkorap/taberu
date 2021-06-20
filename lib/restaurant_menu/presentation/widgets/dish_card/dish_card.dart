@@ -11,9 +11,9 @@ class DishCard extends StatelessWidget {
   final Dish dish;
 
   const DishCard({
-    Key key,
-    @required this.onTap,
-    @required this.dish,
+    Key? key,
+    required this.onTap,
+    required this.dish,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class DishCard extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 100.0),
+              padding: StiloEdge.top24,
               child: DishCardBody(
                 name: dish.name,
                 price: dish.price,
@@ -36,7 +36,7 @@ class DishCard extends StatelessWidget {
             Align(
               alignment: const Alignment(0.0, -1.5),
               child: DishCardImage(
-                image: dish.gallery.getOrCrash().firstOrNull(),
+                image: dish.gallery.getOrCrash().first(),
               ),
             ),
           ],

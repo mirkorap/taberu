@@ -21,22 +21,20 @@ class DayOfWeek extends SimpleValueObject<int> {
   final Either<ValueFailure<int>, int> value;
 
   factory DayOfWeek(int dayOfWeek) {
-    assert(dayOfWeek != null);
-
     return DayOfWeek._(
       validateChoice(dayOfWeek, daysOfWeek.keys),
     );
   }
 
   factory DayOfWeek.fromString(String dayOfWeekStr) {
-    final dayOfWeek = daysOfWeek.keys.firstOrNull(
+    final dayOfWeek = daysOfWeek.keys.first(
       (k) => daysOfWeek[k] == dayOfWeekStr.toLowerCase(),
     );
 
     return DayOfWeek(dayOfWeek);
   }
 
-  String asString() => daysOfWeek[getOrCrash()];
+  String asString() => daysOfWeek[getOrCrash()].toString();
 
   DayOfWeek._(this.value);
 }

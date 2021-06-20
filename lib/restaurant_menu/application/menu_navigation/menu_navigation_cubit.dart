@@ -18,7 +18,7 @@ part 'menu_navigation_state.dart';
 class MenuNavigationCubit extends Cubit<MenuNavigationState> {
   final ISelectedRestaurantStorage _storage;
   final IMenuRepository _menuRepository;
-  StreamSubscription<Either<MenuFailure, KtList<Menu>>> _menuStreamSubscription;
+  StreamSubscription<Either<MenuFailure, KtList<Menu>>>? _menuStreamSubscription;
 
   MenuNavigationCubit(
     this._storage,

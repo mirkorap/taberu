@@ -1,7 +1,7 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stilo/stilo.dart';
@@ -15,11 +15,11 @@ import 'package:taberu/themes/app_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantSelectionBody extends StatelessWidget {
-  const RestaurantSelectionBody({Key key}) : super(key: key);
+  const RestaurantSelectionBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Restaurant selectedRestaurant;
+    Restaurant? selectedRestaurant;
 
     return BlocConsumer<RestaurantSearchCubit, RestaurantSearchState>(
       listener: (context, state) {
@@ -49,12 +49,12 @@ class RestaurantSelectionBody extends StatelessWidget {
               ),
               searchBoxDecoration: AppInput.searchTextField,
               popupShape: const RoundedRectangleBorder(
-                borderRadius: StiloBorderRadius.t7,
+                borderRadius: StiloBorderRadius.topXl3,
               ),
               emptyBuilder: (context, searchEntry) {
                 return Center(
                   child: Text(
-                    searchEntry.isEmpty ? 'app.type_to_search' : 'app.no_results_found',
+                    searchEntry != null ? 'app.type_to_search' : 'app.no_results_found',
                     style: Theme.of(context).textTheme.bodyText1,
                   ).tr(),
                 );
@@ -70,16 +70,16 @@ class RestaurantSelectionBody extends StatelessWidget {
               },
               onChanged: (restaurant) => selectedRestaurant = restaurant,
             ),
-            StiloSpacing.y10,
+            StiloSpacing.vert8,
             TextButton(
               onPressed: () {
                 final storage = getIt<ISelectedRestaurantStorage>();
-                storage.setRestaurant(selectedRestaurant);
-                ExtendedNavigator.of(context).replace(Routes.dishesSelectionScreen);
+                storage.setRestaurant(selectedRestaurant!);
+                context.replaceRoute(const DishesSelectionScreen());
               },
               child: const Text('restaurant_selection.show_menu').tr(),
             ),
-            StiloSpacing.y5,
+            StiloSpacing.vert4,
             LinkButton(
               onTap: () => launch('https://www.google.com'),
               text: tr('restaurant_selection.register_restaurant'),

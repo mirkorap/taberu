@@ -6,8 +6,8 @@ class FailureDisplay extends StatelessWidget {
   final String message;
 
   const FailureDisplay({
-    Key key,
-    @required this.message,
+    Key? key,
+    required this.message,
   }) : super(key: key);
 
   @override
@@ -21,10 +21,10 @@ class FailureDisplay extends StatelessWidget {
             color: AppColor.danger,
             size: StiloFontSize.xl6,
           ),
-          StiloSpacing.y3,
+          StiloSpacing.vert2,
           Text(
             message,
-            style: Theme.of(context).textTheme.headline2.copyWith(color: AppColor.danger),
+            style: Theme.of(context).textTheme.headline2!.copyWith(color: AppColor.danger),
             textAlign: TextAlign.center,
           ),
         ],

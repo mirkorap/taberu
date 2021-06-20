@@ -8,8 +8,8 @@ class DishCardImage extends StatelessWidget {
   final DishImage image;
 
   const DishCardImage({
-    Key key,
-    @required this.image,
+    Key? key,
+    required this.image,
   }) : super(key: key);
 
   @override

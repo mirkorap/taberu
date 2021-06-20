@@ -12,8 +12,8 @@ class AppLocale extends StatelessWidget {
   final Widget child;
 
   const AppLocale({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override

@@ -17,7 +17,7 @@ class SelectedRestaurantStorage implements ISelectedRestaurantStorage {
   @override
   Restaurant getRestaurant() {
     final jsonRestaurant = jsonDecode(
-      _deviceStorage.getString(storageKey),
+      _deviceStorage.getString(storageKey)!,
     ) as Map<String, dynamic>;
 
     return RestaurantDto.fromJson(jsonRestaurant).toDomain();

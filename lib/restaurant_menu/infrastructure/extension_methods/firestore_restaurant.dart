@@ -21,8 +21,8 @@ extension RestaurantQueryDocumentSnapshot on QueryDocumentSnapshot {
 
 extension RestaurantOnErrorExtensions on Stream<Either<RestaurantFailure, KtList<Restaurant>>> {
   Stream<Either<RestaurantFailure, KtList<Restaurant>>> onErrorReturnWithFailure() {
-    return onErrorReturnWith((e) {
-      if (e is FirebaseException && e.isPermissionDeniedException) {
+    return onErrorReturnWith((error, stackTrace) {
+      if (error is FirebaseException && error.isPermissionDeniedException) {
         return left(const RestaurantFailure.insufficientPermissions());
       }
 

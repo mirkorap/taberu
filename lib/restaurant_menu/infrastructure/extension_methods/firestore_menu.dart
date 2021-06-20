@@ -21,8 +21,8 @@ extension MenuQueryDocumentSnapshot on QueryDocumentSnapshot {
 
 extension MenuOnErrorExtensions on Stream<Either<MenuFailure, KtList<Menu>>> {
   Stream<Either<MenuFailure, KtList<Menu>>> onErrorReturnWithFailure() {
-    return onErrorReturnWith((e) {
-      if (e is FirebaseException && e.isPermissionDeniedException) {
+    return onErrorReturnWith((error, stackTrace) {
+      if (error is FirebaseException && error.isPermissionDeniedException) {
         return left(const MenuFailure.insufficientPermissions());
       }
 

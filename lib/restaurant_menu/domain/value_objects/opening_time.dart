@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/failures/value_failure.dart';
 import 'package:taberu/core/domain/value_objects/day_of_week.dart';
 import 'package:taberu/core/domain/value_objects/value_object.dart';
+import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 
 @immutable
 class OpeningTime extends ValueObject {
@@ -11,14 +12,10 @@ class OpeningTime extends ValueObject {
   final Either<ValueFailure<DateTime>, DateTime> endTime;
 
   factory OpeningTime({
-    @required DayOfWeek dayOfWeek,
-    @required DateTime startTime,
-    @required DateTime endTime,
+    required DayOfWeek dayOfWeek,
+    required DateTime startTime,
+    required DateTime endTime,
   }) {
-    assert(dayOfWeek != null);
-    assert(startTime != null);
-    assert(endTime != null);
-
     return OpeningTime._(
       dayOfWeek: right(dayOfWeek),
       startTime: right(startTime),
@@ -27,10 +24,21 @@ class OpeningTime extends ValueObject {
   }
 
   OpeningTime._({
-    @required this.dayOfWeek,
-    @required this.startTime,
-    @required this.endTime,
+    required this.dayOfWeek,
+    required this.startTime,
+    required this.endTime,
   });
+
+  String get timeRange {
+    if (startTime.andThen(endTime).isLeft()) {
+      return '-';
+    }
+
+    final startTimeFormatted = startTime.getOrCrash().toString().substring(11, 16);
+    final endTimeFormatted = endTime.getOrCrash().toString().substring(11, 16);
+
+    return '$startTimeFormatted - $endTimeFormatted';
+  }
 
   @override
   bool operator ==(Object o) {

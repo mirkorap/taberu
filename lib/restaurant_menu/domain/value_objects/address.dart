@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:taberu/core/domain/failures/value_failure.dart';
 import 'package:taberu/core/domain/validators/value_validators.dart';
 import 'package:taberu/core/domain/value_objects/value_object.dart';
+import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 
 @immutable
 class Address extends ValueObject {
@@ -13,14 +14,10 @@ class Address extends ValueObject {
   final Either<ValueFailure<String>, String> street;
 
   factory Address({
-    @required String city,
-    @required String postalCode,
-    @required String street,
+    required String city,
+    required String postalCode,
+    required String street,
   }) {
-    assert(city != null);
-    assert(postalCode != null);
-    assert(street != null);
-
     final validatedCity = validateStringNotEmpty(city);
     final validatedPostalCode = validateStringNotEmpty(postalCode).flatMap(
       (value) => validateMaxStringLength(value, postalCodeMaxLength),
@@ -35,9 +32,9 @@ class Address extends ValueObject {
   }
 
   Address._({
-    @required this.city,
-    @required this.postalCode,
-    @required this.street,
+    required this.city,
+    required this.postalCode,
+    required this.street,
   });
 
   @override
@@ -53,5 +50,11 @@ class Address extends ValueObject {
   int get hashCode => city.hashCode + postalCode.hashCode + street.hashCode;
 
   @override
-  String toString() => 'Address($city, $postalCode, $street)';
+  String toString() {
+    if (city.andThen(postalCode).andThen(street).isLeft()) {
+      return '-';
+    }
+
+    return '${street.getOrCrash()}, ${postalCode.getOrCrash()} ${city.getOrCrash()}';
+  }
 }

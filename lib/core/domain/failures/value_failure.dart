@@ -4,7 +4,7 @@ import 'package:kt_dart/kt.dart';
 part 'value_failure.freezed.dart';
 
 @freezed
-abstract class ValueFailure<T> with _$ValueFailure<T> {
+class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.empty(T failedValue) = Empty<T>;
 
   const factory ValueFailure.exceedingLength(T failedValue, int maxLength) = ExceedingLength<T>;

@@ -16,7 +16,7 @@ part 'restaurant_search_state.dart';
 @injectable
 class RestaurantSearchCubit extends Cubit<RestaurantSearchState> {
   final IRestaurantRepository _restaurantRepository;
-  StreamSubscription<Either<RestaurantFailure, KtList<Restaurant>>> _restaurantStreamSubscription;
+  StreamSubscription<Either<RestaurantFailure, KtList<Restaurant>>>? _restaurantStreamSubscription;
 
   RestaurantSearchCubit(this._restaurantRepository) : super(const RestaurantSearchState.initial());
 

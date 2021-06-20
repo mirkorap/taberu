@@ -7,7 +7,7 @@ abstract class AppInput {
   static final searchTextField = InputDecoration(
     filled: true,
     floatingLabelBehavior: FloatingLabelBehavior.never,
-    contentPadding: StiloEdge.a2,
+    contentPadding: StiloEdge.all2,
     prefixIcon: const Icon(Icons.search),
     labelText: tr('app.actions.search'),
     border: AppBorder.searchTextField,

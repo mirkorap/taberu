@@ -1,7 +1,7 @@
 part of 'dish_search_cubit.dart';
 
 @freezed
-abstract class DishSearchState with _$DishSearchState {
+class DishSearchState with _$DishSearchState {
   const factory DishSearchState.initial() = _Initial;
 
   const factory DishSearchState.searchInProgress() = _SearchInProgress;

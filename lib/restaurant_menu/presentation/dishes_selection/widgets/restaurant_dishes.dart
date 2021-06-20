@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:kt_dart/kt.dart';
-import 'package:stilo/stilo.dart';
 import 'package:taberu/core/presentation/widgets/failures/failure_display.dart';
 import 'package:taberu/restaurant_menu/application/dish_search/dish_search_cubit.dart';
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
@@ -16,12 +15,13 @@ class RestaurantDishes extends StatelessWidget {
   final Axis scrollDirection;
 
   const RestaurantDishes({
-    Key key,
-    @required this.scrollDirection,
+    Key? key,
+    required this.scrollDirection,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // TODO: improve responsive for horizontal cards
     return BlocBuilder<DishSearchCubit, DishSearchState>(
       builder: (context, state) {
         return state.when(
@@ -73,14 +73,14 @@ class RestaurantDishes extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(
-              top: index.isEven ? StiloEdge.edge4 : StiloEdge.edge20,
-              right: StiloEdge.edge2,
-              left: StiloEdge.edge2,
-              bottom: index.isEven ? StiloEdge.edge20 : StiloEdge.edge4,
+              top: index.isEven ? 12.0 : 60.0,
+              right: 6.0,
+              left: 6.0,
+              bottom: index.isEven ? 60.0 : 12.0,
             ),
             child: DishCard(
               onTap: () {
-                ExtendedNavigator.of(context).pushDishDetailsScreen(dish: dishes[index]);
+                context.pushRoute(DishDetailsScreen(dish: dishes[index]));
               },
               dish: dishes[index],
             ),
@@ -101,14 +101,14 @@ class RestaurantDishes extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(
-              top: StiloEdge.edge12,
-              right: StiloEdge.edge12,
-              left: StiloEdge.edge12,
-              bottom: StiloEdge.edge2,
+              top: 36.0,
+              right: 36.0,
+              left: 36.0,
+              bottom: 6.0,
             ),
             child: DishCard(
               onTap: () {
-                ExtendedNavigator.of(context).pushDishDetailsScreen(dish: dishes[index]);
+                context.pushRoute(DishDetailsScreen(dish: dishes[index]));
               },
               dish: dishes[index],
             ),
