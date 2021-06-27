@@ -25,7 +25,6 @@ class OpeningTimeDto with _$OpeningTimeDto {
     );
   }
 
-  // ignore: unused_element
   const OpeningTimeDto._();
 
   OpeningTime toDomain() {

@@ -51,7 +51,6 @@ class DishDto with _$DishDto {
     return DishDto.fromJson(json);
   }
 
-  // ignore: unused_element
   const DishDto._();
 
   Dish toDomain() {

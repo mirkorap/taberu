@@ -61,7 +61,6 @@ class RestaurantDto with _$RestaurantDto {
     return RestaurantDto.fromJson(json);
   }
 
-  // ignore: unused_element
   const RestaurantDto._();
 
   Restaurant toDomain() {

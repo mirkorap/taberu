@@ -23,7 +23,6 @@ class DishImageDto with _$DishImageDto {
     );
   }
 
-  // ignore: unused_element
   const DishImageDto._();
 
   DishImage toDomain() {

@@ -34,7 +34,6 @@ class MenuDto with _$MenuDto {
     return MenuDto.fromJson(json);
   }
 
-  // ignore: unused_element
   const MenuDto._();
 
   Menu toDomain() {
