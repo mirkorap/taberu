@@ -18,4 +18,6 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.listTooLong(T failedValue, int maxLength) = ListTooLong<T>;
 
   const factory ValueFailure.invalidImageFormat(T failedValue) = InvalidImageFormat<T>;
+
+  const factory ValueFailure.lessThan(T failedValue, int minValue) = LessThan<T>;
 }

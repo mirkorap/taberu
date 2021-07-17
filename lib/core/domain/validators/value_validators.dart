@@ -60,3 +60,11 @@ Either<ValueFailure<String>, String> validateImageFormat(String input) {
 
   return left(ValueFailure.invalidImageFormat(input));
 }
+
+Either<ValueFailure<int>, int> validateGreaterOrEqualThan(int input, int minValue) {
+  if (input >= minValue) {
+    return right(input);
+  }
+
+  return left(ValueFailure.lessThan(input, minValue));
+}
