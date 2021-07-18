@@ -88,4 +88,8 @@ class Order with _$Order {
   }
 
   const Order._();
+
+  bool get isDeliveredAtHome => type == OrderType.homeDelivery;
+
+  bool get isDeliveredAtTable => type == OrderType.tableDelivery;
 }
