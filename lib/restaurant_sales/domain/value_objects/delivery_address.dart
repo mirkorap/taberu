@@ -33,7 +33,7 @@ class DeliveryAddress extends ValueObject {
     final validatedFloor = validateStringNotEmpty(floor);
     final validatedFirstName = validateStringNotEmpty(firstName);
     final validatedLastName = validateStringNotEmpty(lastName);
-    final validatedPhone = validateStringNotEmpty(phone);
+    final validatedPhone = validatePhone(phone);
 
     return DeliveryAddress._(
       city: validatedCity,
