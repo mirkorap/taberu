@@ -2,7 +2,7 @@ enum OrderState {
   cart,
   pending,
   processing,
-  served,
+  delivered,
   payed,
   canceled,
 }
