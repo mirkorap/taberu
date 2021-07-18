@@ -16,6 +16,7 @@ dependencies:
   dartz: ^0.10.0-nullsafety.2
   dropdown_search: ^0.6.1
   easy_localization: ^3.0.0
+  enum_to_string: ^2.0.1
   firebase_core: ^1.2.1
   flutter:
     sdk: flutter
