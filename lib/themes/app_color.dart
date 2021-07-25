@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stilo/stilo.dart';
 
 abstract class AppColor {
   static const primary = Color(0xFFFA4A0C);
@@ -9,4 +10,5 @@ abstract class AppColor {
 
   static const background = Color(0xFFF2F2F2);
   static const circularProgressIndicator = AlwaysStoppedAnimation(primary);
+  static const actionProgressIndicator = AlwaysStoppedAnimation(StiloColor.white);
 }
