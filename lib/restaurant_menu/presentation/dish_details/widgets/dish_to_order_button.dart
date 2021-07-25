@@ -20,16 +20,19 @@ class DishToOrderButton extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: StiloEdge.all6,
-          child: TextButton(
-            onPressed: () {
-              final cubit = context.read<DishActorCubit>();
-              cubit.addToOrder(dish);
-            },
-            child: state.maybeWhen(
-              actionInProgress: () => const CircularProgressIndicator(
-                valueColor: AppColor.actionProgressIndicator,
+          child: IgnorePointer(
+            ignoring: state == const DishActorState.actionInProgress(),
+            child: TextButton(
+              onPressed: () {
+                final cubit = context.read<DishActorCubit>();
+                cubit.addToOrder(dish);
+              },
+              child: state.maybeWhen(
+                actionInProgress: () => const CircularProgressIndicator(
+                  valueColor: AppColor.actionProgressIndicator,
+                ),
+                orElse: () => const Text('app.actions.add_to_order').tr(),
               ),
-              orElse: () => const Text('app.actions.add_to_order').tr(),
             ),
           ),
         );
