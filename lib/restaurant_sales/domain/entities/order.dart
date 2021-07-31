@@ -29,64 +29,6 @@ class Order with _$Order {
     String? notes,
   }) = _Order;
 
-  factory Order.atHome({
-    required UniqueId id,
-    required OrderNumber number,
-    required OrderState state,
-    required DeliveryAddress deliveryAddress,
-    required Money adjustmentTotal,
-    required Money subtotal,
-    required Money total,
-    required KtList<OrderItem> orderItems,
-    required DateTime createdAt,
-    required DateTime updatedAt,
-    String? notes,
-  }) {
-    return Order(
-      id: id,
-      number: number,
-      state: state,
-      type: OrderType.homeDelivery,
-      deliveryAddress: deliveryAddress,
-      adjustmentTotal: adjustmentTotal,
-      subtotal: subtotal,
-      total: total,
-      orderItems: orderItems,
-      notes: notes,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
-  }
-
-  factory Order.atTable({
-    required UniqueId id,
-    required OrderNumber number,
-    required OrderState state,
-    required RestaurantTable restaurantTable,
-    required Money adjustmentTotal,
-    required Money subtotal,
-    required Money total,
-    required KtList<OrderItem> orderItems,
-    required DateTime createdAt,
-    required DateTime updatedAt,
-    String? notes,
-  }) {
-    return Order(
-      id: id,
-      number: number,
-      state: state,
-      type: OrderType.tableDelivery,
-      restaurantTable: restaurantTable,
-      adjustmentTotal: adjustmentTotal,
-      subtotal: subtotal,
-      total: total,
-      orderItems: orderItems,
-      notes: notes,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
-  }
-
   const Order._();
 
   bool get isDeliveredAtHome => type == OrderType.homeDelivery;
