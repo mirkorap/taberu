@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/quantity.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
+import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 
 part 'order_item.freezed.dart';
@@ -15,4 +16,34 @@ class OrderItem with _$OrderItem {
     required Money unitPrice,
     required Money totalPrice,
   }) = _OrderItem;
+
+  factory OrderItem.fromDish(Dish dish) {
+    return OrderItem(
+      id: UniqueId(),
+      dish: dish,
+      quantity: Quantity(1),
+      unitPrice: dish.price,
+      totalPrice: dish.price,
+    );
+  }
+
+  const OrderItem._();
+
+  OrderItem increaseQuantity() {
+    return updateQuantity(quantity.getOrCrash() + 1);
+  }
+
+  OrderItem decreaseQuantity() {
+    return updateQuantity(quantity.getOrCrash() - 1);
+  }
+
+  OrderItem updateQuantity(int quantity) {
+    return copyWith(
+      quantity: Quantity(quantity),
+      totalPrice: Money(
+        amount: unitPrice.amount.getOrCrash() * quantity,
+        currency: unitPrice.currency.getOrCrash(),
+      ),
+    );
+  }
 }
