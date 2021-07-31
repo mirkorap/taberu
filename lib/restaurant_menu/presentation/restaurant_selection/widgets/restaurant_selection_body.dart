@@ -73,8 +73,8 @@ class RestaurantSelectionBody extends StatelessWidget {
             StiloSpacing.vert8,
             TextButton(
               onPressed: () {
-                final storage = getIt<ISelectedRestaurantStorage>();
-                storage.setRestaurant(selectedRestaurant!);
+                final selectedRestaurantStorage = getIt<ISelectedRestaurantStorage>();
+                selectedRestaurantStorage.setRestaurant(selectedRestaurant!);
                 context.replaceRoute(const DishesSelectionScreen());
               },
               child: const Text('restaurant_selection.show_menu').tr(),
