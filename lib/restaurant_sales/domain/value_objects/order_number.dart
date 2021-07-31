@@ -22,6 +22,12 @@ class OrderNumber extends SimpleValueObject<int> {
 
   OrderNumber._(this.value);
 
+  OrderNumber next() {
+    final nextOrderNumber = value.getOrElse(() => 0) + 1;
+
+    return OrderNumber(nextOrderNumber);
+  }
+
   @override
   String toString() {
     return value.toString().padLeft(9, '0');
