@@ -8,5 +8,7 @@ class OrderFailure with _$OrderFailure {
 
   const factory OrderFailure.unableToUpdate() = _UnableToUpdate;
 
+  const factory OrderFailure.noOrderFound() = _NoOrderFound;
+
   const factory OrderFailure.unexpected() = _Unexpected;
 }
