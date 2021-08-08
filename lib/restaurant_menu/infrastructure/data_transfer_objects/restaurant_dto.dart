@@ -49,6 +49,7 @@ class RestaurantDto with _$RestaurantDto {
       facebookUrl: restaurant.facebookUrl,
       instagramUrl: restaurant.instagramUrl,
       active: restaurant.active,
+      menus: restaurant.menus.map((menu) => MenuDto.fromDomain(menu)).asList(),
       createdAt: restaurant.createdAt.millisecondsSinceEpoch,
       updatedAt: restaurant.updatedAt.millisecondsSinceEpoch,
     );
