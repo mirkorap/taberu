@@ -22,15 +22,6 @@ class RestaurantTablesDto with _$RestaurantTablesDto implements ConfigurationTyp
 
   factory RestaurantTablesDto.fromJson(Map<String, dynamic> json) => _$RestaurantTablesDtoFromJson(json);
 
-  factory RestaurantTablesDto.fromDomain(Configuration<KtList<RestaurantTable>> configuration) {
-    return RestaurantTablesDto(
-      id: configuration.id.getOrCrash(),
-      value: configuration.value.map((restaurantTable) => RestaurantTableDto.fromDomain(restaurantTable)).asList(),
-      createdAt: configuration.createdAt.millisecondsSinceEpoch,
-      updatedAt: configuration.updatedAt.millisecondsSinceEpoch,
-    );
-  }
-
   factory RestaurantTablesDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
     final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
-import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 import 'package:taberu/restaurant_menu/domain/entities/configuration.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/configuration_types/configuration_type_dto.dart';
 
@@ -20,15 +19,6 @@ class DeliveryCostsDto with _$DeliveryCostsDto implements ConfigurationTypeDto<M
   }) = _DeliveryCostsDto;
 
   factory DeliveryCostsDto.fromJson(Map<String, dynamic> json) => _$DeliveryCostsDtoFromJson(json);
-
-  factory DeliveryCostsDto.fromDomain(Configuration<Money> configuration) {
-    return DeliveryCostsDto(
-      id: configuration.id.getOrCrash(),
-      value: configuration.value.amount.getOrCrash(),
-      createdAt: configuration.createdAt.millisecondsSinceEpoch,
-      updatedAt: configuration.updatedAt.millisecondsSinceEpoch,
-    );
-  }
 
   factory DeliveryCostsDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
