@@ -75,8 +75,8 @@ class TaberuApp extends StatelessWidget {
   }
 
   PageRouteInfo get _nextRoute {
-    final storage = getIt<ISelectedRestaurantStorage>();
-    if (storage.containsRestaurant()) {
+    final selectedRestaurantStorage = getIt<ISelectedRestaurantStorage>();
+    if (selectedRestaurantStorage.containsRestaurant()) {
       return const DishesSelectionScreen();
     }
 
