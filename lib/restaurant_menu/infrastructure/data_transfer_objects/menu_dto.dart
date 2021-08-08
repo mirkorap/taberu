@@ -19,14 +19,6 @@ class MenuDto with _$MenuDto {
 
   factory MenuDto.fromJson(Map<String, dynamic> json) => _$MenuDtoFromJson(json);
 
-  factory MenuDto.fromDomain(Menu menu) {
-    return MenuDto(
-      id: menu.id.getOrCrash(),
-      name: menu.name,
-      dishes: menu.dishes.map((dish) => DishDto.fromDomain(dish)).asList(),
-    );
-  }
-
   factory MenuDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
     final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);
