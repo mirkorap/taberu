@@ -79,7 +79,7 @@ class OrderDto with _$OrderDto {
       adjustmentTotal: Money(amount: adjustmentTotal),
       subtotal: Money(amount: subtotal),
       total: Money(amount: total),
-      orderItems: orderItems.map((item) => item.toDomain()).toImmutableList(),
+      orderItems: orderItems.map((orderItem) => orderItem.toDomain()).toImmutableList(),
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),
     );

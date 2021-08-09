@@ -40,7 +40,7 @@ class MenuDto with _$MenuDto {
     return Menu(
       id: UniqueId.fromUniqueString(id),
       name: name,
-      dishes: dishes.map((item) => item.toDomain()).toImmutableList(),
+      dishes: dishes.map((dish) => dish.toDomain()).toImmutableList(),
     );
   }
 }

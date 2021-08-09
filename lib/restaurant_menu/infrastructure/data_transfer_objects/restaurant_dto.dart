@@ -71,7 +71,7 @@ class RestaurantDto with _$RestaurantDto {
       address: address.toDomain(),
       position: position.toDomain(),
       weekOpeningTime: LimitedList(
-        weekOpeningTime.map((item) => item.toDomain()).toImmutableList(),
+        weekOpeningTime.map((openingTime) => openingTime.toDomain()).toImmutableList(),
         Restaurant.weekOpeningTimeMaxLength,
       ),
       phone: Phone(phone),
@@ -80,7 +80,7 @@ class RestaurantDto with _$RestaurantDto {
       facebookUrl: facebookUrl,
       instagramUrl: instagramUrl,
       active: active,
-      menus: menus.map((item) => item.toDomain()).toImmutableList(),
+      menus: menus.map((menu) => menu.toDomain()).toImmutableList(),
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),
     );

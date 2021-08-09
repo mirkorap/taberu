@@ -63,7 +63,7 @@ class DishDto with _$DishDto {
       price: Money(amount: price),
       visible: visible,
       gallery: LimitedList(
-        gallery.map((item) => item.toDomain()).toImmutableList(),
+        gallery.map((dishImage) => dishImage.toDomain()).toImmutableList(),
         Dish.galleryMaxLength,
       ),
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
