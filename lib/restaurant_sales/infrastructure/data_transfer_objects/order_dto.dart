@@ -13,9 +13,9 @@ import 'package:taberu/restaurant_sales/domain/value_objects/order_number.dart';
 import 'package:taberu/restaurant_sales/infrastructure/data_transfer_objects/delivery_address_dto.dart';
 import 'package:taberu/restaurant_sales/infrastructure/data_transfer_objects/order_item_dto.dart';
 
-part 'order.freezed.dart';
+part 'order_dto.freezed.dart';
 
-part 'order.g.dart';
+part 'order_dto.g.dart';
 
 @freezed
 class OrderDto with _$OrderDto {
@@ -53,12 +53,14 @@ class OrderDto with _$OrderDto {
     );
 
     if (order.isDeliveredAtHome) {
-      final deliveryAddress = DeliveryAddressDto.fromDomain(order.deliveryAddress!);
-      return orderDto.copyWith(deliveryAddress: deliveryAddress);
+      return orderDto.copyWith(
+        deliveryAddress: DeliveryAddressDto.fromDomain(order.deliveryAddress!),
+      );
     }
 
-    final restaurantTable = RestaurantTableDto.fromDomain(order.restaurantTable!);
-    return orderDto.copyWith(restaurantTable: restaurantTable);
+    return orderDto.copyWith(
+      restaurantTable: RestaurantTableDto.fromDomain(order.restaurantTable!),
+    );
   }
 
   factory OrderDto.fromFirestore(DocumentSnapshot doc) {

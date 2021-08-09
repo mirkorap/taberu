@@ -5,7 +5,7 @@ import 'package:taberu/core/infrastructure/extension_methods/firebase_core.dart'
 import 'package:taberu/restaurant_sales/domain/entities/order.dart';
 import 'package:taberu/restaurant_sales/domain/failures/order_failure.dart';
 import 'package:taberu/restaurant_sales/domain/repositories/i_order_repository.dart';
-import 'package:taberu/restaurant_sales/infrastructure/data_transfer_objects/order.dart';
+import 'package:taberu/restaurant_sales/infrastructure/data_transfer_objects/order_dto.dart';
 
 @LazySingleton(as: IOrderRepository)
 class OrderRepository implements IOrderRepository {

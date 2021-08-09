@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:taberu/core/application/services/i_device_storage.dart';
 import 'package:taberu/restaurant_sales/application/services/i_current_order_storage.dart';
 import 'package:taberu/restaurant_sales/domain/entities/order.dart';
-import 'package:taberu/restaurant_sales/infrastructure/data_transfer_objects/order.dart';
+import 'package:taberu/restaurant_sales/infrastructure/data_transfer_objects/order_dto.dart';
 
 @LazySingleton(as: ICurrentOrderStorage)
 class CurrentOrderStorage implements ICurrentOrderStorage {
