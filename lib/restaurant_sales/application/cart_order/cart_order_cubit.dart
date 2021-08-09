@@ -15,7 +15,7 @@ part 'cart_order_state.dart';
 class CartOrderCubit extends Cubit<CartOrderState> {
   CartOrderCubit() : super(CartOrderState.initial());
 
-  Future<void> addDishToOrder(Dish dish) async {
+  void addDishToOrder(Dish dish) {
     final orderItem = OrderItem.fromDish(dish);
     final order = state.order.addOrderItem(orderItem);
     emit(state.copyWith(order: order));
