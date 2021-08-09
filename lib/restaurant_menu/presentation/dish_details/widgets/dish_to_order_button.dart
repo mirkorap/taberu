@@ -18,10 +18,10 @@ class DishToOrderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DishDetailsCubit, DishDetailsState>(
       builder: (context, state) {
-        return Padding(
-          padding: StiloEdge.all6,
-          child: IgnorePointer(
-            ignoring: state == const DishDetailsState.actionInProgress(),
+        return IgnorePointer(
+          ignoring: state == const DishDetailsState.actionInProgress(),
+          child: Padding(
+            padding: StiloEdge.all6,
             child: TextButton(
               onPressed: () {
                 final cubit = context.read<DishDetailsCubit>();
