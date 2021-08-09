@@ -4,12 +4,16 @@ import 'package:taberu/core/presentation/widgets/navigation_bars/top_navigation_
 import 'package:taberu/themes/app_color.dart';
 
 class MessageBoxScreen extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String? buttonText;
   final IconData icon;
   final String title;
   final String subtitle;
 
   const MessageBoxScreen({
     Key? key,
+    this.onPressed,
+    this.buttonText,
     required this.icon,
     required this.title,
     required this.subtitle,
@@ -43,6 +47,16 @@ class MessageBoxScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline4,
               ),
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Visibility(
+        visible: onPressed != null,
+        child: Padding(
+          padding: StiloEdge.all6,
+          child: TextButton(
+            onPressed: onPressed,
+            child: Text(buttonText.toString()),
           ),
         ),
       ),
