@@ -24,7 +24,6 @@ class AddressDto with _$AddressDto {
     );
   }
 
-  // ignore: unused_element
   const AddressDto._();
 
   Address toDomain() {

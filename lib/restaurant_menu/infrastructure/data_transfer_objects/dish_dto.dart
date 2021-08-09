@@ -51,7 +51,6 @@ class DishDto with _$DishDto {
     return DishDto.fromJson(json);
   }
 
-  // ignore: unused_element
   const DishDto._();
 
   Dish toDomain() {
@@ -64,7 +63,7 @@ class DishDto with _$DishDto {
       price: Money(amount: price),
       visible: visible,
       gallery: LimitedList(
-        gallery.map((item) => item.toDomain()).toImmutableList(),
+        gallery.map((dishImage) => dishImage.toDomain()).toImmutableList(),
         Dish.galleryMaxLength,
       ),
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),

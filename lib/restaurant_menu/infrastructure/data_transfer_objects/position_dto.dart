@@ -22,7 +22,6 @@ class PositionDto with _$PositionDto {
     );
   }
 
-  // ignore: unused_element
   const PositionDto._();
 
   Position toDomain() {

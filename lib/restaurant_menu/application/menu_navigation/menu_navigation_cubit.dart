@@ -16,19 +16,19 @@ part 'menu_navigation_state.dart';
 
 @injectable
 class MenuNavigationCubit extends Cubit<MenuNavigationState> {
-  final ISelectedRestaurantStorage _storage;
+  final ISelectedRestaurantStorage _selectedRestaurantStorage;
   final IMenuRepository _menuRepository;
   StreamSubscription<Either<MenuFailure, KtList<Menu>>>? _menuStreamSubscription;
 
   MenuNavigationCubit(
-    this._storage,
+    this._selectedRestaurantStorage,
     this._menuRepository,
   ) : super(const MenuNavigationState.initial());
 
   void load() {
     emit(const MenuNavigationState.loadInProgress());
 
-    final selectedRestaurant = _storage.getRestaurant();
+    final selectedRestaurant = _selectedRestaurantStorage.getRestaurant();
     final selectedRestaurantId = selectedRestaurant.id.getOrCrash();
 
     _menuStreamSubscription?.cancel();

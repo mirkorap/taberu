@@ -34,14 +34,13 @@ class MenuDto with _$MenuDto {
     return MenuDto.fromJson(json);
   }
 
-  // ignore: unused_element
   const MenuDto._();
 
   Menu toDomain() {
     return Menu(
       id: UniqueId.fromUniqueString(id),
       name: name,
-      dishes: dishes.map((item) => item.toDomain()).toImmutableList(),
+      dishes: dishes.map((dish) => dish.toDomain()).toImmutableList(),
     );
   }
 }

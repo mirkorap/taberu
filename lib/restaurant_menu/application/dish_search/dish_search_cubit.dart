@@ -21,12 +21,12 @@ typedef DishRepositorySearchByAction = Stream<Either<DishFailure, KtList<Dish>>>
 
 @injectable
 class DishSearchCubit extends Cubit<DishSearchState> {
-  final ISelectedRestaurantStorage _storage;
+  final ISelectedRestaurantStorage _selectedRestaurantStorage;
   final IDishRepository _dishRepository;
   StreamSubscription<Either<DishFailure, KtList<Dish>>>? _dishStreamSubscription;
 
   DishSearchCubit(
-    this._storage,
+    this._selectedRestaurantStorage,
     this._dishRepository,
   ) : super(const DishSearchState.initial());
 
@@ -48,7 +48,7 @@ class DishSearchCubit extends Cubit<DishSearchState> {
   ) {
     emit(const DishSearchState.searchInProgress());
 
-    final selectedRestaurant = _storage.getRestaurant();
+    final selectedRestaurant = _selectedRestaurantStorage.getRestaurant();
     final selectedRestaurantId = selectedRestaurant.id.getOrCrash();
 
     final criteria = forwardedCriteria.copyWith(

@@ -28,7 +28,7 @@ class BottomNavigationBar extends StatelessWidget {
       index: routes.keys.toList().indexOf(currentRouteName),
       items: [
         const Icon(Icons.home_outlined, size: 30.0),
-        const Icon(Icons.shopping_cart_outlined, size: 30.0),
+        const Icon(Icons.restaurant_menu_outlined, size: 30.0),
         //const Icon(Icons.add_shopping_cart_outlined, size: 30.0),
         //const Icon(Icons.restaurant_menu_outlined, size: 30.0),
       ],

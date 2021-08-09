@@ -49,6 +49,7 @@ class RestaurantDto with _$RestaurantDto {
       facebookUrl: restaurant.facebookUrl,
       instagramUrl: restaurant.instagramUrl,
       active: restaurant.active,
+      menus: restaurant.menus.map((menu) => MenuDto.fromDomain(menu)).asList(),
       createdAt: restaurant.createdAt.millisecondsSinceEpoch,
       updatedAt: restaurant.updatedAt.millisecondsSinceEpoch,
     );
@@ -61,7 +62,6 @@ class RestaurantDto with _$RestaurantDto {
     return RestaurantDto.fromJson(json);
   }
 
-  // ignore: unused_element
   const RestaurantDto._();
 
   Restaurant toDomain() {
@@ -71,7 +71,7 @@ class RestaurantDto with _$RestaurantDto {
       address: address.toDomain(),
       position: position.toDomain(),
       weekOpeningTime: LimitedList(
-        weekOpeningTime.map((item) => item.toDomain()).toImmutableList(),
+        weekOpeningTime.map((openingTime) => openingTime.toDomain()).toImmutableList(),
         Restaurant.weekOpeningTimeMaxLength,
       ),
       phone: Phone(phone),
@@ -80,7 +80,7 @@ class RestaurantDto with _$RestaurantDto {
       facebookUrl: facebookUrl,
       instagramUrl: instagramUrl,
       active: active,
-      menus: menus.map((item) => item.toDomain()).toImmutableList(),
+      menus: menus.map((menu) => menu.toDomain()).toImmutableList(),
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),
     );
