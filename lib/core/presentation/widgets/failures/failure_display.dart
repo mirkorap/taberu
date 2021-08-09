@@ -24,8 +24,8 @@ class FailureDisplay extends StatelessWidget {
           StiloSpacing.vert2,
           Text(
             message,
-            style: Theme.of(context).textTheme.headline2!.copyWith(color: AppColor.danger),
             textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline2!.copyWith(color: AppColor.danger),
           ),
         ],
       ),
