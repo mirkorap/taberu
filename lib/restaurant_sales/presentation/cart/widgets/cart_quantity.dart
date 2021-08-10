@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stilo/stilo.dart';
+import 'package:taberu/core/domain/value_objects/quantity.dart';
 import 'package:taberu/themes/app_button.dart';
 
 class CartQuantity extends StatelessWidget {
-  const CartQuantity({Key? key}) : super(key: key);
+  final Quantity quantity;
+
+  const CartQuantity({
+    Key? key,
+    required this.quantity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,10 @@ class CartQuantity extends StatelessWidget {
               data: AppButton.quantityButton,
               child: ElevatedButton(
                 onPressed: () {},
-                child: const Text('1', textAlign: TextAlign.center),
+                child: Text(
+                  quantity.getOrCrash().toString(),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),
