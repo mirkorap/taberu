@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stilo/stilo.dart';
-import 'package:taberu/core/presentation/widgets/navigation_bars/top_navigation_bar.dart';
 import 'package:taberu/themes/app_color.dart';
 
 class MessageBoxScreen extends StatelessWidget {
@@ -22,7 +21,6 @@ class MessageBoxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopNavigationBar(),
       body: Padding(
         padding: StiloEdge.all10,
         child: Center(

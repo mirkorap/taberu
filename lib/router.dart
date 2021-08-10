@@ -10,7 +10,7 @@ import 'package:taberu/restaurant_menu/presentation/restaurant_selection/restaur
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(page: SplashScreen),
-    AutoRoute(page: MessageBoxScreen, fullscreenDialog: true),
+    AutoRoute(page: MessageBoxScreen),
     AutoRoute(page: RestaurantSelectionScreen),
     AutoRoute(page: DishesSelectionScreen),
     AutoRoute(page: RestaurantContactsScreen),
