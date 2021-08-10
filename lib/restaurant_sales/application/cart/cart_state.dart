@@ -1,16 +1,16 @@
-part of 'cart_order_cubit.dart';
+part of 'cart_cubit.dart';
 
 @freezed
-class CartOrderState with _$CartOrderState {
-  const factory CartOrderState({
+class CartState with _$CartState {
+  const factory CartState({
     required Order order,
     required bool isEditing,
     required bool isSaving,
     required Option<Either<OrderFailure, Unit>> saveFailureOrSuccessOption,
-  }) = _CartOrderState;
+  }) = _CartState;
 
-  factory CartOrderState.initial() {
-    return CartOrderState(
+  factory CartState.initial() {
+    return CartState(
       order: Order.empty(),
       isEditing: false,
       isSaving: false,

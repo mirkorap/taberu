@@ -9,7 +9,7 @@ import 'package:taberu/injection.dart';
 import 'package:taberu/locale.dart';
 import 'package:taberu/restaurant_menu/application/dish_details/dish_details_cubit.dart';
 import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
-import 'package:taberu/restaurant_sales/application/cart_order/cart_order_cubit.dart';
+import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
 import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_image.dart';
 import 'package:taberu/themes/app_theme.dart';
@@ -34,16 +34,16 @@ class TaberuApp extends StatelessWidget {
         BlocProvider<DishDetailsCubit>(
           create: (context) => getIt<DishDetailsCubit>(),
         ),
-        BlocProvider<CartOrderCubit>(
-          create: (context) => getIt<CartOrderCubit>(),
+        BlocProvider<CartCubit>(
+          create: (context) => getIt<CartCubit>(),
         ),
       ],
       child: BlocListener<DishDetailsCubit, DishDetailsState>(
         listener: (context, state) {
           state.maybeWhen(
-            dishToOrderButtonPressed: (dish) {
-              final cubit = context.read<CartOrderCubit>();
-              cubit.addDishToOrder(dish);
+            dishToCartButtonPressed: (dish) {
+              final cubit = context.read<CartCubit>();
+              cubit.addDishToCart(dish);
             },
             orElse: () => null,
           );

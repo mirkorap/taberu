@@ -6,5 +6,5 @@ class DishDetailsState with _$DishDetailsState {
 
   const factory DishDetailsState.actionInProgress() = _ActionInProgress;
 
-  const factory DishDetailsState.dishToOrderButtonPressed(Dish dish) = _DishToOrderButtonPressed;
+  const factory DishDetailsState.dishToCartButtonPressed(Dish dish) = _DishToCartButtonPressed;
 }
