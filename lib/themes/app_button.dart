@@ -14,4 +14,28 @@ abstract class AppButton {
       minimumSize: MaterialStateProperty.all(const Size(314.0, 70.0)),
     ),
   );
+
+  static final decreaseButton = ElevatedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(AppColor.primary),
+      textStyle: MaterialStateProperty.all(AppTextStyle.headline3),
+      shape: MaterialStateProperty.all(AppBorder.decreaseButton),
+    ),
+  );
+
+  static final quantityButton = ElevatedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(AppColor.primary),
+      textStyle: MaterialStateProperty.all(AppTextStyle.headline4),
+      shape: MaterialStateProperty.all(AppBorder.quantityButton),
+    ),
+  );
+
+  static final increaseButton = ElevatedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(AppColor.primary),
+      textStyle: MaterialStateProperty.all(AppTextStyle.headline3),
+      shape: MaterialStateProperty.all(AppBorder.increaseButton),
+    ),
+  );
 }
