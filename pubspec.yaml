@@ -52,6 +52,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/restaurant_menu/
+    - assets/images/restaurant_sales/
     - assets/translations/
   fonts:
     - family: Taberu
