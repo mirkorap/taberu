@@ -23,29 +23,27 @@ class MessageBoxScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: StiloEdge.all10,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                color: AppColor.secondary,
-                size: 115.0,
-              ),
-              StiloSpacing.vert2,
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline2,
-              ),
-              StiloSpacing.vert2,
-              Text(
-                subtitle,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: AppColor.secondary,
+              size: 115.0,
+            ),
+            StiloSpacing.vert2,
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline2,
+            ),
+            StiloSpacing.vert2,
+            Text(
+              subtitle,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: Visibility(
