@@ -36,25 +36,27 @@ class CartScreen extends StatelessWidget {
                   ).tr(),
                 ],
               ),
-              BlocBuilder<CartCubit, CartState>(
-                builder: (context, state) {
-                  return Column(
-                    children: [
-                      for (final orderItem in state.order.orderItems.iter) ...[
-                        StiloSpacing.vert6,
-                        CartListTile(
-                          onDelete: () {},
-                          orderItem: orderItem,
+              Center(
+                child: BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    return Column(
+                      children: [
+                        for (final orderItem in state.order.orderItems.iter) ...[
+                          StiloSpacing.vert6,
+                          CartListTile(
+                            onDelete: () {},
+                            orderItem: orderItem,
+                          ),
+                        ],
+                        StiloSpacing.vert8,
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text('cart.complete_order').tr(),
                         ),
                       ],
-                      StiloSpacing.vert8,
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('cart.complete_order').tr(),
-                      ),
-                    ],
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ],
           ),
