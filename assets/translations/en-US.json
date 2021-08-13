@@ -45,5 +45,10 @@
     "description": "Description",
     "ingredients": "Ingredients",
     "allergens": "Allergens"
+  },
+  "cart": {
+    "title": "Dishes added\nto cart",
+    "swipe_to_delete": "Swipe on an item to delete",
+    "complete_order": "Complete order"
   }
 }
