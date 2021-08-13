@@ -5,6 +5,7 @@ import 'package:taberu/restaurant_menu/presentation/dish_details/dish_details_sc
 import 'package:taberu/restaurant_menu/presentation/dishes_selection/dishes_selection_screen.dart';
 import 'package:taberu/restaurant_menu/presentation/restaurant_contacts/restaurant_contacts_screen.dart';
 import 'package:taberu/restaurant_menu/presentation/restaurant_selection/restaurant_selection_screen.dart';
+import 'package:taberu/restaurant_sales/presentation/cart/cart_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -15,6 +16,7 @@ import 'package:taberu/restaurant_menu/presentation/restaurant_selection/restaur
     AutoRoute(page: DishesSelectionScreen),
     AutoRoute(page: RestaurantContactsScreen),
     AutoRoute(page: DishDetailsScreen, fullscreenDialog: true),
+    AutoRoute(page: CartScreen),
   ],
 )
 class $AppRouter {}
