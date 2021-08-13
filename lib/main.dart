@@ -10,6 +10,7 @@ import 'package:taberu/locale.dart';
 import 'package:taberu/restaurant_menu/application/dish_details/dish_details_cubit.dart';
 import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
+import 'package:taberu/restaurant_sales/application/guards/cart_guard.dart';
 import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_image.dart';
 import 'package:taberu/themes/app_theme.dart';
@@ -23,7 +24,7 @@ Future<void> main() async {
 }
 
 class TaberuApp extends StatelessWidget {
-  final _appRouter = AppRouter();
+  final _appRouter = AppRouter(cartGuard: CartGuard());
 
   TaberuApp({Key? key}) : super(key: key);
 
