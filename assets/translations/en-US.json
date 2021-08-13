@@ -50,5 +50,10 @@
     "title": "Dishes added\nto cart",
     "swipe_to_delete": "Swipe on an item to delete",
     "complete_order": "Complete order"
+  },
+  "empty_cart": {
+    "title": "Empty cart",
+    "subtitle": "Press the orange button at the bottom to select dishes",
+    "button_text": "Start ordering"
   }
 }
