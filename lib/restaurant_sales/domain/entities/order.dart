@@ -49,11 +49,11 @@ class Order with _$Order {
   const Order._();
 
   Order addOrderItem(OrderItem orderItem) {
-    final index = this.orderItems.indexOfFirst((element) => element.dish == orderItem.dish);
+    final existingOrderItem = this.orderItems.find((element) => element.dish == orderItem.dish);
 
-    if (index >= 0) {
-      final existingOrderItem = this.orderItems.elementAt(index);
-      final orderItems = this.orderItems.replaceAt(index, existingOrderItem.increaseQuantity());
+    if (existingOrderItem != null) {
+      final updatedOrderItem = existingOrderItem.increaseQuantity(orderItem.quantity);
+      final orderItems = this.orderItems.replace(existingOrderItem, updatedOrderItem);
       return copyWith(orderItems: orderItems).recalculateTotals();
     }
 
@@ -62,15 +62,15 @@ class Order with _$Order {
   }
 
   Order removeOrderItem(OrderItem orderItem) {
-    final index = orderItems.indexOfFirst((element) => element.dish == orderItem.dish);
-    final existingOrderItem = orderItems.elementAtOrNull(index);
+    final existingOrderItem = orderItems.find((element) => element.dish == orderItem.dish);
 
-    if (existingOrderItem != null && existingOrderItem.quantity.getOrCrash() > 1) {
-      final orderItems = this.orderItems.replaceAt(index, existingOrderItem.decreaseQuantity());
+    if (existingOrderItem != null && existingOrderItem.quantity > orderItem.quantity) {
+      final updatedOrderItem = existingOrderItem.decreaseQuantity(orderItem.quantity);
+      final orderItems = this.orderItems.replace(existingOrderItem, updatedOrderItem);
       return copyWith(orderItems: orderItems).recalculateTotals();
     }
 
-    if (existingOrderItem != null && existingOrderItem.quantity.getOrCrash() == 1) {
+    if (existingOrderItem != null && existingOrderItem.quantity == orderItem.quantity) {
       final orderItems = this.orderItems.minusElement(existingOrderItem);
       return copyWith(orderItems: orderItems).recalculateTotals();
     }
