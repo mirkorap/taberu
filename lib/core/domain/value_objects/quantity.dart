@@ -22,4 +22,8 @@ class Quantity extends SimpleValueObject<int> {
   Quantity operator -(Quantity o) {
     return Quantity(getOrCrash() - o.getOrCrash());
   }
+
+  bool operator >(Quantity o) {
+    return getOrCrash() > o.getOrCrash();
+  }
 }
