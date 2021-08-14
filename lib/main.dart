@@ -44,7 +44,7 @@ class TaberuApp extends StatelessWidget {
           state.maybeWhen(
             dishToCartButtonPressed: (dish) {
               final cubit = context.read<CartCubit>();
-              cubit.addDishToCart(dish);
+              cubit.addOneToCart(dish);
             },
             orElse: () => null,
           );
