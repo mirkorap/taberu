@@ -4,10 +4,14 @@ import 'package:taberu/core/domain/value_objects/quantity.dart';
 import 'package:taberu/themes/app_button.dart';
 
 class CartQuantity extends StatelessWidget {
+  final VoidCallback onDecreasePressed;
+  final VoidCallback onIncreasePressed;
   final Quantity quantity;
 
   const CartQuantity({
     Key? key,
+    required this.onDecreasePressed,
+    required this.onIncreasePressed,
     required this.quantity,
   }) : super(key: key);
 
@@ -21,13 +25,13 @@ class CartQuantity extends StatelessWidget {
           child: ElevatedButtonTheme(
             data: AppButton.decreaseButton,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onDecreasePressed,
               child: const Text('-', textAlign: TextAlign.center),
             ),
           ),
         ),
         SizedBox(
-          width: StiloWidth.w10,
+          width: StiloWidth.w14,
           height: StiloHeight.h8,
           child: IgnorePointer(
             child: ElevatedButtonTheme(
@@ -48,7 +52,7 @@ class CartQuantity extends StatelessWidget {
           child: ElevatedButtonTheme(
             data: AppButton.increaseButton,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onIncreasePressed,
               child: const Text('+', textAlign: TextAlign.center),
             ),
           ),

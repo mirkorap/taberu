@@ -10,11 +10,15 @@ import 'package:taberu/themes/app_text_style.dart';
 
 class CartListTile extends StatelessWidget {
   final VoidCallback onDelete;
+  final VoidCallback onDecreaseQuantity;
+  final VoidCallback onIncreaseQuantity;
   final OrderItem orderItem;
 
   const CartListTile({
     Key? key,
     required this.onDelete,
+    required this.onDecreaseQuantity,
+    required this.onIncreaseQuantity,
     required this.orderItem,
   }) : super(key: key);
 
@@ -48,7 +52,11 @@ class CartListTile extends StatelessWidget {
                   orderItem.totalPrice.toString(),
                   style: AppTextStyle.priceText,
                 ),
-                CartQuantity(quantity: orderItem.quantity),
+                CartQuantity(
+                  quantity: orderItem.quantity,
+                  onDecreasePressed: onDecreaseQuantity,
+                  onIncreasePressed: onIncreaseQuantity,
+                ),
               ],
             ),
           ),
