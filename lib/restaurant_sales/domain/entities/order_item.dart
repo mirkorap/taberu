@@ -29,19 +29,19 @@ class OrderItem with _$OrderItem {
 
   const OrderItem._();
 
-  OrderItem increaseQuantity(int quantity) {
-    return updateQuantity(this.quantity.getOrCrash() + quantity);
+  OrderItem increaseQuantity(Quantity quantity) {
+    return updateQuantity(this.quantity + quantity);
   }
 
-  OrderItem decreaseQuantity(int quantity) {
-    return updateQuantity(this.quantity.getOrCrash() - quantity);
+  OrderItem decreaseQuantity(Quantity quantity) {
+    return updateQuantity(this.quantity - quantity);
   }
 
-  OrderItem updateQuantity(int quantity) {
+  OrderItem updateQuantity(Quantity quantity) {
     return copyWith(
-      quantity: Quantity(quantity),
+      quantity: quantity,
       totalPrice: Money(
-        amount: unitPrice.amount.getOrCrash() * quantity,
+        amount: unitPrice.amount.getOrCrash() * quantity.getOrCrash(),
         currency: unitPrice.currency.getOrCrash(),
       ),
     );
