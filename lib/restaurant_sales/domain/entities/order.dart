@@ -4,6 +4,7 @@ import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 import 'package:taberu/core/infrastructure/extension_methods/kt_iterable.dart';
+import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant_table.dart';
 import 'package:taberu/restaurant_sales/domain/entities/order_item.dart';
 import 'package:taberu/restaurant_sales/domain/enums/order_state.dart';
@@ -48,8 +49,12 @@ class Order with _$Order {
 
   const Order._();
 
+  OrderItem? findOrderItemByDish(Dish dish) {
+    return orderItems.find((element) => element.dish == dish);
+  }
+
   Order addOrderItem(OrderItem orderItem) {
-    final existingOrderItem = this.orderItems.find((element) => element.dish == orderItem.dish);
+    final existingOrderItem = findOrderItemByDish(orderItem.dish);
 
     if (existingOrderItem != null) {
       final updatedOrderItem = existingOrderItem.increaseQuantity(orderItem.quantity);
@@ -62,7 +67,7 @@ class Order with _$Order {
   }
 
   Order removeOrderItem(OrderItem orderItem) {
-    final existingOrderItem = orderItems.find((element) => element.dish == orderItem.dish);
+    final existingOrderItem = findOrderItemByDish(orderItem.dish);
 
     if (existingOrderItem != null && existingOrderItem.quantity > orderItem.quantity) {
       final updatedOrderItem = existingOrderItem.decreaseQuantity(orderItem.quantity);
