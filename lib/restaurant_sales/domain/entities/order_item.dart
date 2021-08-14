@@ -29,12 +29,12 @@ class OrderItem with _$OrderItem {
 
   const OrderItem._();
 
-  OrderItem increaseQuantity() {
-    return updateQuantity(quantity.getOrCrash() + 1);
+  OrderItem increaseQuantity(int quantity) {
+    return updateQuantity(this.quantity.getOrCrash() + quantity);
   }
 
-  OrderItem decreaseQuantity() {
-    return updateQuantity(quantity.getOrCrash() - 1);
+  OrderItem decreaseQuantity(int quantity) {
+    return updateQuantity(this.quantity.getOrCrash() - quantity);
   }
 
   OrderItem updateQuantity(int quantity) {
