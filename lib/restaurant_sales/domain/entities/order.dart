@@ -48,6 +48,8 @@ class Order with _$Order {
 
   const Order._();
 
+  bool hasOrderItems() => orderItems.isNotEmpty();
+
   Order addOrderItem(OrderItem orderItem) {
     final existingOrderItem = this.orderItems.find((element) => element.dish == orderItem.dish);
 
@@ -97,8 +99,4 @@ class Order with _$Order {
       ),
     );
   }
-
-  bool get isDeliveredAtHome => type == OrderType.homeDelivery;
-
-  bool get isDeliveredAtTable => type == OrderType.tableDelivery;
 }

@@ -15,7 +15,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<CartCubit, CartState>(
       listener: (context, state) {
-        if (state.order.orderItems.isEmpty()) {
+        if (!state.order.hasOrderItems()) {
           context.replaceRoute(const EmptyCartScreen());
         }
       },
