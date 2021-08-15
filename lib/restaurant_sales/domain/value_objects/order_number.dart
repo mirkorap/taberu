@@ -30,6 +30,6 @@ class OrderNumber extends SimpleValueObject<int> {
 
   @override
   String toString() {
-    return value.toString().padLeft(9, '0');
+    return getOrCrash().toString().padLeft(9, '0');
   }
 }
