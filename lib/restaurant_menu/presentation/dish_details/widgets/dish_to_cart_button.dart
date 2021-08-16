@@ -23,9 +23,9 @@ class DishToCartButton extends StatelessWidget {
           child: Padding(
             padding: StiloEdge.all6,
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 final cubit = context.read<DishDetailsCubit>();
-                cubit.pressDishToCartButton(dish);
+                await cubit.pressDishToCartButton(dish);
               },
               child: state.maybeWhen(
                 actionInProgress: () => const CircularProgressIndicator(

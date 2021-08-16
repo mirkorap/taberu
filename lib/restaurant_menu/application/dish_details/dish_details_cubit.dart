@@ -14,9 +14,11 @@ part 'dish_details_state.dart';
 class DishDetailsCubit extends Cubit<DishDetailsState> {
   DishDetailsCubit() : super(const DishDetailsState.initial());
 
-  void pressDishToCartButton(Dish dish) {
+  Future<void> pressDishToCartButton(Dish dish) {
     emit(const DishDetailsState.actionInProgress());
 
-    Timer(StiloDuration.d1000, () => emit(DishDetailsState.dishToCartButtonPressed(dish)));
+    return Future.delayed(StiloDuration.d1000, () {
+      emit(DishDetailsState.dishToCartButtonPressed(dish));
+    });
   }
 }
