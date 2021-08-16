@@ -8,16 +8,16 @@ import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/rest
 
 @LazySingleton(as: ISelectedRestaurantStorage)
 class SelectedRestaurantStorage implements ISelectedRestaurantStorage {
-  static const storageKey = 'selected_restaurant';
-
   final IDeviceStorage _deviceStorage;
 
   SelectedRestaurantStorage(this._deviceStorage);
 
+  String get _storageKey => 'selected_restaurant';
+
   @override
   Restaurant getRestaurant() {
     final jsonRestaurant = jsonDecode(
-      _deviceStorage.getString(storageKey)!,
+      _deviceStorage.getString(_storageKey)!,
     ) as Map<String, dynamic>;
 
     return RestaurantDto.fromJson(jsonRestaurant).toDomain();
@@ -26,13 +26,13 @@ class SelectedRestaurantStorage implements ISelectedRestaurantStorage {
   @override
   Future<bool> setRestaurant(Restaurant restaurant) {
     return _deviceStorage.setString(
-      storageKey,
+      _storageKey,
       jsonEncode(RestaurantDto.fromDomain(restaurant).toJson()),
     );
   }
 
   @override
   bool containsRestaurant() {
-    return _deviceStorage.containsKey(storageKey);
+    return _deviceStorage.containsKey(_storageKey);
   }
 }
