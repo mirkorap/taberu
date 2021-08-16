@@ -6,4 +6,6 @@ abstract class ICurrentOrderStorage {
   Future<bool> setOrder(Order order);
 
   bool containsOrder();
+
+  Future<bool> clear();
 }
