@@ -8,9 +8,11 @@ import 'package:stilo/stilo.dart';
 import 'package:taberu/injection.dart';
 import 'package:taberu/locale.dart';
 import 'package:taberu/restaurant_menu/application/dish_details/dish_details_cubit.dart';
+import 'package:taberu/restaurant_menu/application/restaurant_selection/restaurant_selection_cubit.dart';
 import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
 import 'package:taberu/restaurant_sales/application/guards/cart_guard.dart';
+import 'package:taberu/restaurant_sales/application/services/i_current_order_storage.dart';
 import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_image.dart';
 import 'package:taberu/themes/app_theme.dart';
@@ -32,6 +34,9 @@ class TaberuApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<RestaurantSelectionCubit>(
+          create: (context) => getIt<RestaurantSelectionCubit>(),
+        ),
         BlocProvider<DishDetailsCubit>(
           create: (context) => getIt<DishDetailsCubit>(),
         ),
@@ -39,16 +44,31 @@ class TaberuApp extends StatelessWidget {
           create: (context) => getIt<CartCubit>(),
         ),
       ],
-      child: BlocListener<DishDetailsCubit, DishDetailsState>(
-        listener: (context, state) {
-          state.maybeWhen(
-            dishToCartButtonPressed: (dish) {
-              final cubit = context.read<CartCubit>();
-              cubit.addOneToCart(dish);
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<RestaurantSelectionCubit, RestaurantSelectionState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                restaurantSelected: (restaurant) {
+                  final currentOrderStorage = getIt<ICurrentOrderStorage>();
+                  currentOrderStorage.clear();
+                },
+                orElse: () => null,
+              );
             },
-            orElse: () => null,
-          );
-        },
+          ),
+          BlocListener<DishDetailsCubit, DishDetailsState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                dishToCartButtonPressed: (dish) {
+                  final cubit = context.read<CartCubit>();
+                  cubit.addOneToCart(dish);
+                },
+                orElse: () => null,
+              );
+            },
+          ),
+        ],
         child: MaterialApp.router(
           title: tr('app.title'),
           debugShowCheckedModeBanner: false, // TODO: hide based on environment
