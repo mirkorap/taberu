@@ -35,7 +35,7 @@ class CartScreen extends StatelessWidget {
                 const CartList(),
                 StiloSpacing.vert6,
                 Center(
-                  child: TextButton(
+                  child: ElevatedButton(
                     onPressed: () {},
                     child: const Text('cart.complete_order').tr(),
                   ),

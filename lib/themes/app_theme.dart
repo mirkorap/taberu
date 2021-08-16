@@ -10,7 +10,7 @@ abstract class AppTheme {
       accentColor: AppColor.accent,
       backgroundColor: AppColor.background,
       scaffoldBackgroundColor: AppColor.background,
-      textButtonTheme: AppButton.roundedButton,
+      elevatedButtonTheme: AppButton.roundedButton,
       textTheme: TextTheme(
         headline1: AppTextStyle.headline1,
         headline2: AppTextStyle.headline2,

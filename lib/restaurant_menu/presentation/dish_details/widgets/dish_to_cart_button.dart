@@ -22,7 +22,7 @@ class DishToCartButton extends StatelessWidget {
           ignoring: state == const DishDetailsState.actionInProgress(),
           child: Padding(
             padding: StiloEdge.all6,
-            child: TextButton(
+            child: ElevatedButton(
               onPressed: () {
                 final cubit = context.read<DishDetailsCubit>();
                 cubit.pressDishToCartButton(dish);

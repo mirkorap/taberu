@@ -50,7 +50,7 @@ class MessageBoxScreen extends StatelessWidget {
         visible: onPressed != null,
         child: Padding(
           padding: StiloEdge.all6,
-          child: TextButton(
+          child: ElevatedButton(
             onPressed: onPressed,
             child: Text(buttonText.toString()),
           ),

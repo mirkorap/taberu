@@ -5,12 +5,12 @@ import 'package:taberu/themes/app_color.dart';
 import 'package:taberu/themes/app_text_style.dart';
 
 abstract class AppButton {
-  static final roundedButton = TextButtonThemeData(
+  static final roundedButton = ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(AppColor.primary),
-      foregroundColor: MaterialStateProperty.all(StiloColor.white),
       textStyle: MaterialStateProperty.all(AppTextStyle.buttonText),
       shape: MaterialStateProperty.all(AppBorder.roundedButton),
+      elevation: MaterialStateProperty.all(StiloElevation.z0),
       minimumSize: MaterialStateProperty.all(const Size(314.0, 70.0)),
     ),
   );
@@ -20,6 +20,7 @@ abstract class AppButton {
       backgroundColor: MaterialStateProperty.all(AppColor.primary),
       textStyle: MaterialStateProperty.all(AppTextStyle.headline3),
       shape: MaterialStateProperty.all(AppBorder.decreaseButton),
+      elevation: MaterialStateProperty.all(StiloElevation.z0),
     ),
   );
 
@@ -28,6 +29,7 @@ abstract class AppButton {
       backgroundColor: MaterialStateProperty.all(AppColor.primary),
       textStyle: MaterialStateProperty.all(AppTextStyle.headline4),
       shape: MaterialStateProperty.all(AppBorder.quantityButton),
+      elevation: MaterialStateProperty.all(StiloElevation.z0),
     ),
   );
 
@@ -36,6 +38,7 @@ abstract class AppButton {
       backgroundColor: MaterialStateProperty.all(AppColor.primary),
       textStyle: MaterialStateProperty.all(AppTextStyle.headline3),
       shape: MaterialStateProperty.all(AppBorder.increaseButton),
+      elevation: MaterialStateProperty.all(StiloElevation.z0),
     ),
   );
 }
