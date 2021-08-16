@@ -16,6 +16,13 @@ abstract class AppButton {
     ),
   );
 
+  static final disabledRoundedButton = ElevatedButtonThemeData(
+    style: roundedButton.style!.copyWith(
+      backgroundColor: MaterialStateProperty.all(AppColor.secondary),
+      foregroundColor: MaterialStateProperty.all(StiloColor.trueGrey[700]),
+    ),
+  );
+
   static final decreaseButton = ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(AppColor.primary),
