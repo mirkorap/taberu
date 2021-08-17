@@ -7,5 +7,7 @@ abstract class ICurrentOrderStorage {
 
   bool containsOrder();
 
+  bool containsOrderItems();
+
   Future<bool> clear();
 }

@@ -37,6 +37,11 @@ class CurrentOrderStorage implements ICurrentOrderStorage {
   }
 
   @override
+  bool containsOrderItems() {
+    return containsOrder() && getOrder().hasOrderItems();
+  }
+
+  @override
   Future<bool> clear() {
     return _deviceStorage.remove(storageKey);
   }
