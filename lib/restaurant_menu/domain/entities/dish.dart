@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
@@ -22,4 +23,8 @@ class Dish with _$Dish {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _Dish;
+
+  const Dish._();
+
+  DishImage get mainImage => gallery.getOrCrash().first();
 }

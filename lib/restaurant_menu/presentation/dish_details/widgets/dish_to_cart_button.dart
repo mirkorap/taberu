@@ -6,10 +6,10 @@ import 'package:taberu/restaurant_menu/application/dish_details/dish_details_cub
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/themes/app_color.dart';
 
-class DishToOrderButton extends StatelessWidget {
+class DishToCartButton extends StatelessWidget {
   final Dish dish;
 
-  const DishToOrderButton({
+  const DishToCartButton({
     Key? key,
     required this.dish,
   }) : super(key: key);
@@ -18,14 +18,14 @@ class DishToOrderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DishDetailsCubit, DishDetailsState>(
       builder: (context, state) {
-        return Padding(
-          padding: StiloEdge.all6,
-          child: IgnorePointer(
-            ignoring: state == const DishDetailsState.actionInProgress(),
-            child: TextButton(
-              onPressed: () {
+        return IgnorePointer(
+          ignoring: state == const DishDetailsState.actionInProgress(),
+          child: Padding(
+            padding: StiloEdge.all6,
+            child: ElevatedButton(
+              onPressed: () async {
                 final cubit = context.read<DishDetailsCubit>();
-                cubit.addDishToOrder(dish);
+                await cubit.pressDishToCartButton(dish);
               },
               child: state.maybeWhen(
                 actionInProgress: () => const CircularProgressIndicator(

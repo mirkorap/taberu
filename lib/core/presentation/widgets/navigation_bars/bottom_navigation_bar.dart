@@ -6,9 +6,9 @@ import 'package:taberu/router.gr.dart';
 import 'package:taberu/themes/app_color.dart';
 
 class BottomNavigationBar extends StatelessWidget {
-  // TODO: remove transition duration between routes
   static const routes = {
     DishesSelectionScreen.name: DishesSelectionScreen(),
+    CartScreen.name: CartScreen(),
     RestaurantContactsScreen.name: RestaurantContactsScreen(),
   };
 
@@ -28,8 +28,8 @@ class BottomNavigationBar extends StatelessWidget {
       index: routes.keys.toList().indexOf(currentRouteName),
       items: [
         const Icon(Icons.home_outlined, size: 30.0),
+        const Icon(Icons.shopping_cart_outlined, size: 30.0),
         const Icon(Icons.restaurant_menu_outlined, size: 30.0),
-        //const Icon(Icons.add_shopping_cart_outlined, size: 30.0),
         //const Icon(Icons.restaurant_menu_outlined, size: 30.0),
       ],
     );

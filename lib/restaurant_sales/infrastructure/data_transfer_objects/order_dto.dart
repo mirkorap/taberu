@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart' show optionOf;
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
@@ -38,11 +39,16 @@ class OrderDto with _$OrderDto {
   factory OrderDto.fromJson(Map<String, dynamic> json) => _$OrderDtoFromJson(json);
 
   factory OrderDto.fromDomain(Order order) {
-    final orderDto = OrderDto(
+    final deliveryAddress = optionOf(order.deliveryAddress).fold(() => null, (r) => DeliveryAddressDto.fromDomain(r));
+    final restaurantTable = optionOf(order.restaurantTable).fold(() => null, (r) => RestaurantTableDto.fromDomain(r));
+
+    return OrderDto(
       id: order.id.getOrCrash(),
       number: order.number.toString(),
       state: EnumToString.convertToString(order.state),
       type: EnumToString.convertToString(order.type),
+      deliveryAddress: deliveryAddress,
+      restaurantTable: restaurantTable,
       adjustmentTotal: order.adjustmentTotal.amount.getOrCrash(),
       subtotal: order.subtotal.amount.getOrCrash(),
       total: order.total.amount.getOrCrash(),
@@ -50,16 +56,6 @@ class OrderDto with _$OrderDto {
       notes: order.notes,
       createdAt: order.createdAt.millisecondsSinceEpoch,
       updatedAt: order.updatedAt.millisecondsSinceEpoch,
-    );
-
-    if (order.isDeliveredAtHome) {
-      return orderDto.copyWith(
-        deliveryAddress: DeliveryAddressDto.fromDomain(order.deliveryAddress!),
-      );
-    }
-
-    return orderDto.copyWith(
-      restaurantTable: RestaurantTableDto.fromDomain(order.restaurantTable!),
     );
   }
 
@@ -73,23 +69,20 @@ class OrderDto with _$OrderDto {
   const OrderDto._();
 
   Order toDomain() {
-    final order = Order(
+    return Order(
       id: UniqueId.fromUniqueString(id),
       number: OrderNumber.fromString(number),
       state: EnumToString.fromString(OrderState.values, state)!,
       type: EnumToString.fromString(OrderType.values, type)!,
+      deliveryAddress: deliveryAddress?.toDomain(),
+      restaurantTable: restaurantTable?.toDomain(),
       adjustmentTotal: Money(amount: adjustmentTotal),
       subtotal: Money(amount: subtotal),
       total: Money(amount: total),
       orderItems: orderItems.map((orderItem) => orderItem.toDomain()).toImmutableList(),
+      notes: notes,
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),
     );
-
-    if (order.isDeliveredAtHome) {
-      return order.copyWith(deliveryAddress: deliveryAddress!.toDomain());
-    }
-
-    return order.copyWith(restaurantTable: restaurantTable!.toDomain());
   }
 }

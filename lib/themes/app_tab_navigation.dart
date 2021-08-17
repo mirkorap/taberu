@@ -7,7 +7,7 @@ abstract class AppTabNavigation {
   static final restaurantMenuTabBar = TabBarTheme(
     labelColor: AppColor.primary,
     labelStyle: AppTextStyle.headline3,
-    unselectedLabelColor: AppColor.disabled,
+    unselectedLabelColor: AppColor.secondary,
     unselectedLabelStyle: AppTextStyle.headline4,
     indicator: UnderlineTabIndicator(
       borderSide: StiloBorder.side4(AppColor.primary),

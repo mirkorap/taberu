@@ -45,5 +45,15 @@
     "description": "Descrizione",
     "ingredients": "Ingredienti",
     "allergens": "Allergeni"
+  },
+  "cart": {
+    "title": "Piatti aggiunti\nal carrello",
+    "swipe_to_delete": "Scorri su un elemento per eliminarlo",
+    "complete_order": "Completa l'ordine"
+  },
+  "empty_cart": {
+    "title": "Carrello vuoto",
+    "subtitle": "Premi il pulsante arancione in basso per selezionare i piatti",
+    "button_text": "Inizia a ordinare"
   }
 }

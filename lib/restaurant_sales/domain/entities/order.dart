@@ -48,12 +48,14 @@ class Order with _$Order {
 
   const Order._();
 
-  Order addOrderItem(OrderItem orderItem) {
-    final index = this.orderItems.indexOfFirst((element) => element.dish == orderItem.dish);
+  bool hasOrderItems() => orderItems.isNotEmpty();
 
-    if (index >= 0) {
-      final existingOrderItem = this.orderItems.elementAt(index);
-      final orderItems = this.orderItems.replaceAt(index, existingOrderItem.increaseQuantity());
+  Order addOrderItem(OrderItem orderItem) {
+    final existingOrderItem = this.orderItems.find((element) => element.dish == orderItem.dish);
+
+    if (existingOrderItem != null) {
+      final updatedOrderItem = existingOrderItem.increaseQuantity(orderItem.quantity);
+      final orderItems = this.orderItems.replace(existingOrderItem, updatedOrderItem);
       return copyWith(orderItems: orderItems).recalculateTotals();
     }
 
@@ -62,20 +64,24 @@ class Order with _$Order {
   }
 
   Order removeOrderItem(OrderItem orderItem) {
-    final index = orderItems.indexOfFirst((element) => element.dish == orderItem.dish);
-    final existingOrderItem = orderItems.elementAtOrNull(index);
+    final existingOrderItem = orderItems.find((element) => element.dish == orderItem.dish);
 
-    if (existingOrderItem != null && existingOrderItem.quantity.getOrCrash() > 1) {
-      final orderItems = this.orderItems.replaceAt(index, existingOrderItem.decreaseQuantity());
+    if (existingOrderItem != null && existingOrderItem.quantity > orderItem.quantity) {
+      final updatedOrderItem = existingOrderItem.decreaseQuantity(orderItem.quantity);
+      final orderItems = this.orderItems.replace(existingOrderItem, updatedOrderItem);
       return copyWith(orderItems: orderItems).recalculateTotals();
     }
 
-    if (existingOrderItem != null && existingOrderItem.quantity.getOrCrash() == 1) {
-      final orderItems = this.orderItems.minusElement(existingOrderItem);
-      return copyWith(orderItems: orderItems).recalculateTotals();
+    if (existingOrderItem != null && existingOrderItem.quantity == orderItem.quantity) {
+      return deleteOrderItem(existingOrderItem);
     }
 
     return this;
+  }
+
+  Order deleteOrderItem(OrderItem orderItem) {
+    final orderItems = this.orderItems.minusElement(orderItem);
+    return copyWith(orderItems: orderItems).recalculateTotals();
   }
 
   Order recalculateTotals() {
@@ -93,8 +99,4 @@ class Order with _$Order {
       ),
     );
   }
-
-  bool get isDeliveredAtHome => type == OrderType.homeDelivery;
-
-  bool get isDeliveredAtTable => type == OrderType.tableDelivery;
 }
