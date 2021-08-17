@@ -19,6 +19,11 @@ class CartCubit extends Cubit<CartState> {
 
   CartCubit(this._currentOrderStorage) : super(CartState.initial());
 
+  void initialize(Order initialOrder) {
+    _currentOrderStorage.setOrder(initialOrder);
+    emit(state.copyWith(order: initialOrder));
+  }
+
   void addOneToCart(Dish dish) {
     final orderItem = OrderItem.fromDish(dish);
     final order = state.order.addOrderItem(orderItem);

@@ -25,7 +25,16 @@ class AppBloc extends StatelessWidget {
           create: (context) => getIt<DishDetailsCubit>(),
         ),
         BlocProvider<CartCubit>(
-          create: (context) => getIt<CartCubit>(),
+          create: (context) {
+            final cubit = getIt<CartCubit>();
+            final currentOrderStorage = getIt<ICurrentOrderStorage>();
+
+            if (currentOrderStorage.containsOrder()) {
+              cubit.initialize(currentOrderStorage.getOrder());
+            }
+
+            return cubit;
+          },
         ),
       ],
       child: MultiBlocListener(
