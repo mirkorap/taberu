@@ -19,6 +19,6 @@ class CartGuard extends AutoRouteGuard {
   }
 
   bool canNavigate() {
-    return _currentOrderStorage.containsOrderItems();
+    return _currentOrderStorage.containsOrder() && _currentOrderStorage.getOrder().hasOrderItems();
   }
 }
