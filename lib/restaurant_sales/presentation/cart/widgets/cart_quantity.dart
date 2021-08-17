@@ -37,7 +37,7 @@ class CartQuantity extends StatelessWidget {
             child: ElevatedButtonTheme(
               data: AppButton.quantityButton,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: null,
                 child: Text(
                   quantity.getOrCrash().toString(),
                   textAlign: TextAlign.center,
