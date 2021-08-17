@@ -4,7 +4,6 @@ part of 'cart_cubit.dart';
 class CartState with _$CartState {
   const factory CartState({
     required Order order,
-    required bool isEditing,
     required bool isSaving,
     required Option<Either<OrderFailure, Unit>> saveFailureOrSuccessOption,
   }) = _CartState;
@@ -12,7 +11,6 @@ class CartState with _$CartState {
   factory CartState.initial() {
     return CartState(
       order: Order.empty(),
-      isEditing: false,
       isSaving: false,
       saveFailureOrSuccessOption: none(),
     );
