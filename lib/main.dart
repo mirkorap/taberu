@@ -22,7 +22,7 @@ Future<void> main() async {
 }
 
 class TaberuApp extends StatelessWidget {
-  final _appRouter = AppRouter(cartGuard: CartGuard());
+  final _appRouter = AppRouter(cartGuard: getIt<CartGuard>());
 
   TaberuApp({Key? key}) : super(key: key);
 
