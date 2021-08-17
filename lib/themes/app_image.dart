@@ -13,6 +13,7 @@ abstract class AppImage {
       precacheImage(const AssetImage(splashScreen), context),
       precacheImage(const AssetImage(dishPlaceholder), context),
       precacheImage(const AssetImage(restaurantMarker), context),
+      precacheImage(const AssetImage(swipeIcon), context),
     ]);
   }
 }
