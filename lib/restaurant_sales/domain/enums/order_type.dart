@@ -1,4 +1,4 @@
 enum OrderType {
-  homeDelivery,
   tableDelivery,
+  homeDelivery,
 }
