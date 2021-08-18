@@ -7,6 +7,7 @@ import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 import 'package:taberu/restaurant_sales/application/services/i_current_order_storage.dart';
 import 'package:taberu/restaurant_sales/domain/entities/order.dart';
 import 'package:taberu/restaurant_sales/domain/entities/order_item.dart';
+import 'package:taberu/restaurant_sales/domain/enums/order_type.dart';
 import 'package:taberu/restaurant_sales/domain/failures/order_failure.dart';
 
 part 'cart_cubit.freezed.dart';
@@ -41,6 +42,12 @@ class CartCubit extends Cubit<CartState> {
   void deleteFromCart(Dish dish) {
     final orderItem = state.order.orderItems.first((element) => element.dish == dish);
     final order = state.order.deleteOrderItem(orderItem);
+    _currentOrderStorage.setOrder(order);
+    emit(state.copyWith(order: order));
+  }
+
+  void changeOrderType(OrderType orderType) {
+    final order = state.order.copyWith(type: orderType);
     _currentOrderStorage.setOrder(order);
     emit(state.copyWith(order: order));
   }
