@@ -55,5 +55,10 @@
     "title": "Carrello vuoto",
     "subtitle": "Premi il pulsante arancione in basso per selezionare i piatti",
     "button_text": "Inizia a ordinare"
+  },
+  "checkout": {
+    "order_type": "Tipologia ordine",
+    "tableDelivery": "Consegna al tavolo",
+    "homeDelivery": "Consegna a domicilio"
   }
 }

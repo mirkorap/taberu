@@ -55,5 +55,10 @@
     "title": "Empty cart",
     "subtitle": "Press the orange button at the bottom to select dishes",
     "button_text": "Start ordering"
+  },
+  "checkout": {
+    "order_type": "Order type",
+    "tableDelivery": "Table delivery",
+    "homeDelivery": "Home delivery"
   }
 }
