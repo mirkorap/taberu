@@ -3,19 +3,19 @@ import 'package:stilo/stilo.dart';
 import 'package:taberu/themes/app_color.dart';
 
 class MessageBoxScreen extends StatelessWidget {
-  final VoidCallback? onPressed;
-  final String? buttonText;
   final IconData icon;
   final String title;
   final String subtitle;
+  final VoidCallback? onPressed;
+  final String? buttonText;
 
   const MessageBoxScreen({
     Key? key,
-    this.onPressed,
-    this.buttonText,
     required this.icon,
     required this.title,
     required this.subtitle,
+    this.onPressed,
+    this.buttonText,
   }) : super(key: key);
 
   @override
