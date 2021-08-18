@@ -36,7 +36,7 @@ class CartScreen extends StatelessWidget {
                 StiloSpacing.vert6,
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => context.pushRoute(const CheckoutScreen()),
                     child: const Text('cart.complete_order').tr(),
                   ),
                 ),

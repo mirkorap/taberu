@@ -6,6 +6,7 @@ import 'package:taberu/restaurant_menu/presentation/restaurant_contacts/restaura
 import 'package:taberu/restaurant_menu/presentation/restaurant_selection/restaurant_selection_screen.dart';
 import 'package:taberu/restaurant_sales/application/guards/cart_guard.dart';
 import 'package:taberu/restaurant_sales/presentation/cart/cart_screen.dart';
+import 'package:taberu/restaurant_sales/presentation/checkout/checkout_screen.dart';
 import 'package:taberu/restaurant_sales/presentation/empty_cart/empty_cart_screen.dart';
 
 @MaterialAutoRouter(
@@ -18,6 +19,7 @@ import 'package:taberu/restaurant_sales/presentation/empty_cart/empty_cart_scree
     AutoRoute(page: DishDetailsScreen, fullscreenDialog: true),
     AutoRoute(page: CartScreen, guards: [CartGuard]),
     AutoRoute(page: EmptyCartScreen),
+    AutoRoute(page: CheckoutScreen, guards: [CartGuard], fullscreenDialog: true),
   ],
 )
 class $AppRouter {}
