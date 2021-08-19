@@ -20,7 +20,7 @@ class OrderTypeList extends StatelessWidget {
               'checkout.order_type',
               style: Theme.of(context).textTheme.headline2,
             ).tr(),
-            StiloSpacing.vert6,
+            StiloSpacing.vert4,
             ...OrderType.values.asMap().entries.map((entry) {
               return Column(
                 children: [
