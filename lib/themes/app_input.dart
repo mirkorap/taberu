@@ -12,4 +12,14 @@ abstract class AppInput {
     labelText: tr('app.actions.search'),
     border: AppBorder.searchTextField,
   );
+
+  static final selectBoxField = InputDecoration(
+    filled: true,
+    fillColor: StiloColor.white,
+    floatingLabelBehavior: FloatingLabelBehavior.never,
+    contentPadding: StiloEdge.all2,
+    prefixIcon: const Icon(Icons.search),
+    labelText: tr('app.actions.select'),
+    border: AppBorder.selectBoxField,
+  );
 }
