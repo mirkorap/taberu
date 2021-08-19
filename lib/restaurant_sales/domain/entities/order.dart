@@ -99,4 +99,8 @@ class Order with _$Order {
       ),
     );
   }
+
+  bool get isDeliveredAtHome => type == OrderType.homeDelivery;
+
+  bool get isDeliveredAtTable => type == OrderType.tableDelivery;
 }
