@@ -5,6 +5,7 @@
     "no_results_found": "No results found",
     "actions": {
       "search": "Search",
+      "select": "Select",
       "add_to_order": "Add to order"
     },
     "failures": {
@@ -59,6 +60,7 @@
   "checkout": {
     "order_type": "Order type",
     "tableDelivery": "Table delivery",
-    "homeDelivery": "Home delivery"
+    "homeDelivery": "Home delivery",
+    "restaurant_table": "Table number"
   }
 }
