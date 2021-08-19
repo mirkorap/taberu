@@ -6,6 +6,7 @@ import 'package:stilo/stilo.dart';
 import 'package:taberu/restaurant_menu/application/restaurant_configuration/restaurant_configuration_cubit.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant_table.dart';
 import 'package:taberu/restaurant_menu/infrastructure/extension_methods/kt_configuration.dart';
+import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
 import 'package:taberu/themes/app_input.dart';
 
 class RestaurantTableSelectBox extends StatelessWidget {
@@ -30,7 +31,10 @@ class RestaurantTableSelectBox extends StatelessWidget {
                   dropdownSearchDecoration: AppInput.selectBoxField,
                   items: configurations.restaurantTables.asList(),
                   itemAsString: (restaurantTable) => restaurantTable.name,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    final cubit = context.read<CartCubit>();
+                    cubit.changeRestaurantTable(value!);
+                  },
                 ),
               ],
             );
