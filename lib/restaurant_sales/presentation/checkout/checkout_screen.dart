@@ -29,7 +29,7 @@ class CheckoutScreen extends StatelessWidget {
                     StiloSpacing.vert6,
                     Visibility(
                       visible: state.order.isDeliveredAtTable,
-                      child: const RestaurantTableSelectBox(),
+                      child: RestaurantTableSelectBox(selectedItem: state.order.restaurantTable),
                     ),
                   ],
                 );
