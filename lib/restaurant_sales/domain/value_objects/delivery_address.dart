@@ -11,7 +11,6 @@ class DeliveryAddress extends ValueObject {
   final Either<ValueFailure<String>, String> city;
   final Either<ValueFailure<String>, String> postalCode;
   final Either<ValueFailure<String>, String> street;
-  final Either<ValueFailure<String>, String> floor;
   final Either<ValueFailure<String>, String> firstName;
   final Either<ValueFailure<String>, String> lastName;
   final Either<ValueFailure<String>, String> phone;
@@ -20,7 +19,6 @@ class DeliveryAddress extends ValueObject {
     required String city,
     required String postalCode,
     required String street,
-    required String floor,
     required String firstName,
     required String lastName,
     required String phone,
@@ -30,7 +28,6 @@ class DeliveryAddress extends ValueObject {
       (value) => validateMaxStringLength(value, postalCodeMaxLength),
     );
     final validatedStreet = validateStringNotEmpty(street);
-    final validatedFloor = validateStringNotEmpty(floor);
     final validatedFirstName = validateStringNotEmpty(firstName);
     final validatedLastName = validateStringNotEmpty(lastName);
     final validatedPhone = validatePhone(phone);
@@ -39,7 +36,6 @@ class DeliveryAddress extends ValueObject {
       city: validatedCity,
       postalCode: validatedPostalCode,
       street: validatedStreet,
-      floor: validatedFloor,
       firstName: validatedFirstName,
       lastName: validatedLastName,
       phone: validatedPhone,
@@ -50,7 +46,6 @@ class DeliveryAddress extends ValueObject {
     required this.city,
     required this.postalCode,
     required this.street,
-    required this.floor,
     required this.firstName,
     required this.lastName,
     required this.phone,
@@ -66,7 +61,6 @@ class DeliveryAddress extends ValueObject {
         o.city == city &&
         o.postalCode == postalCode &&
         o.street == street &&
-        o.floor == floor &&
         o.firstName == firstName &&
         o.lastName == lastName &&
         o.phone == phone;
@@ -77,7 +71,6 @@ class DeliveryAddress extends ValueObject {
       city.hashCode +
       postalCode.hashCode +
       street.hashCode +
-      floor.hashCode +
       firstName.hashCode +
       lastName.hashCode +
       phone.hashCode;
