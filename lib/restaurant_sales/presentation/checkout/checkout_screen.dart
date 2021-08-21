@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stilo/stilo.dart';
@@ -7,6 +8,7 @@ import 'package:taberu/restaurant_menu/application/restaurant_configuration/rest
 import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/delivery_address_form.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_notes_form.dart';
+import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_totals.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_type_list.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/restaurant_table_select_box.dart';
 
@@ -40,10 +42,22 @@ class CheckoutScreen extends StatelessWidget {
                         StiloSpacing.vert6,
                       ],
                       const OrderNotesForm(),
+                      const SizedBox(
+                        height: StiloHeight.h20,
+                        child: Divider(),
+                      ),
+                      const OrderTotals(),
                     ],
                   );
                 },
               ),
+            ),
+          ),
+          bottomNavigationBar: Padding(
+            padding: StiloEdge.all6,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text('checkout.confirm_order').tr(),
             ),
           ),
         ),
