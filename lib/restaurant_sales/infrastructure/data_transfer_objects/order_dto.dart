@@ -39,8 +39,8 @@ class OrderDto with _$OrderDto {
   factory OrderDto.fromJson(Map<String, dynamic> json) => _$OrderDtoFromJson(json);
 
   factory OrderDto.fromDomain(Order order) {
-    final deliveryAddress = optionOf(order.deliveryAddress).fold(() => null, (r) => DeliveryAddressDto.fromDomain(r));
-    final restaurantTable = optionOf(order.restaurantTable).fold(() => null, (r) => RestaurantTableDto.fromDomain(r));
+    final deliveryAddress = optionOf(order.deliveryAddress).fold(() => null, (e) => DeliveryAddressDto.fromDomain(e));
+    final restaurantTable = optionOf(order.restaurantTable).fold(() => null, (e) => RestaurantTableDto.fromDomain(e));
 
     return OrderDto(
       id: order.id.getOrCrash(),
