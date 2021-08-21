@@ -6,6 +6,10 @@ abstract class AppBorder {
     borderRadius: StiloBorderRadius.allXl6,
   );
 
+  static const inputTextField = OutlineInputBorder(
+    borderRadius: StiloBorderRadius.allXl,
+  );
+
   static const searchTextField = OutlineInputBorder(
     borderSide: BorderSide.none,
     borderRadius: StiloBorderRadius.allFull,
