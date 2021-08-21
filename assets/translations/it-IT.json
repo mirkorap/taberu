@@ -71,6 +71,8 @@
     "delivery_street": "Via",
     "delivery_first_name": "Nome",
     "delivery_last_name": "Cognome",
-    "delivery_phone": "Telefono"
+    "delivery_phone": "Telefono",
+    "notes": "Note",
+    "notes_hint_text": "Se hai un'allergia o un'intolleranza alimentare (o se una persona per la quale stai effettuando un ordine ne ha) indicala in questo campo"
   }
 }
