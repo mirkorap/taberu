@@ -10,12 +10,7 @@ import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
 import 'package:taberu/themes/app_input.dart';
 
 class RestaurantTableSelectBox extends StatelessWidget {
-  final RestaurantTable? selectedItem;
-
-  const RestaurantTableSelectBox({
-    Key? key,
-    required this.selectedItem,
-  }) : super(key: key);
+  const RestaurantTableSelectBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +31,6 @@ class RestaurantTableSelectBox extends StatelessWidget {
                   dropdownSearchDecoration: AppInput.selectBoxField,
                   items: configurations.restaurantTables.asList(),
                   itemAsString: (restaurantTable) => restaurantTable.name,
-                  selectedItem: selectedItem,
                   onChanged: (value) {
                     final cubit = context.read<CartCubit>();
                     cubit.changeRestaurantTable(value!);
