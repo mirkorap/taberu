@@ -16,12 +16,12 @@ class DeliveryAddress extends ValueObject {
   final Either<ValueFailure<String>, String> phone;
 
   factory DeliveryAddress({
-    required String city,
-    required String postalCode,
-    required String street,
-    required String firstName,
-    required String lastName,
-    required String phone,
+    String city = '',
+    String postalCode = '',
+    String street = '',
+    String firstName = '',
+    String lastName = '',
+    String phone = '',
   }) {
     final validatedCity = validateStringNotEmpty(city);
     final validatedPostalCode = validateStringNotEmpty(postalCode).flatMap(
