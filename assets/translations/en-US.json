@@ -9,6 +9,9 @@
       "add_to_order": "Add to order"
     },
     "failures": {
+      "empty": "Cannot be empty",
+      "exceeding_length": "Exceeds the length of {} characters",
+      "invalid_phone": "Invalid phone number",
       "insufficient_permissions": "Insufficient permissions to perform the operation"
     }
   },
@@ -61,6 +64,13 @@
     "order_type": "Order type",
     "tableDelivery": "Table delivery",
     "homeDelivery": "Home delivery",
-    "restaurant_table": "Table number"
+    "restaurant_table": "Table number",
+    "delivery_address": "Delivery address",
+    "delivery_city": "City",
+    "delivery_postal_code": "Postal code",
+    "delivery_street": "Street",
+    "delivery_first_name": "First name",
+    "delivery_last_name": "Last name",
+    "delivery_phone": "Phone"
   }
 }

@@ -9,6 +9,9 @@
       "add_to_order": "Aggiungi all'ordine"
     },
     "failures": {
+      "empty": "Campo obbligatorio",
+      "exceeding_length": "Supera la lunghezza di {} caratteri",
+      "invalid_phone": "Numero di telefono non valido",
       "insufficient_permissions": "Permessi insufficienti per eseguire l'operazione"
     }
   },
@@ -61,6 +64,13 @@
     "order_type": "Tipologia ordine",
     "tableDelivery": "Consegna al tavolo",
     "homeDelivery": "Consegna a domicilio",
-    "restaurant_table": "Numero del tavolo"
+    "restaurant_table": "Numero del tavolo",
+    "delivery_address": "Indirizzo di consegna",
+    "delivery_city": "Città",
+    "delivery_postal_code": "CAP",
+    "delivery_street": "Via",
+    "delivery_first_name": "Nome",
+    "delivery_last_name": "Cognome",
+    "delivery_phone": "Telefono"
   }
 }
