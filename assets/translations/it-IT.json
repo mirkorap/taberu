@@ -74,7 +74,8 @@
     "delivery_phone": "Telefono",
     "notes": "Note",
     "notes_hint_text": "Se hai un'allergia o un'intolleranza alimentare (o se una persona per la quale stai effettuando un ordine ne ha) indicala in questo campo",
-    "adjustment_total": "Servizio",
+    "cover_charge": "Coperto",
+    "delivery_costs": "Spese di consegna",
     "subtotal": "Totale parziale",
     "total": "Totale",
     "confirm_order": "Conferma l'ordine"

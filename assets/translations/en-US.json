@@ -74,7 +74,8 @@
     "delivery_phone": "Phone",
     "notes": "Notes",
     "notes_hint_text": "If you have a food allergy or intolerance (or if a person you are ordering for has one) please indicate it in this field",
-    "adjustment_total": "Service",
+    "cover_charge": "Cover charge",
+    "delivery_costs": "Delivery costs",
     "subtotal": "Subtotal",
     "total": "Total",
     "confirm_order": "Confirm order"
