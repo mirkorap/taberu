@@ -36,6 +36,14 @@ abstract class AppTextStyle {
     ),
   );
 
+  static final headline5 = GoogleFonts.sourceSansPro(
+    textStyle: const TextStyle(
+      color: StiloColor.black,
+      fontSize: StiloFontSize.xl,
+      fontWeight: StiloFontWeight.semiBold,
+    ),
+  );
+
   static final bodyText1 = GoogleFonts.sourceSansPro(
     textStyle: const TextStyle(
       color: StiloColor.black50,

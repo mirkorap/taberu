@@ -20,6 +20,7 @@ abstract class AppTheme {
         headline2: AppTextStyle.headline2,
         headline3: AppTextStyle.headline3,
         headline4: AppTextStyle.headline4,
+        headline5: AppTextStyle.headline5,
         bodyText1: AppTextStyle.bodyText1,
         bodyText2: AppTextStyle.bodyText2,
       ),
