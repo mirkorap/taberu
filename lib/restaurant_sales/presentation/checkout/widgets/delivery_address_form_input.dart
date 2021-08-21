@@ -12,14 +12,14 @@ class DeliveryAddressFormInput extends HookWidget {
   final ValueChanged<String>? onChanged;
   final DeliveryAddressFormInputFailure onFailure;
   final IconData icon;
-  final String labelText;
+  final String hintText;
 
   const DeliveryAddressFormInput({
     Key? key,
     required this.onChanged,
     required this.onFailure,
     required this.icon,
-    required this.labelText,
+    required this.hintText,
   }) : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class DeliveryAddressFormInput extends HookWidget {
       },
       decoration: AppInput.inputTextField.copyWith(
         prefixIcon: Icon(icon),
-        labelText: labelText,
+        hintText: hintText,
       ),
     );
   }

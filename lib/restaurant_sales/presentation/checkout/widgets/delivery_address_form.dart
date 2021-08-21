@@ -33,7 +33,7 @@ class DeliveryAddressForm extends StatelessWidget {
               (_) => null,
             ),
             icon: Icons.location_city,
-            labelText: tr('checkout.delivery_city'),
+            hintText: tr('checkout.delivery_city'),
           ),
           StiloSpacing.vert4,
           DeliveryAddressFormInput(
@@ -50,7 +50,7 @@ class DeliveryAddressForm extends StatelessWidget {
               (_) => null,
             ),
             icon: Icons.location_city,
-            labelText: tr('checkout.delivery_postal_code'),
+            hintText: tr('checkout.delivery_postal_code'),
           ),
           StiloSpacing.vert4,
           DeliveryAddressFormInput(
@@ -66,7 +66,7 @@ class DeliveryAddressForm extends StatelessWidget {
               (_) => null,
             ),
             icon: Icons.location_city,
-            labelText: tr('checkout.delivery_street'),
+            hintText: tr('checkout.delivery_street'),
           ),
           StiloSpacing.vert4,
           DeliveryAddressFormInput(
@@ -82,7 +82,7 @@ class DeliveryAddressForm extends StatelessWidget {
               (_) => null,
             ),
             icon: Icons.person,
-            labelText: tr('checkout.delivery_first_name'),
+            hintText: tr('checkout.delivery_first_name'),
           ),
           StiloSpacing.vert4,
           DeliveryAddressFormInput(
@@ -98,7 +98,7 @@ class DeliveryAddressForm extends StatelessWidget {
               (_) => null,
             ),
             icon: Icons.person,
-            labelText: tr('checkout.delivery_last_name'),
+            hintText: tr('checkout.delivery_last_name'),
           ),
           StiloSpacing.vert4,
           DeliveryAddressFormInput(
@@ -114,7 +114,7 @@ class DeliveryAddressForm extends StatelessWidget {
               (_) => null,
             ),
             icon: Icons.phone,
-            labelText: tr('checkout.delivery_phone'),
+            hintText: tr('checkout.delivery_phone'),
           ),
         ],
       ),
