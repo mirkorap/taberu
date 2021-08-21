@@ -10,6 +10,7 @@ import 'package:taberu/restaurant_sales/domain/entities/order.dart';
 import 'package:taberu/restaurant_sales/domain/entities/order_item.dart';
 import 'package:taberu/restaurant_sales/domain/enums/order_type.dart';
 import 'package:taberu/restaurant_sales/domain/failures/order_failure.dart';
+import 'package:taberu/restaurant_sales/domain/value_objects/delivery_address.dart';
 
 part 'cart_cubit.freezed.dart';
 
@@ -54,13 +55,71 @@ class CartCubit extends Cubit<CartState> {
       deliveryAddress: null,
     );
 
-    _currentOrderStorage.setOrder(order);
     emit(state.copyWith(order: order));
   }
 
   void changeRestaurantTable(RestaurantTable restaurantTable) {
     final order = state.order.copyWith(restaurantTable: restaurantTable);
-    _currentOrderStorage.setOrder(order);
+    emit(state.copyWith(order: order));
+  }
+
+  void changeDeliveryCity(String city) {
+    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
+      () => DeliveryAddress(city: city),
+      (e) => e.copyWith(city: city),
+    );
+
+    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    emit(state.copyWith(order: order));
+  }
+
+  void changeDeliveryPostalCode(String postalCode) {
+    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
+      () => DeliveryAddress(postalCode: postalCode),
+      (e) => e.copyWith(postalCode: postalCode),
+    );
+
+    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    emit(state.copyWith(order: order));
+  }
+
+  void changeDeliveryStreet(String street) {
+    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
+      () => DeliveryAddress(street: street),
+      (e) => e.copyWith(street: street),
+    );
+
+    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    emit(state.copyWith(order: order));
+  }
+
+  void changeDeliveryFirstName(String firstName) {
+    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
+      () => DeliveryAddress(firstName: firstName),
+      (e) => e.copyWith(firstName: firstName),
+    );
+
+    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    emit(state.copyWith(order: order));
+  }
+
+  void changeDeliveryLastName(String lastName) {
+    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
+      () => DeliveryAddress(lastName: lastName),
+      (e) => e.copyWith(lastName: lastName),
+    );
+
+    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    emit(state.copyWith(order: order));
+  }
+
+  void changeDeliveryPhone(String phone) {
+    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
+      () => DeliveryAddress(phone: phone),
+      (e) => e.copyWith(phone: phone),
+    );
+
+    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
     emit(state.copyWith(order: order));
   }
 }
