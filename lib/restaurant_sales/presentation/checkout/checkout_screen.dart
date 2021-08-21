@@ -6,6 +6,7 @@ import 'package:taberu/injection.dart';
 import 'package:taberu/restaurant_menu/application/restaurant_configuration/restaurant_configuration_cubit.dart';
 import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/delivery_address_form.dart';
+import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_notes_form.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_type_list.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/restaurant_table_select_box.dart';
 
@@ -30,14 +31,15 @@ class CheckoutScreen extends StatelessWidget {
                     children: [
                       const OrderTypeList(),
                       StiloSpacing.vert6,
-                      Visibility(
-                        visible: state.order.isDeliveredAtTable,
-                        child: const RestaurantTableSelectBox(),
-                      ),
-                      Visibility(
-                        visible: state.order.isDeliveredAtHome,
-                        child: const DeliveryAddressForm(),
-                      ),
+                      if (state.order.isDeliveredAtTable) ...[
+                        const RestaurantTableSelectBox(),
+                        StiloSpacing.vert6,
+                      ],
+                      if (state.order.isDeliveredAtHome) ...[
+                        const DeliveryAddressForm(),
+                        StiloSpacing.vert6,
+                      ],
+                      const OrderNotesForm(),
                     ],
                   );
                 },
