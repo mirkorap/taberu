@@ -21,7 +21,7 @@ class DeliveryAddress extends StatelessWidget {
         DeliveryAddressInput(
           onChanged: (value) {
             final cubit = context.read<CartCubit>();
-            cubit.updateDeliveryCity(value);
+            cubit.changeDeliveryCity(value);
           },
           onFailure: (deliveryAddress) => deliveryAddress.city.fold(
             (l) => l.maybeMap(
@@ -37,7 +37,7 @@ class DeliveryAddress extends StatelessWidget {
         DeliveryAddressInput(
           onChanged: (value) {
             final cubit = context.read<CartCubit>();
-            cubit.updateDeliveryPostalCode(value);
+            cubit.changeDeliveryPostalCode(value);
           },
           onFailure: (deliveryAddress) => deliveryAddress.postalCode.fold(
             (l) => l.maybeMap(
@@ -54,7 +54,7 @@ class DeliveryAddress extends StatelessWidget {
         DeliveryAddressInput(
           onChanged: (value) {
             final cubit = context.read<CartCubit>();
-            cubit.updateDeliveryStreet(value);
+            cubit.changeDeliveryStreet(value);
           },
           onFailure: (deliveryAddress) => deliveryAddress.street.fold(
             (l) => l.maybeMap(
@@ -70,7 +70,7 @@ class DeliveryAddress extends StatelessWidget {
         DeliveryAddressInput(
           onChanged: (value) {
             final cubit = context.read<CartCubit>();
-            cubit.updateDeliveryFirstName(value);
+            cubit.changeDeliveryFirstName(value);
           },
           onFailure: (deliveryAddress) => deliveryAddress.firstName.fold(
             (l) => l.maybeMap(
@@ -86,7 +86,7 @@ class DeliveryAddress extends StatelessWidget {
         DeliveryAddressInput(
           onChanged: (value) {
             final cubit = context.read<CartCubit>();
-            cubit.updateDeliveryLastName(value);
+            cubit.changeDeliveryLastName(value);
           },
           onFailure: (deliveryAddress) => deliveryAddress.lastName.fold(
             (l) => l.maybeMap(
@@ -102,7 +102,7 @@ class DeliveryAddress extends StatelessWidget {
         DeliveryAddressInput(
           onChanged: (value) {
             final cubit = context.read<CartCubit>();
-            cubit.updateDeliveryPhone(value);
+            cubit.changeDeliveryPhone(value);
           },
           onFailure: (deliveryAddress) => deliveryAddress.phone.fold(
             (l) => l.maybeMap(

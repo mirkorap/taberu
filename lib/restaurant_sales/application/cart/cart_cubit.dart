@@ -96,7 +96,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void updateDeliveryCity(String city) {
+  void changeDeliveryCity(String city) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(city: city),
       (e) => e.copyWith(city: city),
@@ -110,7 +110,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void updateDeliveryPostalCode(String postalCode) {
+  void changeDeliveryPostalCode(String postalCode) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(postalCode: postalCode),
       (e) => e.copyWith(postalCode: postalCode),
@@ -124,7 +124,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void updateDeliveryStreet(String street) {
+  void changeDeliveryStreet(String street) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(street: street),
       (e) => e.copyWith(street: street),
@@ -138,7 +138,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void updateDeliveryFirstName(String firstName) {
+  void changeDeliveryFirstName(String firstName) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(firstName: firstName),
       (e) => e.copyWith(firstName: firstName),
@@ -152,7 +152,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void updateDeliveryLastName(String lastName) {
+  void changeDeliveryLastName(String lastName) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(lastName: lastName),
       (e) => e.copyWith(lastName: lastName),
@@ -166,7 +166,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void updateDeliveryPhone(String phone) {
+  void changeDeliveryPhone(String phone) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(phone: phone),
       (e) => e.copyWith(phone: phone),
@@ -180,7 +180,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void updateNotes(String notes) {
+  void changeNotes(String notes) {
     final order = state.order.copyWith(notes: notes);
 
     emit(state.copyWith(

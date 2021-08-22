@@ -21,7 +21,7 @@ class NotesField extends StatelessWidget {
         TextField(
           onChanged: (value) {
             final cubit = context.read<CartCubit>();
-            cubit.updateNotes(value);
+            cubit.changeNotes(value);
           },
           maxLines: 8,
           decoration: AppInput.inputTextField.copyWith(
