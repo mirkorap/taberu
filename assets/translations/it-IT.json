@@ -75,7 +75,7 @@
     "notes": "Note",
     "notes_hint_text": "Se hai un'allergia o un'intolleranza alimentare (o se una persona per la quale stai effettuando un ordine ne ha) indicala in questo campo",
     "cover_charge": "Coperto",
-    "delivery_costs": "Spese di consegna",
+    "delivery_costs": "Costo di consegna",
     "subtotal": "Totale parziale",
     "total": "Totale",
     "confirm_order": "Conferma l'ordine"
