@@ -5,7 +5,6 @@ part 'configuration.freezed.dart';
 
 @freezed
 class Configuration<T> with _$Configuration<T> {
-  static const coverChargeId = 'cover_charge';
   static const deliveryCostsId = 'delivery_costs';
   static const restaurantTablesId = 'restaurant_tables';
 

@@ -4,12 +4,6 @@ import 'package:taberu/restaurant_menu/domain/entities/configuration.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant_table.dart';
 
 extension KtConfiguration on KtIterable<Configuration> {
-  Money get coverCharge {
-    final configuration = first((configuration) => configuration.id.getOrCrash() == Configuration.coverChargeId);
-
-    return configuration.value as Money;
-  }
-
   Money get deliveryCosts {
     final configuration = first((configuration) => configuration.id.getOrCrash() == Configuration.deliveryCostsId);
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stilo/stilo.dart';
 import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
-import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_adjustment_total.dart';
+import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_delivery_costs.dart';
 
 class OrderTotals extends StatelessWidget {
   const OrderTotals({Key? key}) : super(key: key);
@@ -28,8 +28,10 @@ class OrderTotals extends StatelessWidget {
               ],
             ),
             StiloSpacing.vert2,
-            OrderAdjustmentTotal(order: state.order),
-            StiloSpacing.vert2,
+            if (state.order.isDeliveredAtHome) ...[
+              const OrderDeliveryCosts(),
+              StiloSpacing.vert2,
+            ],
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

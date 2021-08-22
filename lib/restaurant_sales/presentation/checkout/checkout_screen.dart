@@ -6,8 +6,8 @@ import 'package:taberu/core/presentation/widgets/navigation_bars/top_navigation_
 import 'package:taberu/injection.dart';
 import 'package:taberu/restaurant_menu/application/restaurant_configuration/restaurant_configuration_cubit.dart';
 import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
-import 'package:taberu/restaurant_sales/presentation/checkout/widgets/delivery_address_form.dart';
-import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_notes_form.dart';
+import 'package:taberu/restaurant_sales/presentation/checkout/widgets/delivery_address.dart';
+import 'package:taberu/restaurant_sales/presentation/checkout/widgets/notes_field.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_totals.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_type_list.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/restaurant_table_select_box.dart';
@@ -29,25 +29,28 @@ class CheckoutScreen extends StatelessWidget {
               padding: StiloEdge.horiz8,
               child: BlocBuilder<CartCubit, CartState>(
                 builder: (context, state) {
-                  return Column(
-                    children: [
-                      const OrderTypeList(),
-                      StiloSpacing.vert6,
-                      if (state.order.isDeliveredAtTable) ...[
-                        const RestaurantTableSelectBox(),
+                  return Form(
+                    autovalidateMode: AutovalidateMode.always,
+                    child: Column(
+                      children: [
+                        const OrderTypeList(),
                         StiloSpacing.vert6,
+                        if (state.order.isDeliveredAtTable) ...[
+                          const RestaurantTableSelectBox(),
+                          StiloSpacing.vert6,
+                        ],
+                        if (state.order.isDeliveredAtHome) ...[
+                          const DeliveryAddress(),
+                          StiloSpacing.vert6,
+                        ],
+                        const NotesField(),
+                        const SizedBox(
+                          height: StiloHeight.h20,
+                          child: Divider(),
+                        ),
+                        const OrderTotals(),
                       ],
-                      if (state.order.isDeliveredAtHome) ...[
-                        const DeliveryAddressForm(),
-                        StiloSpacing.vert6,
-                      ],
-                      const OrderNotesForm(),
-                      const SizedBox(
-                        height: StiloHeight.h20,
-                        child: Divider(),
-                      ),
-                      const OrderTotals(),
-                    ],
+                    ),
                   );
                 },
               ),
