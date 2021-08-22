@@ -6,15 +6,15 @@ import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
 import 'package:taberu/restaurant_sales/domain/value_objects/delivery_address.dart';
 import 'package:taberu/themes/app_input.dart';
 
-typedef DeliveryAddressFormInputFailure = String? Function(DeliveryAddress deliveryAddress);
+typedef DeliveryAddressInputFailure = String? Function(DeliveryAddress deliveryAddress);
 
-class DeliveryAddressFormInput extends HookWidget {
+class DeliveryAddressInput extends HookWidget {
   final ValueChanged<String>? onChanged;
-  final DeliveryAddressFormInputFailure onFailure;
+  final DeliveryAddressInputFailure onFailure;
   final IconData icon;
   final String hintText;
 
-  const DeliveryAddressFormInput({
+  const DeliveryAddressInput({
     Key? key,
     required this.onChanged,
     required this.onFailure,
