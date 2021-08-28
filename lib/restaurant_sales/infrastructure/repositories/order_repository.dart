@@ -55,26 +55,4 @@ class OrderRepository implements IOrderRepository {
       return left(const OrderFailure.unexpected());
     }
   }
-
-  @override
-  Future<Either<OrderFailure, Unit>> update(Order order) async {
-    try {
-      final restaurantDoc = _firestore.collection('restaurants').doc('');
-      final orderDto = OrderDto.fromDomain(order);
-
-      await restaurantDoc.collection('orders').doc(orderDto.id).update(orderDto.toJson());
-
-      return right(unit);
-    } on FirebaseException catch (e) {
-      if (e.isPermissionDeniedException) {
-        return left(const OrderFailure.insufficientPermissions());
-      }
-
-      if (e.isNotFoundException) {
-        return left(const OrderFailure.unableToUpdate());
-      }
-
-      return left(const OrderFailure.unexpected());
-    }
-  }
 }

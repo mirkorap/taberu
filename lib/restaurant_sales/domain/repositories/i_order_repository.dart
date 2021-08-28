@@ -6,6 +6,4 @@ abstract class IOrderRepository {
   Future<Either<OrderFailure, Order>> getLastRestaurantOrder(String restaurantId);
 
   Future<Either<OrderFailure, Unit>> create(Order order);
-
-  Future<Either<OrderFailure, Unit>> update(Order order);
 }
