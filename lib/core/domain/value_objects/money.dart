@@ -49,4 +49,12 @@ class Money extends ValueObject {
 
     return '$displayedAmount $displayedCurrency';
   }
+
+  @override
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    final Either<ValueFailure<dynamic>, Unit> failureAmount = amount.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failureCurrency = currency.fold((l) => left(l), (_) => right(unit));
+
+    return failureAmount.andThen(failureCurrency).fold((l) => left(l), (r) => right(r));
+  }
 }

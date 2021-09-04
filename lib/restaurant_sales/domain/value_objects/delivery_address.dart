@@ -118,10 +118,23 @@ class DeliveryAddress extends ValueObject {
 
   @override
   int get hashCode =>
-      city.hashCode +
-      postalCode.hashCode +
-      street.hashCode +
-      firstName.hashCode +
-      lastName.hashCode +
-      phone.hashCode;
+      city.hashCode + postalCode.hashCode + street.hashCode + firstName.hashCode + lastName.hashCode + phone.hashCode;
+
+  @override
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    final Either<ValueFailure<dynamic>, Unit> failureCity = city.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failurePostalCode = postalCode.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failureStreet = street.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failureFirstName = firstName.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failureLastName = lastName.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failurePhone = phone.fold((l) => left(l), (_) => right(unit));
+
+    return failureCity
+        .andThen(failurePostalCode)
+        .andThen(failureStreet)
+        .andThen(failureFirstName)
+        .andThen(failureLastName)
+        .andThen(failurePhone)
+        .fold((l) => left(l), (r) => right(r));
+  }
 }

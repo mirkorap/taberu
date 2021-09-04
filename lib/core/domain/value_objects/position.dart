@@ -37,4 +37,12 @@ class Position extends ValueObject {
 
   @override
   String toString() => 'Position($longitude, $latitude)';
+
+  @override
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    final Either<ValueFailure<dynamic>, Unit> failureLongitude = longitude.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failureLatitude = latitude.fold((l) => left(l), (_) => right(unit));
+
+    return failureLongitude.andThen(failureLatitude).fold((l) => left(l), (r) => right(r));
+  }
 }

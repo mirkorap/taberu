@@ -13,6 +13,8 @@ abstract class ValueObject {
 
   @override
   String toString() => throw UnimplementedError();
+
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit => throw UnimplementedError();
 }
 
 @immutable
@@ -35,4 +37,9 @@ abstract class SimpleValueObject<T> extends ValueObject {
 
   @override
   String toString() => '$runtimeType($value)';
+
+  @override
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    return value.fold((l) => left(l), (_) => right(unit));
+  }
 }

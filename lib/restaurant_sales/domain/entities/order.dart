@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
+import 'package:taberu/core/domain/failures/value_failure.dart';
 import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
@@ -100,7 +102,21 @@ class Order with _$Order {
     );
   }
 
-  bool get isDeliveredAtHome => type == OrderType.homeDelivery;
+  Option<ValueFailure<dynamic>> get failureOption {
+    if (isDeliveredAtTable) {
+      return optionOf(restaurantTable).fold(
+        () => some(ValueFailure.empty(restaurantTable)),
+        (_) => none(),
+      );
+    }
 
-  bool get isDeliveredAtTable => type == OrderType.tableDelivery;
+    if (isDeliveredAtHome) {
+      return optionOf(deliveryAddress).fold(
+        () => some(ValueFailure.empty(deliveryAddress)),
+        (e) => e.failureOrUnit.fold((l) => some(l), (_) => none()),
+      );
+    }
+
+    return none();
+  }
 }

@@ -57,4 +57,13 @@ class Address extends ValueObject {
 
     return '${street.getOrCrash()}, ${postalCode.getOrCrash()} ${city.getOrCrash()}';
   }
+
+  @override
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    final Either<ValueFailure<dynamic>, Unit> failureCity = city.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failurePostalCode = postalCode.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failureStreet = street.fold((l) => left(l), (_) => right(unit));
+
+    return failureCity.andThen(failurePostalCode).andThen(failureStreet).fold((l) => left(l), (r) => right(r));
+  }
 }

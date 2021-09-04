@@ -54,4 +54,13 @@ class OpeningTime extends ValueObject {
 
   @override
   String toString() => 'OpeningTime($dayOfWeek, $startTime, $endTime)';
+
+  @override
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    final Either<ValueFailure<dynamic>, Unit> failureDayOfWeek = dayOfWeek.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failureStartTime = startTime.fold((l) => left(l), (_) => right(unit));
+    final Either<ValueFailure<dynamic>, Unit> failureEndTime = endTime.fold((l) => left(l), (_) => right(unit));
+
+    return failureDayOfWeek.andThen(failureStartTime).andThen(failureEndTime).fold((l) => left(l), (r) => right(r));
+  }
 }
