@@ -6,6 +6,7 @@ import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 import 'package:taberu/core/infrastructure/extension_methods/kt_iterable.dart';
+import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant_table.dart';
 import 'package:taberu/restaurant_sales/domain/entities/order_item.dart';
 import 'package:taberu/restaurant_sales/domain/enums/order_state.dart';
@@ -19,6 +20,7 @@ part 'order.freezed.dart';
 class Order with _$Order {
   factory Order({
     required UniqueId id,
+    required UniqueId restaurantId,
     required OrderNumber number,
     required OrderState state,
     required OrderType type,
@@ -26,16 +28,17 @@ class Order with _$Order {
     required Money subtotal,
     required Money total,
     required KtList<OrderItem> orderItems,
+    required String notes,
     required DateTime createdAt,
     required DateTime updatedAt,
     DeliveryAddress? deliveryAddress,
     RestaurantTable? restaurantTable,
-    String? notes,
   }) = _Order;
 
-  factory Order.empty() {
+  factory Order.fromRestaurant(Restaurant restaurant) {
     return Order(
       id: UniqueId(),
+      restaurantId: restaurant.id,
       number: OrderNumber(1),
       state: OrderState.cart,
       type: OrderType.tableDelivery,
@@ -43,6 +46,7 @@ class Order with _$Order {
       subtotal: Money(amount: 0),
       total: Money(amount: 0),
       orderItems: emptyList(),
+      notes: '',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
@@ -50,28 +54,32 @@ class Order with _$Order {
 
   const Order._();
 
+  bool get isDeliveredAtTable => type == OrderType.tableDelivery;
+
+  bool get isDeliveredAtHome => type == OrderType.homeDelivery;
+
   bool hasOrderItems() => orderItems.isNotEmpty();
 
   Order addOrderItem(OrderItem orderItem) {
-    final existingOrderItem = this.orderItems.find((element) => element.dish == orderItem.dish);
+    final existingOrderItem = this.orderItems.find((element) => element.containsDish(orderItem.dishId));
 
     if (existingOrderItem != null) {
       final updatedOrderItem = existingOrderItem.increaseQuantity(orderItem.quantity);
       final orderItems = this.orderItems.replace(existingOrderItem, updatedOrderItem);
-      return copyWith(orderItems: orderItems).recalculateTotals();
+      return copyWith(orderItems: orderItems)._recalculateTotals();
     }
 
     final orderItems = this.orderItems.plusElement(orderItem);
-    return copyWith(orderItems: orderItems).recalculateTotals();
+    return copyWith(orderItems: orderItems)._recalculateTotals();
   }
 
   Order removeOrderItem(OrderItem orderItem) {
-    final existingOrderItem = orderItems.find((element) => element.dish == orderItem.dish);
+    final existingOrderItem = orderItems.find((element) => element.containsDish(orderItem.dishId));
 
     if (existingOrderItem != null && existingOrderItem.quantity > orderItem.quantity) {
       final updatedOrderItem = existingOrderItem.decreaseQuantity(orderItem.quantity);
       final orderItems = this.orderItems.replace(existingOrderItem, updatedOrderItem);
-      return copyWith(orderItems: orderItems).recalculateTotals();
+      return copyWith(orderItems: orderItems)._recalculateTotals();
     }
 
     if (existingOrderItem != null && existingOrderItem.quantity == orderItem.quantity) {
@@ -83,12 +91,12 @@ class Order with _$Order {
 
   Order deleteOrderItem(OrderItem orderItem) {
     final orderItems = this.orderItems.minusElement(orderItem);
-    return copyWith(orderItems: orderItems).recalculateTotals();
+    return copyWith(orderItems: orderItems)._recalculateTotals();
   }
 
-  Order recalculateTotals() {
+  Order _recalculateTotals() {
     final subtotalAmount = orderItems.sumBy((orderItem) => orderItem.totalPrice.amount.getOrCrash());
-    final totalAmount = adjustmentTotal.amount.getOrCrash() + subtotalAmount;
+    final totalAmount = subtotalAmount + adjustmentTotal.amount.getOrCrash();
 
     return copyWith(
       subtotal: Money(
