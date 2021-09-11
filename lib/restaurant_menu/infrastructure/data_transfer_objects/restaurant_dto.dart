@@ -7,7 +7,6 @@ import 'package:taberu/core/domain/value_objects/phone.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/address_dto.dart';
-import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/menu_dto.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/opening_time_dto.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/position_dto.dart';
 
@@ -29,7 +28,6 @@ class RestaurantDto with _$RestaurantDto {
     required String facebookUrl,
     required String instagramUrl,
     required bool active,
-    @JsonKey(defaultValue: []) @Default([]) List<MenuDto> menus,
     required int createdAt,
     required int updatedAt,
   }) = _RestaurantDto;
@@ -49,7 +47,6 @@ class RestaurantDto with _$RestaurantDto {
       facebookUrl: restaurant.facebookUrl,
       instagramUrl: restaurant.instagramUrl,
       active: restaurant.active,
-      menus: restaurant.menus.map((menu) => MenuDto.fromDomain(menu)).asList(),
       createdAt: restaurant.createdAt.millisecondsSinceEpoch,
       updatedAt: restaurant.updatedAt.millisecondsSinceEpoch,
     );
@@ -57,7 +54,7 @@ class RestaurantDto with _$RestaurantDto {
 
   factory RestaurantDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);
+    final json = Map.fromEntries([MapEntry('id', doc.id), ...data.entries]);
 
     return RestaurantDto.fromJson(json);
   }
@@ -80,7 +77,6 @@ class RestaurantDto with _$RestaurantDto {
       facebookUrl: facebookUrl,
       instagramUrl: instagramUrl,
       active: active,
-      menus: menus.map((menu) => menu.toDomain()).toImmutableList(),
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),
     );

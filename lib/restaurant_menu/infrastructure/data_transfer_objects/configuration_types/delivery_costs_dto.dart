@@ -13,6 +13,7 @@ part 'delivery_costs_dto.g.dart';
 class DeliveryCostsDto with _$DeliveryCostsDto implements ConfigurationTypeDto<Money> {
   const factory DeliveryCostsDto({
     required String id,
+    required String restaurantId,
     required int value,
     required int createdAt,
     required int updatedAt,
@@ -22,7 +23,13 @@ class DeliveryCostsDto with _$DeliveryCostsDto implements ConfigurationTypeDto<M
 
   factory DeliveryCostsDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);
+    final restaurantId = doc.reference.parent.parent!.id;
+
+    final json = Map.fromEntries([
+      MapEntry('id', doc.id),
+      MapEntry('restaurant_id', restaurantId),
+      ...data.entries,
+    ]);
 
     return DeliveryCostsDto.fromJson(json);
   }
@@ -33,6 +40,7 @@ class DeliveryCostsDto with _$DeliveryCostsDto implements ConfigurationTypeDto<M
   Configuration<Money> toDomain() {
     return Configuration<Money>(
       id: UniqueId.fromUniqueString(id),
+      restaurantId: UniqueId.fromUniqueString(restaurantId),
       value: Money(amount: value),
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),

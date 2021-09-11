@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/kt.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
-import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
 
 part 'menu.freezed.dart';
 
@@ -9,7 +7,9 @@ part 'menu.freezed.dart';
 class Menu with _$Menu {
   const factory Menu({
     required UniqueId id,
+    required UniqueId restaurantId,
     required String name,
-    required KtList<Dish> dishes,
+    required DateTime createdAt,
+    required DateTime updatedAt,
   }) = _Menu;
 }

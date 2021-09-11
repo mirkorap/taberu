@@ -13,6 +13,7 @@ class Dish with _$Dish {
 
   const factory Dish({
     required UniqueId id,
+    required UniqueId menuId,
     required String name,
     required String description,
     required String ingredients,

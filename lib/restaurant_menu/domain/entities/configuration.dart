@@ -10,6 +10,7 @@ class Configuration<T> with _$Configuration<T> {
 
   const factory Configuration({
     required UniqueId id,
+    required UniqueId restaurantId,
     required T value,
     required DateTime createdAt,
     required DateTime updatedAt,

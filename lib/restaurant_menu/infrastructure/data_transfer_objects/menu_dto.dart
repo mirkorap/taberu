@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/kt.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/restaurant_menu/domain/entities/menu.dart';
-import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/dish_dto.dart';
 
 part 'menu_dto.freezed.dart';
 
@@ -13,8 +11,10 @@ part 'menu_dto.g.dart';
 class MenuDto with _$MenuDto {
   const factory MenuDto({
     required String id,
+    required String restaurantId,
     required String name,
-    @JsonKey(defaultValue: []) @Default([]) List<DishDto> dishes,
+    required int createdAt,
+    required int updatedAt,
   }) = _MenuDto;
 
   factory MenuDto.fromJson(Map<String, dynamic> json) => _$MenuDtoFromJson(json);
@@ -22,14 +22,22 @@ class MenuDto with _$MenuDto {
   factory MenuDto.fromDomain(Menu menu) {
     return MenuDto(
       id: menu.id.getOrCrash(),
+      restaurantId: menu.restaurantId.getOrCrash(),
       name: menu.name,
-      dishes: menu.dishes.map((dish) => DishDto.fromDomain(dish)).asList(),
+      createdAt: menu.createdAt.millisecondsSinceEpoch,
+      updatedAt: menu.updatedAt.millisecondsSinceEpoch,
     );
   }
 
   factory MenuDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);
+    final restaurantId = doc.reference.parent.parent!.id;
+
+    final json = Map.fromEntries([
+      MapEntry('id', doc.id),
+      MapEntry('restaurant_id', restaurantId),
+      ...data.entries,
+    ]);
 
     return MenuDto.fromJson(json);
   }
@@ -39,8 +47,10 @@ class MenuDto with _$MenuDto {
   Menu toDomain() {
     return Menu(
       id: UniqueId.fromUniqueString(id),
+      restaurantId: UniqueId.fromUniqueString(restaurantId),
       name: name,
-      dishes: dishes.map((dish) => dish.toDomain()).toImmutableList(),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),
     );
   }
 }

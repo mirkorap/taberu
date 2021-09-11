@@ -16,6 +16,7 @@ part 'dish_dto.g.dart';
 class DishDto with _$DishDto {
   const factory DishDto({
     required String id,
+    required String menuId,
     required String name,
     required String description,
     required String ingredients,
@@ -32,6 +33,7 @@ class DishDto with _$DishDto {
   factory DishDto.fromDomain(Dish dish) {
     return DishDto(
       id: dish.id.getOrCrash(),
+      menuId: dish.menuId.getOrCrash(),
       name: dish.name,
       description: dish.description,
       ingredients: dish.ingredients,
@@ -46,7 +48,13 @@ class DishDto with _$DishDto {
 
   factory DishDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);
+    final menuId = doc.reference.parent.parent!.id;
+
+    final json = Map.fromEntries([
+      MapEntry('id', doc.id),
+      MapEntry('menu_id', menuId),
+      ...data.entries,
+    ]);
 
     return DishDto.fromJson(json);
   }
@@ -56,6 +64,7 @@ class DishDto with _$DishDto {
   Dish toDomain() {
     return Dish(
       id: UniqueId.fromUniqueString(id),
+      menuId: UniqueId.fromUniqueString(menuId),
       name: name,
       description: description,
       ingredients: ingredients,

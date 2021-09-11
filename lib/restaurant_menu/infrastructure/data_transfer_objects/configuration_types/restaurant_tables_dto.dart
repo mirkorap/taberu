@@ -15,6 +15,7 @@ part 'restaurant_tables_dto.g.dart';
 class RestaurantTablesDto with _$RestaurantTablesDto implements ConfigurationTypeDto<KtList<RestaurantTable>> {
   const factory RestaurantTablesDto({
     required String id,
+    required String restaurantId,
     required List<RestaurantTableDto> value,
     required int createdAt,
     required int updatedAt,
@@ -24,7 +25,13 @@ class RestaurantTablesDto with _$RestaurantTablesDto implements ConfigurationTyp
 
   factory RestaurantTablesDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    final json = Map.fromEntries([...data.entries, MapEntry('id', doc.id)]);
+    final restaurantId = doc.reference.parent.parent!.id;
+
+    final json = Map.fromEntries([
+      MapEntry('id', doc.id),
+      MapEntry('restaurant_id', restaurantId),
+      ...data.entries,
+    ]);
 
     return RestaurantTablesDto.fromJson(json);
   }
@@ -35,6 +42,7 @@ class RestaurantTablesDto with _$RestaurantTablesDto implements ConfigurationTyp
   Configuration<KtList<RestaurantTable>> toDomain() {
     return Configuration<KtList<RestaurantTable>>(
       id: UniqueId.fromUniqueString(id),
+      restaurantId: UniqueId.fromUniqueString(restaurantId),
       value: value.map((item) => item.toDomain()).toImmutableList(),
       createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(updatedAt),

@@ -1,11 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/kt.dart';
 import 'package:taberu/core/domain/value_objects/email_address.dart';
 import 'package:taberu/core/domain/value_objects/limited_list.dart';
 import 'package:taberu/core/domain/value_objects/phone.dart';
 import 'package:taberu/core/domain/value_objects/position.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
-import 'package:taberu/restaurant_menu/domain/entities/menu.dart';
 import 'package:taberu/restaurant_menu/domain/value_objects/address.dart';
 import 'package:taberu/restaurant_menu/domain/value_objects/opening_time.dart';
 
@@ -27,7 +25,6 @@ class Restaurant with _$Restaurant {
     required String facebookUrl,
     required String instagramUrl,
     required bool active,
-    required KtList<Menu> menus,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _Restaurant;
