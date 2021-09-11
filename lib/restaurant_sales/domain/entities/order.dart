@@ -31,8 +31,8 @@ class Order with _$Order {
     required String notes,
     required DateTime createdAt,
     required DateTime updatedAt,
-    DeliveryAddress? deliveryAddress,
     RestaurantTable? restaurantTable,
+    DeliveryAddress? deliveryAddress,
   }) = _Order;
 
   factory Order.fromRestaurant(Restaurant restaurant) {
