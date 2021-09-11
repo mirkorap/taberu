@@ -42,6 +42,17 @@ class DeliveryAddress extends ValueObject {
     );
   }
 
+  factory DeliveryAddress.from(DeliveryAddress deliveryAddress) {
+    return DeliveryAddress._(
+      city: deliveryAddress.city,
+      postalCode: deliveryAddress.postalCode,
+      street: deliveryAddress.street,
+      firstName: deliveryAddress.firstName,
+      lastName: deliveryAddress.lastName,
+      phone: deliveryAddress.phone,
+    );
+  }
+
   DeliveryAddress._({
     required this.city,
     required this.postalCode,
@@ -50,56 +61,6 @@ class DeliveryAddress extends ValueObject {
     required this.lastName,
     required this.phone,
   });
-
-  DeliveryAddress copyWith({
-    String? city,
-    String? postalCode,
-    String? street,
-    String? firstName,
-    String? lastName,
-    String? phone,
-  }) {
-    final validatedCity = optionOf(city).fold(
-      () => this.city,
-      (e) => validateStringNotEmpty(e),
-    );
-
-    final validatedPostalCode = optionOf(postalCode).fold(
-      () => this.postalCode,
-      (e) => validateStringNotEmpty(e).flatMap(
-        (value) => validateMaxStringLength(value, postalCodeMaxLength),
-      ),
-    );
-
-    final validatedStreet = optionOf(street).fold(
-      () => this.street,
-      (e) => validateStringNotEmpty(e),
-    );
-
-    final validatedFirstName = optionOf(firstName).fold(
-      () => this.firstName,
-      (e) => validateStringNotEmpty(e),
-    );
-
-    final validatedLastName = optionOf(lastName).fold(
-      () => this.lastName,
-      (e) => validateStringNotEmpty(e),
-    );
-
-    final validatedPhone = optionOf(phone).fold(
-      () => this.phone,
-      (e) => validateStringNotEmpty(e),
-    );
-
-    return DeliveryAddress._(
-      city: validatedCity,
-      postalCode: validatedPostalCode,
-      street: validatedStreet,
-      firstName: validatedFirstName,
-      lastName: validatedLastName,
-      phone: validatedPhone,
-    );
-  }
 
   @override
   bool operator ==(Object o) {
@@ -117,8 +78,14 @@ class DeliveryAddress extends ValueObject {
   }
 
   @override
-  int get hashCode =>
-      city.hashCode + postalCode.hashCode + street.hashCode + firstName.hashCode + lastName.hashCode + phone.hashCode;
+  int get hashCode {
+    return city.hashCode +
+        postalCode.hashCode +
+        street.hashCode +
+        firstName.hashCode +
+        lastName.hashCode +
+        phone.hashCode;
+  }
 
   @override
   Either<ValueFailure<dynamic>, Unit> get failureOrUnit {

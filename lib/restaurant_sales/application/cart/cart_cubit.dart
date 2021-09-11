@@ -33,8 +33,6 @@ class CartCubit extends Cubit<CartState> {
   ) : super(CartState.initial());
 
   void initialize(Order initialOrder) {
-    _currentOrderStorage.setOrder(initialOrder);
-
     emit(state.copyWith(
       order: initialOrder,
       saveFailureOrSuccessOption: none(),
@@ -99,7 +97,7 @@ class CartCubit extends Cubit<CartState> {
   void changeDeliveryCity(String city) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(city: city),
-      (e) => e.copyWith(city: city),
+      (e) => DeliveryAddress.from(DeliveryAddress(city: city)),
     );
 
     final order = state.order.copyWith(deliveryAddress: deliveryAddress);
@@ -113,7 +111,7 @@ class CartCubit extends Cubit<CartState> {
   void changeDeliveryPostalCode(String postalCode) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(postalCode: postalCode),
-      (e) => e.copyWith(postalCode: postalCode),
+      (e) => DeliveryAddress.from(DeliveryAddress(postalCode: postalCode)),
     );
 
     final order = state.order.copyWith(deliveryAddress: deliveryAddress);
@@ -127,7 +125,7 @@ class CartCubit extends Cubit<CartState> {
   void changeDeliveryStreet(String street) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(street: street),
-      (e) => e.copyWith(street: street),
+      (e) => DeliveryAddress.from(DeliveryAddress(street: street)),
     );
 
     final order = state.order.copyWith(deliveryAddress: deliveryAddress);
@@ -141,7 +139,7 @@ class CartCubit extends Cubit<CartState> {
   void changeDeliveryFirstName(String firstName) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(firstName: firstName),
-      (e) => e.copyWith(firstName: firstName),
+      (e) => DeliveryAddress.from(DeliveryAddress(firstName: firstName)),
     );
 
     final order = state.order.copyWith(deliveryAddress: deliveryAddress);
@@ -155,7 +153,7 @@ class CartCubit extends Cubit<CartState> {
   void changeDeliveryLastName(String lastName) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(lastName: lastName),
-      (e) => e.copyWith(lastName: lastName),
+      (e) => DeliveryAddress.from(DeliveryAddress(lastName: lastName)),
     );
 
     final order = state.order.copyWith(deliveryAddress: deliveryAddress);
@@ -169,7 +167,7 @@ class CartCubit extends Cubit<CartState> {
   void changeDeliveryPhone(String phone) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(phone: phone),
-      (e) => e.copyWith(phone: phone),
+      (e) => DeliveryAddress.from(DeliveryAddress(phone: phone)),
     );
 
     final order = state.order.copyWith(deliveryAddress: deliveryAddress);
