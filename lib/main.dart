@@ -45,7 +45,7 @@ class TaberuApp extends StatelessWidget {
   }
 
   PageRouteInfo _buildInitialRoute(BuildContext context) {
-    return SplashScreen(
+    return SplashRoute(
       nextRoute: _nextRoute,
       beforeNavigation: Future.wait([
         Future.delayed(StiloDuration.d3000),
@@ -57,9 +57,9 @@ class TaberuApp extends StatelessWidget {
   PageRouteInfo get _nextRoute {
     final selectedRestaurantStorage = getIt<ISelectedRestaurantStorage>();
     if (selectedRestaurantStorage.containsRestaurant()) {
-      return const DishesSelectionScreen();
+      return const DishesSelectionRoute();
     }
 
-    return const RestaurantSelectionScreen();
+    return const RestaurantSelectionRoute();
   }
 }

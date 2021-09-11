@@ -80,7 +80,7 @@ class RestaurantDishes extends StatelessWidget {
             ),
             child: DishCard(
               onTap: () {
-                context.pushRoute(DishDetailsScreen(dish: dishes[index]));
+                context.pushRoute(DishDetailsRoute(dish: dishes[index]));
               },
               dish: dishes[index],
             ),
@@ -108,7 +108,7 @@ class RestaurantDishes extends StatelessWidget {
             ),
             child: DishCard(
               onTap: () {
-                context.pushRoute(DishDetailsScreen(dish: dishes[index]));
+                context.pushRoute(DishDetailsRoute(dish: dishes[index]));
               },
               dish: dishes[index],
             ),

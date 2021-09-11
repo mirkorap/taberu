@@ -7,9 +7,9 @@ import 'package:taberu/themes/app_color.dart';
 
 class BottomNavigationBar extends StatelessWidget {
   static const routes = {
-    DishesSelectionScreen.name: DishesSelectionScreen(),
-    CartScreen.name: CartScreen(),
-    RestaurantContactsScreen.name: RestaurantContactsScreen(),
+    DishesSelectionRoute.name: DishesSelectionRoute(),
+    CartRoute.name: CartRoute(),
+    RestaurantContactsRoute.name: RestaurantContactsRoute(),
   };
 
   const BottomNavigationBar({Key? key}) : super(key: key);

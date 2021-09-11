@@ -15,7 +15,7 @@ class CartGuard extends AutoRouteGuard {
       return resolver.next();
     }
 
-    router.replace(const EmptyCartScreen());
+    router.replace(const EmptyCartRoute());
   }
 
   bool canNavigate() {

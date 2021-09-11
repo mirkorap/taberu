@@ -10,7 +10,7 @@ import 'package:taberu/restaurant_sales/presentation/checkout/checkout_screen.da
 import 'package:taberu/restaurant_sales/presentation/empty_cart/empty_cart_screen.dart';
 
 @MaterialAutoRouter(
-  replaceInRouteName: 'Page,Route',
+  replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
     AutoRoute(page: SplashScreen),
     AutoRoute(page: RestaurantSelectionScreen),

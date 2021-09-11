@@ -28,7 +28,7 @@ class RestaurantSelectionButton extends StatelessWidget {
               onPressed: () async {
                 final cubit = context.read<RestaurantSelectionCubit>();
                 await cubit.selectRestaurant(restaurant!);
-                context.replaceRoute(const DishesSelectionScreen());
+                context.replaceRoute(const DishesSelectionRoute());
               },
               child: state.maybeWhen(
                 actionInProgress: () => const CircularProgressIndicator(

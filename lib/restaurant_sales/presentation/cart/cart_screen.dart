@@ -16,7 +16,7 @@ class CartScreen extends StatelessWidget {
     return BlocListener<CartCubit, CartState>(
       listener: (context, state) {
         if (!state.order.hasOrderItems()) {
-          context.replaceRoute(const EmptyCartScreen());
+          context.replaceRoute(const EmptyCartRoute());
         }
       },
       child: Scaffold(
@@ -36,7 +36,7 @@ class CartScreen extends StatelessWidget {
                 StiloSpacing.vert6,
                 Center(
                   child: ElevatedButton(
-                    onPressed: () => context.pushRoute(const CheckoutScreen()),
+                    onPressed: () => context.pushRoute(const CheckoutRoute()),
                     child: const Text('cart.complete_order').tr(),
                   ),
                 ),

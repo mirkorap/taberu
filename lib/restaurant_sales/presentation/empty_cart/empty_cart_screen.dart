@@ -10,7 +10,7 @@ class EmptyCartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MessageBoxScreen(
-      onPressed: () => context.replaceRoute(const DishesSelectionScreen()),
+      onPressed: () => context.replaceRoute(const DishesSelectionRoute()),
       buttonText: tr('empty_cart.button_text'),
       icon: Icons.shopping_cart_outlined,
       title: tr('empty_cart.title'),

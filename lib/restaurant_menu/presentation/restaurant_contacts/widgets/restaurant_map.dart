@@ -19,12 +19,12 @@ class RestaurantMap extends StatelessWidget {
       height: StiloHeight.h72,
       child: FutureBuilder(
         future: _createRestaurantMarker(context),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot<BitmapDescriptor> snapshot) {
           return GoogleMap(
             markers: {
               Marker(
                 markerId: const MarkerId('restaurant'),
-                icon: snapshot.data as BitmapDescriptor,
+                icon: snapshot.data!,
                 position: LatLng(
                   position.latitude.getOrCrash(),
                   position.longitude.getOrCrash(),
