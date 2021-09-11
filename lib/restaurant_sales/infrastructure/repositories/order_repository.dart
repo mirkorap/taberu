@@ -16,7 +16,7 @@ class OrderRepository implements IOrderRepository {
   @override
   Future<Either<OrderFailure, Order>> getLastRestaurantOrder(String restaurantId) async {
     try {
-      final query = await _firestore
+      final querySnapshot = await _firestore
           .collection('restaurants')
           .doc(restaurantId)
           .collection('orders')
@@ -24,8 +24,8 @@ class OrderRepository implements IOrderRepository {
           .limit(1)
           .get();
 
-      if (query.docs.isNotEmpty) {
-        return right(OrderDto.fromFirestore(query.docs[0]).toDomain());
+      if (querySnapshot.docs.isNotEmpty) {
+        return right(OrderDto.fromFirestore(querySnapshot.docs[0]).toDomain());
       }
 
       return left(const OrderFailure.noOrderFound());
@@ -41,10 +41,14 @@ class OrderRepository implements IOrderRepository {
   @override
   Future<Either<OrderFailure, Unit>> create(Order order) async {
     try {
-      final restaurantDoc = _firestore.collection('restaurants').doc('');
       final orderDto = OrderDto.fromDomain(order);
 
-      await restaurantDoc.collection('orders').doc(orderDto.id).set(orderDto.toJson());
+      await _firestore
+          .collection('restaurants')
+          .doc(orderDto.restaurantId)
+          .collection('orders')
+          .doc(orderDto.id)
+          .set(orderDto.toJson());
 
       return right(unit);
     } on FirebaseException catch (e) {
