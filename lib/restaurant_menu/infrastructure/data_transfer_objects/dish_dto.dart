@@ -48,7 +48,7 @@ class DishDto with _$DishDto {
 
   factory DishDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    final menuId = doc.reference.parent.parent!.path;
+    final menuId = doc.reference.parent.parent!.id;
 
     final json = Map.fromEntries([
       MapEntry('id', doc.id),

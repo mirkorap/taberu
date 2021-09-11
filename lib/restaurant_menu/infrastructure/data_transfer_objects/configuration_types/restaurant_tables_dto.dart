@@ -25,7 +25,7 @@ class RestaurantTablesDto with _$RestaurantTablesDto implements ConfigurationTyp
 
   factory RestaurantTablesDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    final restaurantId = doc.reference.parent.parent!.path;
+    final restaurantId = doc.reference.parent.parent!.id;
 
     final json = Map.fromEntries([
       MapEntry('id', doc.id),
