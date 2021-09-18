@@ -53,9 +53,9 @@ class CartListTile extends StatelessWidget {
                   style: AppTextStyle.priceText,
                 ),
                 CartQuantity(
-                  quantity: orderItem.quantity,
                   onDecreasePressed: onDecreaseQuantity,
                   onIncreasePressed: onIncreaseQuantity,
+                  quantity: orderItem.quantity,
                 ),
               ],
             ),
