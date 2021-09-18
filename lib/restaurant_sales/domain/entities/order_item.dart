@@ -11,7 +11,7 @@ part 'order_item.freezed.dart';
 class OrderItem with _$OrderItem {
   const factory OrderItem({
     required UniqueId id,
-    required UniqueId dishId,
+    required Dish dish,
     required Quantity quantity,
     required Money unitPrice,
     required Money totalPrice,
@@ -20,7 +20,7 @@ class OrderItem with _$OrderItem {
   factory OrderItem.fromDish(Dish dish) {
     return OrderItem(
       id: UniqueId(),
-      dishId: dish.id,
+      dish: dish,
       quantity: Quantity(1),
       unitPrice: dish.price,
       totalPrice: dish.price,
@@ -29,7 +29,7 @@ class OrderItem with _$OrderItem {
 
   const OrderItem._();
 
-  bool containsDish(UniqueId dishId) => this.dishId == dishId;
+  bool containsDish(Dish dish) => this.dish == dish;
 
   OrderItem increaseQuantity(Quantity quantity) {
     return updateQuantity(this.quantity + quantity);
