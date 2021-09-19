@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:taberu/restaurant_menu/application/services/i_selected_restaurant_storage.dart';
 import 'package:taberu/restaurant_menu/domain/entities/dish.dart';
+import 'package:taberu/restaurant_menu/domain/entities/restaurant.dart';
 import 'package:taberu/restaurant_menu/domain/entities/restaurant_table.dart';
 import 'package:taberu/restaurant_sales/application/services/i_current_order_storage.dart';
 import 'package:taberu/restaurant_sales/domain/entities/order.dart';
@@ -30,7 +31,7 @@ class CartCubit extends Cubit<CartState> {
     this._selectedRestaurantStorage,
     this._currentOrderStorage,
     this._orderRepository,
-  ) : super(CartState.initial());
+  ) : super(CartState.initial(_selectedRestaurantStorage.getRestaurant()));
 
   void initialize(Order initialOrder) {
     emit(state.copyWith(
@@ -62,7 +63,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void deleteFromCart(Dish dish) {
-    final orderItem = state.order.orderItems.first((element) => element.dish == dish);
+    final orderItem = state.order.orderItems.first((element) => element.containsDish(dish));
     final order = state.order.deleteOrderItem(orderItem);
     _currentOrderStorage.setOrder(order);
 
@@ -94,7 +95,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void changeDeliveryCity(String city) {
+  void editDeliveryCity(String city) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(city: city),
       (e) => DeliveryAddress.from(DeliveryAddress(city: city)),
@@ -108,7 +109,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void changeDeliveryPostalCode(String postalCode) {
+  void editDeliveryPostalCode(String postalCode) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(postalCode: postalCode),
       (e) => DeliveryAddress.from(DeliveryAddress(postalCode: postalCode)),
@@ -122,7 +123,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void changeDeliveryStreet(String street) {
+  void editDeliveryStreet(String street) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(street: street),
       (e) => DeliveryAddress.from(DeliveryAddress(street: street)),
@@ -136,7 +137,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void changeDeliveryFirstName(String firstName) {
+  void editDeliveryFirstName(String firstName) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(firstName: firstName),
       (e) => DeliveryAddress.from(DeliveryAddress(firstName: firstName)),
@@ -150,7 +151,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void changeDeliveryLastName(String lastName) {
+  void editDeliveryLastName(String lastName) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(lastName: lastName),
       (e) => DeliveryAddress.from(DeliveryAddress(lastName: lastName)),
@@ -164,7 +165,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void changeDeliveryPhone(String phone) {
+  void editDeliveryPhone(String phone) {
     final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
       () => DeliveryAddress(phone: phone),
       (e) => DeliveryAddress.from(DeliveryAddress(phone: phone)),
@@ -178,7 +179,7 @@ class CartCubit extends Cubit<CartState> {
     ));
   }
 
-  void changeNotes(String notes) {
+  void editNotes(String notes) {
     final order = state.order.copyWith(notes: notes);
 
     emit(state.copyWith(

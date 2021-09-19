@@ -4,13 +4,15 @@ part of 'cart_cubit.dart';
 class CartState with _$CartState {
   const factory CartState({
     required Order order,
+    required bool showErrorMessages,
     required bool isSaving,
     required Option<Either<OrderFailure, Unit>> saveFailureOrSuccessOption,
   }) = _CartState;
 
-  factory CartState.initial() {
+  factory CartState.initial(Restaurant restaurant) {
     return CartState(
-      order: Order.empty(),
+      order: Order.fromRestaurant(restaurant),
+      showErrorMessages: false,
       isSaving: false,
       saveFailureOrSuccessOption: none(),
     );

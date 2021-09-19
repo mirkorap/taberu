@@ -21,11 +21,11 @@ class NotesField extends StatelessWidget {
         TextField(
           onChanged: (value) {
             final cubit = context.read<CartCubit>();
-            cubit.changeNotes(value);
+            cubit.editNotes(value);
           },
           maxLines: 8,
           decoration: AppInput.inputTextField.copyWith(
-            hintText: tr('checkout.notes_hint_text'),
+            hintText: tr('checkout.notes_hint'),
           ),
         ),
       ],

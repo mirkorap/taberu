@@ -5,17 +5,17 @@ import 'package:stilo/stilo.dart';
 import 'package:taberu/restaurant_sales/domain/enums/order_type.dart';
 
 class OrderTypeListTile extends StatelessWidget {
+  final ValueChanged<OrderType?> onChanged;
   final OrderType value;
   final OrderType groupValue;
-  final ValueChanged<OrderType?> onChanged;
-  final BorderRadius? borderRadius;
+  final BorderRadius borderRadius;
 
   const OrderTypeListTile({
     Key? key,
+    required this.onChanged,
     required this.value,
     required this.groupValue,
-    required this.onChanged,
-    this.borderRadius,
+    required this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -23,9 +23,9 @@ class OrderTypeListTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: borderRadius,
       child: RadioListTile<OrderType>(
+        onChanged: onChanged,
         value: value,
         groupValue: groupValue,
-        onChanged: onChanged,
         contentPadding: StiloEdge.all4,
         tileColor: StiloColor.white,
         title: Text(
