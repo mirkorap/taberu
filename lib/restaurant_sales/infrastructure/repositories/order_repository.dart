@@ -45,7 +45,7 @@ class OrderRepository implements IOrderRepository {
 
       await _firestore
           .collection('restaurants')
-          .doc(orderDto.restaurantId)
+          .doc(orderDto.restaurant.id)
           .collection('orders')
           .doc(orderDto.id)
           .set(orderDto.toJson());

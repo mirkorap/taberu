@@ -7,6 +7,7 @@ import 'package:taberu/core/domain/value_objects/money.dart';
 import 'package:taberu/core/domain/value_objects/uuid.dart';
 import 'package:taberu/core/infrastructure/extension_methods/dartz_value_object.dart';
 import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/configuration_values/restaurant_table_dto.dart';
+import 'package:taberu/restaurant_menu/infrastructure/data_transfer_objects/restaurant_dto.dart';
 import 'package:taberu/restaurant_sales/domain/entities/order.dart';
 import 'package:taberu/restaurant_sales/domain/enums/order_state.dart';
 import 'package:taberu/restaurant_sales/domain/enums/order_type.dart';
@@ -22,7 +23,7 @@ part 'order_dto.g.dart';
 class OrderDto with _$OrderDto {
   const factory OrderDto({
     required String id,
-    required String restaurantId,
+    required RestaurantDto restaurant,
     required String number,
     required String state,
     required String type,
@@ -45,7 +46,7 @@ class OrderDto with _$OrderDto {
 
     return OrderDto(
       id: order.id.getOrCrash(),
-      restaurantId: order.restaurantId.getOrCrash(),
+      restaurant: RestaurantDto.fromDomain(order.restaurant),
       number: order.number.toString(),
       state: EnumToString.convertToString(order.state),
       type: EnumToString.convertToString(order.type),
@@ -63,13 +64,7 @@ class OrderDto with _$OrderDto {
 
   factory OrderDto.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    final restaurantId = doc.reference.parent.parent!.id;
-
-    final json = Map.fromEntries([
-      MapEntry('id', doc.id),
-      MapEntry('restaurant_id', restaurantId),
-      ...data.entries,
-    ]);
+    final json = Map.fromEntries([MapEntry('id', doc.id), ...data.entries]);
 
     return OrderDto.fromJson(json);
   }
@@ -79,7 +74,7 @@ class OrderDto with _$OrderDto {
   Order toDomain() {
     return Order(
       id: UniqueId.fromUniqueString(id),
-      restaurantId: UniqueId.fromUniqueString(restaurantId),
+      restaurant: restaurant.toDomain(),
       number: OrderNumber.fromString(number),
       state: EnumToString.fromString(OrderState.values, state)!,
       type: EnumToString.fromString(OrderType.values, type)!,
