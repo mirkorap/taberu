@@ -61,7 +61,7 @@ class Order with _$Order {
   bool hasOrderItems() => orderItems.isNotEmpty();
 
   Order addOrderItem(OrderItem orderItem) {
-    final existingOrderItem = this.orderItems.find((element) => element.containsDish(orderItem.dish));
+    final existingOrderItem = this.orderItems.find((element) => element.containsDish(orderItem.dishId));
 
     if (existingOrderItem != null) {
       final updatedOrderItem = existingOrderItem.increaseQuantity(orderItem.quantity);
@@ -74,7 +74,7 @@ class Order with _$Order {
   }
 
   Order removeOrderItem(OrderItem orderItem) {
-    final existingOrderItem = orderItems.find((element) => element.containsDish(orderItem.dish));
+    final existingOrderItem = orderItems.find((element) => element.containsDish(orderItem.dishId));
 
     if (existingOrderItem != null && existingOrderItem.quantity > orderItem.quantity) {
       final updatedOrderItem = existingOrderItem.decreaseQuantity(orderItem.quantity);
