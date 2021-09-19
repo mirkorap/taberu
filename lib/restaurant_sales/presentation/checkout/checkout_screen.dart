@@ -30,19 +30,20 @@ class CheckoutScreen extends StatelessWidget {
               child: BlocBuilder<CartCubit, CartState>(
                 builder: (context, state) {
                   return Form(
-                    autovalidateMode: AutovalidateMode.always,
+                    autovalidateMode: state.showErrorMessages ? AutovalidateMode.always : AutovalidateMode.disabled,
                     child: Column(
                       children: [
                         const OrderTypeList(),
                         StiloSpacing.vert6,
-                        if (state.order.isDeliveredAtTable) ...[
-                          const RestaurantTableSelectBox(),
-                          StiloSpacing.vert6,
-                        ],
-                        if (state.order.isDeliveredAtHome) ...[
-                          const DeliveryAddress(),
-                          StiloSpacing.vert6,
-                        ],
+                        Visibility(
+                          visible: state.order.isDeliveredAtTable,
+                          child: const RestaurantTableSelectBox(),
+                        ),
+                        Visibility(
+                          visible: state.order.isDeliveredAtHome,
+                          child: const DeliveryAddress(),
+                        ),
+                        StiloSpacing.vert6,
                         const NotesField(),
                         const SizedBox(
                           height: StiloHeight.h20,
