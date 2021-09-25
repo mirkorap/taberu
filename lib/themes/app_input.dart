@@ -34,5 +34,8 @@ abstract class AppInput {
     prefixIcon: const Icon(Icons.search),
     labelText: tr('app.actions.select'),
     border: AppBorder.selectBoxField,
+    errorStyle: AppTextStyle.headline5.copyWith(
+      color: AppColor.danger,
+    ),
   );
 }
