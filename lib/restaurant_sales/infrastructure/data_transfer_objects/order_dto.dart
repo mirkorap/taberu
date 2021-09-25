@@ -30,7 +30,7 @@ class OrderDto with _$OrderDto {
     required int adjustmentTotal,
     required int subtotal,
     required int total,
-    required List<OrderItemDto> orderItems,
+    @JsonKey(defaultValue: []) @Default([]) List<OrderItemDto> orderItems,
     required String notes,
     required int createdAt,
     required int updatedAt,

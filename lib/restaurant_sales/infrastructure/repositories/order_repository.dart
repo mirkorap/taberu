@@ -5,7 +5,7 @@ import 'package:taberu/core/infrastructure/extension_methods/firebase_core.dart'
 import 'package:taberu/restaurant_sales/domain/entities/order.dart';
 import 'package:taberu/restaurant_sales/domain/failures/order_failure.dart';
 import 'package:taberu/restaurant_sales/domain/repositories/i_order_repository.dart';
-import 'package:taberu/restaurant_sales/infrastructure/data_transfer_objects/order_dto.dart';
+import 'package:taberu/restaurant_sales/domain/value_objects/order_number.dart';
 
 @LazySingleton(as: IOrderRepository)
 class OrderRepository implements IOrderRepository {
@@ -14,7 +14,7 @@ class OrderRepository implements IOrderRepository {
   OrderRepository(this._firestore);
 
   @override
-  Future<Either<OrderFailure, Order>> getLastRestaurantOrder(String restaurantId) async {
+  Future<Either<OrderFailure, OrderNumber>> fetchLastOrderNumber(String restaurantId) async {
     try {
       final querySnapshot = await _firestore
           .collection('restaurants')
@@ -25,7 +25,9 @@ class OrderRepository implements IOrderRepository {
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {
-        return right(OrderDto.fromFirestore(querySnapshot.docs[0]).toDomain());
+        final orderDoc = querySnapshot.docs[0].data();
+
+        return right(OrderNumber.fromString(orderDoc['number'] as String));
       }
 
       return left(const OrderFailure.noOrderFound());
