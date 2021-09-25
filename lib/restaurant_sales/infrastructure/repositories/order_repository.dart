@@ -14,6 +14,19 @@ class OrderRepository implements IOrderRepository {
   OrderRepository(this._firestore);
 
   @override
+  Future<Either<OrderFailure, OrderNumber>> fetchNextOrderNumber(String restaurantId) async {
+    final lastOrderNumber = await fetchLastOrderNumber(restaurantId);
+
+    return lastOrderNumber.fold(
+      (f) => f.maybeWhen(
+        noOrderFound: () => right(OrderNumber(1)),
+        orElse: () => left(f),
+      ),
+      (orderNumber) => right(orderNumber.next()),
+    );
+  }
+
+  @override
   Future<Either<OrderFailure, OrderNumber>> fetchLastOrderNumber(String restaurantId) async {
     try {
       final querySnapshot = await _firestore
