@@ -60,7 +60,10 @@ class CheckoutScreen extends StatelessWidget {
           bottomNavigationBar: Padding(
             padding: StiloEdge.all6,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                final cubit = context.read<CartCubit>();
+                cubit.saveOrder();
+              },
               child: const Text('checkout.confirm_order').tr(),
             ),
           ),

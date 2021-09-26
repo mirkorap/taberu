@@ -58,6 +58,22 @@ class Order with _$Order {
 
   bool get isDeliveredAtHome => type == OrderType.homeDelivery;
 
+  Order changeToTableDelivery() {
+    return copyWith(
+      type: OrderType.tableDelivery,
+      restaurantTable: null,
+      deliveryAddress: null,
+    );
+  }
+
+  Order changeToHomeDelivery() {
+    return copyWith(
+      type: OrderType.homeDelivery,
+      restaurantTable: null,
+      deliveryAddress: DeliveryAddress(),
+    );
+  }
+
   bool hasOrderItems() => orderItems.isNotEmpty();
 
   Order addOrderItem(OrderItem orderItem) {
@@ -108,6 +124,60 @@ class Order with _$Order {
         currency: total.currency.getOrCrash(),
       ),
     );
+  }
+
+  Order editDeliveryCity(String city) {
+    final deliveryAddress = optionOf(this.deliveryAddress).fold(
+      () => DeliveryAddress(city: city),
+      (e) => e.copyWith(city: city),
+    );
+
+    return copyWith(deliveryAddress: deliveryAddress);
+  }
+
+  Order editDeliveryPostalCode(String postalCode) {
+    final deliveryAddress = optionOf(this.deliveryAddress).fold(
+      () => DeliveryAddress(postalCode: postalCode),
+      (e) => e.copyWith(postalCode: postalCode),
+    );
+
+    return copyWith(deliveryAddress: deliveryAddress);
+  }
+
+  Order editDeliveryStreet(String street) {
+    final deliveryAddress = optionOf(this.deliveryAddress).fold(
+      () => DeliveryAddress(street: street),
+      (e) => e.copyWith(street: street),
+    );
+
+    return copyWith(deliveryAddress: deliveryAddress);
+  }
+
+  Order editDeliveryFirstName(String firstName) {
+    final deliveryAddress = optionOf(this.deliveryAddress).fold(
+      () => DeliveryAddress(firstName: firstName),
+      (e) => e.copyWith(firstName: firstName),
+    );
+
+    return copyWith(deliveryAddress: deliveryAddress);
+  }
+
+  Order editDeliveryLastName(String lastName) {
+    final deliveryAddress = optionOf(this.deliveryAddress).fold(
+      () => DeliveryAddress(lastName: lastName),
+      (e) => e.copyWith(lastName: lastName),
+    );
+
+    return copyWith(deliveryAddress: deliveryAddress);
+  }
+
+  Order editDeliveryPhone(String phone) {
+    final deliveryAddress = optionOf(this.deliveryAddress).fold(
+      () => DeliveryAddress(phone: phone),
+      (e) => e.copyWith(phone: phone),
+    );
+
+    return copyWith(deliveryAddress: deliveryAddress);
   }
 
   Option<ValueFailure<dynamic>> get failureOption {

@@ -14,8 +14,6 @@ import 'package:taberu/restaurant_sales/domain/enums/order_state.dart';
 import 'package:taberu/restaurant_sales/domain/enums/order_type.dart';
 import 'package:taberu/restaurant_sales/domain/failures/order_failure.dart';
 import 'package:taberu/restaurant_sales/domain/repositories/i_order_repository.dart';
-import 'package:taberu/restaurant_sales/domain/value_objects/delivery_address.dart';
-import 'package:taberu/restaurant_sales/domain/value_objects/order_number.dart';
 
 part 'cart_cubit.freezed.dart';
 
@@ -74,14 +72,15 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void changeOrderType(OrderType orderType) {
-    final order = state.order.copyWith(
-      type: orderType,
-      restaurantTable: null,
-      deliveryAddress: null,
-    );
+    if (orderType == OrderType.tableDelivery) {
+      return emit(state.copyWith(
+        order: state.order.changeToTableDelivery(),
+        saveFailureOrSuccessOption: none(),
+      ));
+    }
 
     emit(state.copyWith(
-      order: order,
+      order: state.order.changeToHomeDelivery(),
       saveFailureOrSuccessOption: none(),
     ));
   }
@@ -96,12 +95,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void editDeliveryCity(String city) {
-    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
-      () => DeliveryAddress(city: city),
-      (e) => e.copyWith(city: city),
-    );
-
-    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    final order = state.order.editDeliveryCity(city);
 
     emit(state.copyWith(
       order: order,
@@ -110,12 +104,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void editDeliveryPostalCode(String postalCode) {
-    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
-      () => DeliveryAddress(postalCode: postalCode),
-      (e) => e.copyWith(postalCode: postalCode),
-    );
-
-    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    final order = state.order.editDeliveryPostalCode(postalCode);
 
     emit(state.copyWith(
       order: order,
@@ -124,12 +113,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void editDeliveryStreet(String street) {
-    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
-      () => DeliveryAddress(street: street),
-      (e) => e.copyWith(street: street),
-    );
-
-    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    final order = state.order.editDeliveryStreet(street);
 
     emit(state.copyWith(
       order: order,
@@ -138,12 +122,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void editDeliveryFirstName(String firstName) {
-    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
-      () => DeliveryAddress(firstName: firstName),
-      (e) => e.copyWith(firstName: firstName),
-    );
-
-    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    final order = state.order.editDeliveryFirstName(firstName);
 
     emit(state.copyWith(
       order: order,
@@ -152,12 +131,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void editDeliveryLastName(String lastName) {
-    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
-      () => DeliveryAddress(lastName: lastName),
-      (e) => e.copyWith(lastName: lastName),
-    );
-
-    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    final order = state.order.editDeliveryLastName(lastName);
 
     emit(state.copyWith(
       order: order,
@@ -166,12 +140,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void editDeliveryPhone(String phone) {
-    final deliveryAddress = optionOf(state.order.deliveryAddress).fold(
-      () => DeliveryAddress(phone: phone),
-      (e) => e.copyWith(phone: phone),
-    );
-
-    final order = state.order.copyWith(deliveryAddress: deliveryAddress);
+    final order = state.order.editDeliveryPhone(phone);
 
     emit(state.copyWith(
       order: order,

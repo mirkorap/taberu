@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class RestaurantTableSelectBox extends StatelessWidget {
                   dropdownSearchDecoration: AppInput.selectBoxField,
                   items: configurations.restaurantTables.asList(),
                   itemAsString: (restaurantTable) => restaurantTable.name,
+                  validator: (value) => optionOf(value).fold(() => tr('app.failures.empty'), (a) => null),
                   onChanged: (value) {
                     final cubit = context.read<CartCubit>();
                     cubit.changeRestaurantTable(value!);
