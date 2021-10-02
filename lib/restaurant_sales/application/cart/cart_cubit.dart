@@ -163,25 +163,29 @@ class CartCubit extends Cubit<CartState> {
     final selectedRestaurant = _selectedRestaurantStorage.getRestaurant();
     final selectedRestaurantId = selectedRestaurant.id.getOrCrash();
 
-    // TODO: manage other Firebase failures
-    final lastOrder = await _orderRepository.getLastRestaurantOrder(selectedRestaurantId);
-    final nextOrderNumber = lastOrder.fold(
-      (_) => OrderNumber(1),
-      (order) => order.number.next(),
-    );
+    final nextOrderNumber = await _orderRepository.fetchNextOrderNumber(selectedRestaurantId);
 
-    final order = state.order.copyWith(
-      number: nextOrderNumber,
-      state: OrderState.pending,
-    );
+    nextOrderNumber.fold(
+      (_) => emit(state.copyWith(showErrorMessages: true, isSaving: false)),
+      (orderNumber) async {
+        Either<OrderFailure, Unit>? failureOrSuccess;
 
-    // TODO: call method only on order without any failures
-    final failureOrSuccess = await _orderRepository.create(order);
+        final order = state.order.copyWith(
+          number: orderNumber,
+          state: OrderState.pending,
+        );
 
-    state.copyWith(
-      order: order,
-      isSaving: false,
-      saveFailureOrSuccessOption: optionOf(failureOrSuccess),
+        if (order.failureOption.isNone()) {
+          failureOrSuccess = await _orderRepository.create(order);
+        }
+
+        emit(state.copyWith(
+          order: order,
+          showErrorMessages: true,
+          isSaving: false,
+          saveFailureOrSuccessOption: optionOf(failureOrSuccess),
+        ));
+      },
     );
   }
 }
