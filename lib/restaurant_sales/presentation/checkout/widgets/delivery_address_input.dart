@@ -27,6 +27,7 @@ class DeliveryAddressInput extends HookWidget {
     return TextFormField(
       controller: useTextEditingController(),
       onChanged: onChanged,
+      textCapitalization: TextCapitalization.sentences,
       validator: (_) {
         final cubit = context.read<CartCubit>();
 
