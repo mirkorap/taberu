@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stilo/stilo.dart';
@@ -6,6 +5,7 @@ import 'package:taberu/core/presentation/widgets/navigation_bars/top_navigation_
 import 'package:taberu/injection.dart';
 import 'package:taberu/restaurant_menu/application/restaurant_configuration/restaurant_configuration_cubit.dart';
 import 'package:taberu/restaurant_sales/application/cart/cart_cubit.dart';
+import 'package:taberu/restaurant_sales/presentation/checkout/widgets/confirm_order_button.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/delivery_address.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/notes_field.dart';
 import 'package:taberu/restaurant_sales/presentation/checkout/widgets/order_totals.dart';
@@ -57,16 +57,7 @@ class CheckoutScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: Padding(
-            padding: StiloEdge.all6,
-            child: ElevatedButton(
-              onPressed: () {
-                final cubit = context.read<CartCubit>();
-                cubit.saveOrder();
-              },
-              child: const Text('checkout.confirm_order').tr(),
-            ),
-          ),
+          bottomNavigationBar: const ConfirmOrderButton(),
         ),
       ),
     );
