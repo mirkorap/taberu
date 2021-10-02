@@ -89,4 +89,20 @@ class OrderDto with _$OrderDto {
       deliveryAddress: deliveryAddress?.toDomain(),
     );
   }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      'number': number,
+      'state': state,
+      'type': type,
+      'adjustment_total': adjustmentTotal,
+      'subtotal': subtotal,
+      'total': total,
+      'notes': notes,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+      ...optionOf(restaurantTable).fold(() => {}, (e) => {'restaurant_table': e.toJson()}),
+      ...optionOf(deliveryAddress).fold(() => {}, (e) => {'delivery_address': e.toJson()}),
+    };
+  }
 }

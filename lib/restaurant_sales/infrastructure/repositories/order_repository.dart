@@ -6,6 +6,7 @@ import 'package:taberu/restaurant_sales/domain/entities/order.dart';
 import 'package:taberu/restaurant_sales/domain/failures/order_failure.dart';
 import 'package:taberu/restaurant_sales/domain/repositories/i_order_repository.dart';
 import 'package:taberu/restaurant_sales/domain/value_objects/order_number.dart';
+import 'package:taberu/restaurant_sales/infrastructure/data_transfer_objects/order_dto.dart';
 
 @LazySingleton(as: IOrderRepository)
 class OrderRepository implements IOrderRepository {
@@ -58,12 +59,30 @@ class OrderRepository implements IOrderRepository {
     try {
       final orderDto = OrderDto.fromDomain(order);
 
-      await _firestore
+      final batch = _firestore.batch();
+
+      _firestore
           .collection('restaurants')
           .doc(orderDto.restaurant.id)
           .collection('orders')
           .doc(orderDto.id)
-          .set(orderDto.toJson());
+          .set(orderDto.toFirestore());
+
+      orderDto.orderItems.forEach((orderItem) async {
+        final dish = 'restaurants/${orderDto.restaurant.id}/menus/${orderItem.dish.menuId}/dishes/${orderItem.dish.id}';
+        final data = {'dish': dish, ...orderItem.toFirestore()};
+
+        _firestore
+            .collection('restaurants')
+            .doc(orderDto.restaurant.id)
+            .collection('orders')
+            .doc(orderDto.id)
+            .collection('order_items')
+            .doc(orderItem.id)
+            .set(data);
+      });
+
+      batch.commit();
 
       return right(unit);
     } on FirebaseException catch (e) {

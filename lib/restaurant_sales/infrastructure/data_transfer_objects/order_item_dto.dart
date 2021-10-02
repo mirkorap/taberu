@@ -43,4 +43,12 @@ class OrderItemDto with _$OrderItemDto {
       totalPrice: Money(amount: totalPrice),
     );
   }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      'quantity': quantity,
+      'unit_price': unitPrice,
+      'total_price': totalPrice,
+    };
+  }
 }
