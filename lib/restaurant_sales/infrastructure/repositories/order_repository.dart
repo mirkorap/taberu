@@ -59,9 +59,7 @@ class OrderRepository implements IOrderRepository {
     try {
       final orderDto = OrderDto.fromDomain(order);
 
-      final batch = _firestore.batch();
-
-      _firestore
+      await _firestore
           .collection('restaurants')
           .doc(orderDto.restaurant.id)
           .collection('orders')
@@ -72,7 +70,7 @@ class OrderRepository implements IOrderRepository {
         final dish = 'restaurants/${orderDto.restaurant.id}/menus/${orderItem.dish.menuId}/dishes/${orderItem.dish.id}';
         final data = {'dish': dish, ...orderItem.toFirestore()};
 
-        _firestore
+        await _firestore
             .collection('restaurants')
             .doc(orderDto.restaurant.id)
             .collection('orders')
@@ -81,8 +79,6 @@ class OrderRepository implements IOrderRepository {
             .doc(orderItem.id)
             .set(data);
       });
-
-      batch.commit();
 
       return right(unit);
     } on FirebaseException catch (e) {
