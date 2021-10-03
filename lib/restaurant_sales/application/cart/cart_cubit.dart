@@ -166,7 +166,11 @@ class CartCubit extends Cubit<CartState> {
     final nextOrderNumber = await _orderRepository.fetchNextOrderNumber(selectedRestaurantId);
 
     nextOrderNumber.fold(
-      (_) => emit(state.copyWith(showErrorMessages: true, isSaving: false)),
+      (failure) => emit(state.copyWith(
+        showErrorMessages: true,
+        isSaving: false,
+        saveFailureOrSuccessOption: optionOf(left(failure)),
+      )),
       (orderNumber) async {
         Either<OrderFailure, Unit>? failureOrSuccess;
 
@@ -180,7 +184,6 @@ class CartCubit extends Cubit<CartState> {
         }
 
         emit(state.copyWith(
-          order: order,
           showErrorMessages: true,
           isSaving: false,
           saveFailureOrSuccessOption: optionOf(failureOrSuccess),
