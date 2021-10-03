@@ -15,6 +15,8 @@ class RestaurantTableSelectBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<CartCubit>();
+
     return BlocBuilder<RestaurantConfigurationCubit, RestaurantConfigurationState>(
       builder: (context, state) {
         return state.maybeWhen(
@@ -32,11 +34,9 @@ class RestaurantTableSelectBox extends StatelessWidget {
                   dropdownSearchDecoration: AppInput.selectBoxField,
                   items: configurations.restaurantTables.asList(),
                   itemAsString: (restaurantTable) => restaurantTable.name,
+                  selectedItem: cubit.state.order.restaurantTable,
                   validator: (value) => optionOf(value).fold(() => tr('app.failures.empty'), (a) => null),
-                  onChanged: (value) {
-                    final cubit = context.read<CartCubit>();
-                    cubit.changeRestaurantTable(value!);
-                  },
+                  onChanged: (value) => cubit.changeRestaurantTable(value!),
                 ),
               ],
             );
