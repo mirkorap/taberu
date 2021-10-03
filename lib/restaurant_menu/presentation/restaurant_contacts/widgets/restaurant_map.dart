@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:stilo/stilo.dart';
@@ -20,22 +21,25 @@ class RestaurantMap extends StatelessWidget {
       child: FutureBuilder(
         future: _createRestaurantMarker(context),
         builder: (context, AsyncSnapshot<BitmapDescriptor> snapshot) {
-          return GoogleMap(
-            markers: {
-              Marker(
-                markerId: const MarkerId('restaurant'),
-                icon: snapshot.data!,
-                position: LatLng(
+          return option(snapshot.hasData, snapshot.data).fold(
+            () => const CircularProgressIndicator(),
+            (data) => GoogleMap(
+              markers: {
+                Marker(
+                  markerId: const MarkerId('restaurant'),
+                  icon: data!,
+                  position: LatLng(
+                    position.latitude.getOrCrash(),
+                    position.longitude.getOrCrash(),
+                  ),
+                ),
+              },
+              initialCameraPosition: CameraPosition(
+                zoom: 18.0,
+                target: LatLng(
                   position.latitude.getOrCrash(),
                   position.longitude.getOrCrash(),
                 ),
-              ),
-            },
-            initialCameraPosition: CameraPosition(
-              zoom: 18.0,
-              target: LatLng(
-                position.latitude.getOrCrash(),
-                position.longitude.getOrCrash(),
               ),
             ),
           );
