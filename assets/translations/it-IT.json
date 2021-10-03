@@ -12,7 +12,8 @@
       "empty": "Campo obbligatorio",
       "exceeding_length": "Supera la lunghezza di {} caratteri",
       "invalid_phone": "Numero di telefono non valido",
-      "insufficient_permissions": "Permessi insufficienti per eseguire l'operazione"
+      "insufficient_permissions": "Permessi insufficienti per eseguire l'operazione",
+      "unexpected": "Si è verificato un errore imprevisto, contattare l'assistenza"
     }
   },
   "restaurant_selection": {
@@ -78,5 +79,10 @@
     "subtotal": "Totale parziale",
     "total": "Totale",
     "confirm_order": "Conferma l'ordine"
+  },
+  "checkout_success": {
+    "title": "Ordine completato",
+    "subtitle": "Il tuo ordine è stato completato. Riceverai una notifica appena sarà pronto",
+    "button_text": "Vai alla selezione piatti"
   }
 }

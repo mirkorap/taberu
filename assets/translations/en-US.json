@@ -12,7 +12,8 @@
       "empty": "Cannot be empty",
       "exceeding_length": "Exceeds the length of {} characters",
       "invalid_phone": "Invalid phone number",
-      "insufficient_permissions": "Insufficient permissions to perform the operation"
+      "insufficient_permissions": "Insufficient permissions to perform the operation",
+      "unexpected": "Unexpected error occurred, please contact support"
     }
   },
   "restaurant_selection": {
@@ -78,5 +79,10 @@
     "subtotal": "Subtotal",
     "total": "Total",
     "confirm_order": "Confirm order"
+  },
+  "checkout_success": {
+    "title": "Order completed",
+    "subtitle": "Your order has been completed. You will be notified as soon as it is ready",
+    "button_text": "Go to the dishes selection"
   }
 }
