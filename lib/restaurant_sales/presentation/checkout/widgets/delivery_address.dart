@@ -10,6 +10,8 @@ class DeliveryAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<CartCubit>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -19,10 +21,7 @@ class DeliveryAddress extends StatelessWidget {
         ).tr(),
         StiloSpacing.vert4,
         DeliveryAddressInput(
-          onChanged: (value) {
-            final cubit = context.read<CartCubit>();
-            cubit.editDeliveryCity(value);
-          },
+          onChanged: (value) => cubit.editDeliveryCity(value),
           onFailure: (deliveryAddress) => deliveryAddress.city.fold(
             (l) => l.maybeMap(
               empty: (_) => tr('app.failures.empty'),
@@ -30,15 +29,13 @@ class DeliveryAddress extends StatelessWidget {
             ),
             (_) => null,
           ),
+          initialValue: cubit.state.order.deliveryAddress?.city.getOrElse(() => ''),
           icon: Icons.location_city,
           hintText: tr('checkout.delivery_city'),
         ),
         StiloSpacing.vert4,
         DeliveryAddressInput(
-          onChanged: (value) {
-            final cubit = context.read<CartCubit>();
-            cubit.editDeliveryPostalCode(value);
-          },
+          onChanged: (value) => cubit.editDeliveryPostalCode(value),
           onFailure: (deliveryAddress) => deliveryAddress.postalCode.fold(
             (l) => l.maybeMap(
               empty: (_) => tr('app.failures.empty'),
@@ -47,15 +44,13 @@ class DeliveryAddress extends StatelessWidget {
             ),
             (_) => null,
           ),
+          initialValue: cubit.state.order.deliveryAddress?.postalCode.getOrElse(() => ''),
           icon: Icons.location_city,
           hintText: tr('checkout.delivery_postal_code'),
         ),
         StiloSpacing.vert4,
         DeliveryAddressInput(
-          onChanged: (value) {
-            final cubit = context.read<CartCubit>();
-            cubit.editDeliveryStreet(value);
-          },
+          onChanged: (value) => cubit.editDeliveryStreet(value),
           onFailure: (deliveryAddress) => deliveryAddress.street.fold(
             (l) => l.maybeMap(
               empty: (_) => tr('app.failures.empty'),
@@ -63,15 +58,13 @@ class DeliveryAddress extends StatelessWidget {
             ),
             (_) => null,
           ),
+          initialValue: cubit.state.order.deliveryAddress?.street.getOrElse(() => ''),
           icon: Icons.location_city,
           hintText: tr('checkout.delivery_street'),
         ),
         StiloSpacing.vert4,
         DeliveryAddressInput(
-          onChanged: (value) {
-            final cubit = context.read<CartCubit>();
-            cubit.editDeliveryFirstName(value);
-          },
+          onChanged: (value) => cubit.editDeliveryFirstName(value),
           onFailure: (deliveryAddress) => deliveryAddress.firstName.fold(
             (l) => l.maybeMap(
               empty: (_) => tr('app.failures.empty'),
@@ -79,15 +72,13 @@ class DeliveryAddress extends StatelessWidget {
             ),
             (_) => null,
           ),
+          initialValue: cubit.state.order.deliveryAddress?.firstName.getOrElse(() => ''),
           icon: Icons.person,
           hintText: tr('checkout.delivery_first_name'),
         ),
         StiloSpacing.vert4,
         DeliveryAddressInput(
-          onChanged: (value) {
-            final cubit = context.read<CartCubit>();
-            cubit.editDeliveryLastName(value);
-          },
+          onChanged: (value) => cubit.editDeliveryLastName(value),
           onFailure: (deliveryAddress) => deliveryAddress.lastName.fold(
             (l) => l.maybeMap(
               empty: (_) => tr('app.failures.empty'),
@@ -95,15 +86,13 @@ class DeliveryAddress extends StatelessWidget {
             ),
             (_) => null,
           ),
+          initialValue: cubit.state.order.deliveryAddress?.lastName.getOrElse(() => ''),
           icon: Icons.person,
           hintText: tr('checkout.delivery_last_name'),
         ),
         StiloSpacing.vert4,
         DeliveryAddressInput(
-          onChanged: (value) {
-            final cubit = context.read<CartCubit>();
-            cubit.editDeliveryPhone(value);
-          },
+          onChanged: (value) => cubit.editDeliveryPhone(value),
           onFailure: (deliveryAddress) => deliveryAddress.phone.fold(
             (l) => l.maybeMap(
               invalidPhone: (_) => tr('app.failures.invalid_phone'),
@@ -111,6 +100,7 @@ class DeliveryAddress extends StatelessWidget {
             ),
             (_) => null,
           ),
+          initialValue: cubit.state.order.deliveryAddress?.phone.getOrElse(() => ''),
           icon: Icons.phone,
           hintText: tr('checkout.delivery_phone'),
         ),

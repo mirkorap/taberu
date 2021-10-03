@@ -11,6 +11,7 @@ typedef DeliveryAddressInputFailure = String? Function(DeliveryAddress deliveryA
 class DeliveryAddressInput extends HookWidget {
   final ValueChanged<String>? onChanged;
   final DeliveryAddressInputFailure onFailure;
+  final String? initialValue;
   final IconData icon;
   final String hintText;
 
@@ -18,16 +19,19 @@ class DeliveryAddressInput extends HookWidget {
     Key? key,
     required this.onChanged,
     required this.onFailure,
+    required this.initialValue,
     required this.icon,
     required this.hintText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = useTextEditingController();
+    controller.text = optionOf(initialValue).getOrElse(() => '');
+
     return TextFormField(
-      controller: useTextEditingController(),
+      controller: controller,
       onChanged: onChanged,
-      textCapitalization: TextCapitalization.sentences,
       validator: (_) {
         final cubit = context.read<CartCubit>();
 
@@ -36,6 +40,7 @@ class DeliveryAddressInput extends HookWidget {
           (e) => onFailure(e),
         );
       },
+      textCapitalization: TextCapitalization.sentences,
       decoration: AppInput.inputTextField.copyWith(
         prefixIcon: Icon(icon),
         hintText: hintText,
